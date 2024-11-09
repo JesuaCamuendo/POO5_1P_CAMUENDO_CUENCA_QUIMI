@@ -1,4 +1,4 @@
-package POO4_1P_CAMUENDO_CUENCA_QUIMI.src;
+package POO5_1P_CAMUENDO_CUENCA_QUIMI.src;
 public abstract class Usuario {
     private String codigoUnico;
     private String cedula;
