@@ -14,5 +14,9 @@ public class Sistema {
     public void iniciarSeccion() {
     }
 
+    public boolean verificar(){
+        return false;
+    }
+
 
 }
