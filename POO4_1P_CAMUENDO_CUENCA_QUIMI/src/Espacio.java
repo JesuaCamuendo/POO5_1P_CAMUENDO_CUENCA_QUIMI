@@ -66,8 +66,16 @@ public class Espacio {
         this.estado = estado;
     }
 
-
-
     
+
+    @Override
+    public String toString() {
+        return "Espacio [codigoEspacio=" + codigoEspacio + ", tipo=" + tipo + ", nombre=" + nombre + ", capacidad="
+                + capacidad + ", estado=" + estado + ", getCodigoEspacio()=" + getCodigoEspacio() + ", getTipo()="
+                + getTipo() + ", getNombre()=" + getNombre() + ", getCapacidad()=" + getCapacidad() + ", getEstado()="
+                + getEstado() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+                + super.toString() + "]";
+    }
+
     
 }
