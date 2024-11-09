@@ -1,4 +1,4 @@
-public class Administrador {
+public class Administrador extends Usuario{
     private String cargo;
 
     Administrador(String cargo){
