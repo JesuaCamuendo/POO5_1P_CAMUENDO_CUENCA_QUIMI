@@ -2,7 +2,10 @@ package POO4_1P_CAMUENDO_CUENCA_QUIMI.src;
 public class Administrador extends Usuario{
     private String cargo;
 
-    Administrador(String cargo){
+    public Administrador(String codigoUnico, String cedula, String nombre, String apellido, String usuario,
+            String contrasenia, String correo, char rol, String cargo) {
+        super(codigoUnico, cedula, nombre, apellido, usuario, contrasenia, correo, rol);
+        this.cargo = cargo;
     }
 
     public String getCargo() {
