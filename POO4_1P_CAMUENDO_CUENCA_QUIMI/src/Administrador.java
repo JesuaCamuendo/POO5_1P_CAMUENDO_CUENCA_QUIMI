@@ -18,4 +18,9 @@ public class Administrador extends Usuario{
 
     public void gestionarReserva(){
     }
+
+    @Override
+    public String toString(){
+        return super.toString() + ", cargo=" + cargo + "]";
+    }
 }
