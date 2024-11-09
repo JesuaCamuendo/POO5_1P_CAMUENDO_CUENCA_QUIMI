@@ -1,4 +1,3 @@
-package Espacio;
 
 public enum TipoEspacio {
 

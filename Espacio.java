@@ -1,4 +1,3 @@
-package Espacio;
 
 public class Espacio {
 
