@@ -11,7 +11,7 @@ public class Reserva {
     private String motivo;
     private TipoEstado estado;
     public static int ReservasCreadas;
-    // prueba2.0
+    
 
     // constructor de la clase Reserva
     public Reserva(String codigoUnico, Date fecha, Usuario usuario, Espacio espacio, String motivo, TipoEstado estado) {
@@ -72,4 +72,9 @@ public class Reserva {
         this.estado = estado;
     }
 
+    //metodo Reservar
+    public void Reservar(Date fecha, TipoEstado estado){
+    }
+    
+    
 }
