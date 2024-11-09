@@ -37,6 +37,5 @@ public class Estudiante extends Usuario {
 
     @Override
     public gestionarReserva(){
-       System.out.println();
     }
 }
