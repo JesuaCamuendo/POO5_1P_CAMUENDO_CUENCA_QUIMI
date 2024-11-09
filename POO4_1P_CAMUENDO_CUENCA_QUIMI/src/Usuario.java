@@ -31,7 +31,10 @@ public abstract class Usuario {
     public void notificarReserva(TipoEstado estado){}
 
     public String toString() {
-        return "dadad";
+        return "Usuario [codigoUnico=" + codigoUnico + ", cedula=" + cedula + ", nombre="
+           + nombre + ", apellido=" + apellido + ", usuario=" + usuario + ", contraseña=" + contrasenia
+           + ", correo=" + correo + ", rol=" + rol;
+        
     }
 
     public String getCodigoUnico() {
