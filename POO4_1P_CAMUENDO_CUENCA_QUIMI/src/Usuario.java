@@ -9,8 +9,7 @@ public abstract class Usuario {
     private String correo;
     private char rol;
 
-    Usuario(){}
-
+    
     Usuario(String codigoUnico, String cedula, String nombre, String apellido, String usuario
     , String contrasenia, String correo, char rol){
         this.codigoUnico = codigoUnico;
