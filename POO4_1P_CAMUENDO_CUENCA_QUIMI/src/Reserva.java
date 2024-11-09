@@ -11,7 +11,6 @@ public class Reserva {
     private String motivo;
     private TipoEstado estado;
     public static int ReservasCreadas;
-    
 
     // constructor de la clase Reserva
     public Reserva(String codigoUnico, Date fecha, Usuario usuario, Espacio espacio, String motivo, TipoEstado estado) {
@@ -72,16 +71,15 @@ public class Reserva {
         this.estado = estado;
     }
 
-    //metodo Reservar
-    public void Reservar(Date fecha, TipoEstado estado){
+    // metodo Reservar
+    public void Reservar(Date fecha, TipoEstado estado) {
     }
 
-    //metodo toString
+    // metodo toString
     @Override
     public String toString() {
         return "Reserva [codigoUnico=" + codigoUnico + ", fecha=" + fecha + ", usuario=" + usuario + ", espacio="
                 + espacio + ", motivo=" + motivo + ", estado=" + estado + "]";
     }
-    
-    
+
 }
