@@ -75,6 +75,13 @@ public class Reserva {
     //metodo Reservar
     public void Reservar(Date fecha, TipoEstado estado){
     }
+
+    //metodo toString
+    @Override
+    public String toString() {
+        return "Reserva [codigoUnico=" + codigoUnico + ", fecha=" + fecha + ", usuario=" + usuario + ", espacio="
+                + espacio + ", motivo=" + motivo + ", estado=" + estado + "]";
+    }
     
     
 }
