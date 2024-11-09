@@ -34,6 +34,16 @@ public class Profesor extends Usuario {
     public void gestionarReserva() {
     }
 
+    @Override
+    public String toString() {
+        return "Profesor [facultad=" + facultad + ", materia=" + materia + ", getFacultad()=" + getFacultad()
+                + ", getMateria()=" + getMateria() + ", toString()=" + super.toString() + ", getCodigoUnico()="
+                + getCodigoUnico() + ", getCedula()=" + getCedula() + ", getNombre()=" + getNombre()
+                + ", getApellido()=" + getApellido() + ", getUsuario()=" + getUsuario() + ", getCorreo()=" + getCorreo()
+                + ", getContrasenia()=" + getContrasenia() + ", getRol()=" + getRol() + ", getClass()=" + getClass()
+                + ", hashCode()=" + hashCode() + "]";
+    }
 
+    
 
 }
