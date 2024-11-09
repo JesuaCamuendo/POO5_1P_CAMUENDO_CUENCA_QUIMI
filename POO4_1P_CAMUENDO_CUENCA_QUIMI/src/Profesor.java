@@ -29,4 +29,9 @@ public class Profesor extends Usuario {
         this.materia = materia;
     }
 
+    // sobreescritura del metodo gestionar reserva
+    @Override
+    public void gestionarReserva() {
+        super.gestionarReserva();
+    }
 }
