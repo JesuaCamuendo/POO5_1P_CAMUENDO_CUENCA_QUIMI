@@ -36,6 +36,6 @@ public class Estudiante extends Usuario {
     }
 
     @Override
-    public gestionarReserva(){
+    public void gestionarReserva(){
     }
 }
