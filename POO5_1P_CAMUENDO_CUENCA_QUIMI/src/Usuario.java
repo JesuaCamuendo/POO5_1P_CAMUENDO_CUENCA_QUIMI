@@ -25,6 +25,8 @@ public abstract class Usuario {
 
     }
 
+    public abstract void reservar();
+
     public abstract void gestionarReserva();
 
     public abstract void consultarReserva();

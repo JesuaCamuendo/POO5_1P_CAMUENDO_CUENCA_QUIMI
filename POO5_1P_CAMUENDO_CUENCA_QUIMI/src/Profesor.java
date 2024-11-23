@@ -29,11 +29,7 @@ public class Profesor extends Usuario {
         this.materia = materia;
     }
 
-    // sobreescritura del metodo gestionar reserva
-    @Override
-    public void gestionarReserva() {
-    }
-
+    //metodo toString
     @Override
     public String toString() {
         return "Profesor [facultad=" + facultad + ", materia=" + materia + ", getFacultad()=" + getFacultad()
@@ -43,5 +39,32 @@ public class Profesor extends Usuario {
                 + ", getContrasenia()=" + getContrasenia() + ", getRol()=" + getRol() + ", getClass()=" + getClass()
                 + ", hashCode()=" + hashCode() + "]";
     }
+
+    //Sobreescritura de metodos abstractos
+    @Override
+    public void consultarReserva() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void gestionarReserva() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void notificarReserva() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void reservar() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    
 
 }

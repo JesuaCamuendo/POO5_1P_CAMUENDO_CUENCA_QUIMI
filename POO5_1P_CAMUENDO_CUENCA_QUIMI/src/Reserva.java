@@ -4,17 +4,18 @@ import java.util.Date;
 
 public class Reserva {
 
-    private String codigoUnico;
+    private int codigoUnico;
     private Date fecha;
     private Usuario usuario;
     private Espacio espacio;
     private String motivo;
     private TipoEstado estado;
-    public static int ReservasCreadas;
+    public static int ReservasCreadas=0;
 
     // constructor de la clase Reserva
-    public Reserva(String codigoUnico, Date fecha, Usuario usuario, Espacio espacio, String motivo, TipoEstado estado) {
-        this.codigoUnico = codigoUnico;
+    public Reserva(Date fecha, Usuario usuario, Espacio espacio, String motivo, TipoEstado estado) {
+        ReservasCreadas++;
+        this.codigoUnico = ReservasCreadas;
         this.fecha = fecha;
         this.usuario = usuario;
         this.espacio = espacio;
@@ -23,11 +24,11 @@ public class Reserva {
     }
 
     // getters y setters
-    public String getCodigoUnico() {
+    public int getCodigoUnico() {
         return codigoUnico;
     }
 
-    public void setCodigoUnico(String codigoUnico) {
+    public void setCodigoUnico(int codigoUnico) {
         this.codigoUnico = codigoUnico;
     }
 
