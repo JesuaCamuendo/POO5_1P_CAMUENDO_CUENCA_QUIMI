@@ -1,4 +1,5 @@
 package POO5_1P_CAMUENDO_CUENCA_QUIMI.src;
+
 public abstract class Usuario {
     private String codigoUnico;
     private String cedula;
@@ -9,7 +10,6 @@ public abstract class Usuario {
     private String correo;
     private char rol;
 
-    
     Usuario(String codigoUnico, String cedula, String nombre, String apellido, String usuario
     , String contrasenia, String correo, char rol){
         this.codigoUnico = codigoUnico;
@@ -20,15 +20,18 @@ public abstract class Usuario {
         this.contrasenia = contrasenia;
         this.correo = correo;
         this.rol = rol;
-    }
     
-    public void gestionarReserva(){}
+    
 
-    public void notificarReserva(){}
+    public abstract void mostrarMenu();
 
-    public void notificarReserva(String materia){}
+    public abstract void gestionarReserva();
 
-    public void notificarReserva(TipoEstado estado){}
+    public abstract void notificarReserva();
+
+    public abstract void notificarReserva(String materia);
+
+    public abstract void notificarReserva(TipoEstado estado);
 
     public String toString() {
         return "Usuario [codigoUnico=" + codigoUnico + ", cedula=" + cedula + ", nombre="
@@ -100,4 +103,6 @@ public abstract class Usuario {
     public void setRol(char rol) {
         this.rol = rol;
     }
+
+}
 }
