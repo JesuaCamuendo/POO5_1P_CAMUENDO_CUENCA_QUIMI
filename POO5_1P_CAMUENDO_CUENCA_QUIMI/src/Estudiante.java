@@ -1,4 +1,5 @@
 package POO5_1P_CAMUENDO_CUENCA_QUIMI.src;
+import java.util.Scanner; 
 
 public class Estudiante extends Usuario {
 
@@ -35,7 +36,6 @@ public class Estudiante extends Usuario {
                 + ", toString()=" + super.toString() + "]";
     }
 
-    @Override
-    public gestionarReserva(){
-    }
+    
+   
 }
