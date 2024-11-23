@@ -23,15 +23,14 @@ public abstract class Usuario {
     
     
 
-    public abstract void mostrarMenu();
+    }
 
     public abstract void gestionarReserva();
 
+    public abstract void consultarReserva();
+
     public abstract void notificarReserva();
 
-    public abstract void notificarReserva(String materia);
-
-    public abstract void notificarReserva(TipoEstado estado);
 
     public String toString() {
         return "Usuario [codigoUnico=" + codigoUnico + ", cedula=" + cedula + ", nombre="
@@ -104,5 +103,4 @@ public abstract class Usuario {
         this.rol = rol;
     }
 
-}
 }
