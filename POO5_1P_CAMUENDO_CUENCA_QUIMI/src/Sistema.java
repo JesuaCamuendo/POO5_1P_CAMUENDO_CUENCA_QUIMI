@@ -12,7 +12,7 @@ public class Sistema {
     public static void main(String[] args) {
         ManejoArchivos m = new ManejoArchivos();
 
-        m.LeerFichero("C:\\Users\\Usuario\\OneDrive\\Documentos\\GitHub\\-POO4_1P_CAMUENDO_CUENCA_QUIMI\\POO5_1P_CAMUENDO_CUENCA_QUIMI\\src\\Archivos\\usuarios.txt");
+        m.LeerFichero("POO5_1P_CAMUENDO_CUENCA_QUIMI\\\\src\\\\Archivos\\\\usuarios.txt");
     }
 
     public void iniciarSeccion() {
