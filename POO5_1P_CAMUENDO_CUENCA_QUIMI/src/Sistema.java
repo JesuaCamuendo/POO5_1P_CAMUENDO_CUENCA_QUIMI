@@ -2,6 +2,7 @@
 package POO5_1P_CAMUENDO_CUENCA_QUIMI.src;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Sistema {
 
@@ -11,6 +12,7 @@ public class Sistema {
 
 
     public static void main(String[] args) {
+        mostrarmenu();
         ManejoArchivos m = new ManejoArchivos();
         ArrayList<String[]> datos = m.LeerFichero("espacios");
         for (String[] atributo : datos) {
@@ -65,8 +67,14 @@ public class Sistema {
        // return false;
   //  }
 
-    //public void mostrarmenu() {
-
-   // }
+    public static void mostrarmenu() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("╔════════════════════════════════════════════════════╗");
+        System.out.println("║  Sistema De Reserva de Espacios en la Universidad  ║");
+        System.out.println("╚════════════════════════════════════════════════════╝");
+        System.out.print('\n'+"Ingrese su usuario: "); String usuario = s.nextLine();
+        System.out.print("Ingrese su contraseña: "); String contrasenia = s.nextLine();
+        System.out.println(usuario+' '+contrasenia); s.close();
+    }
 
 }
