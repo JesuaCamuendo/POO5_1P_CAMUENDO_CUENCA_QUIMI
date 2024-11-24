@@ -13,9 +13,9 @@ public class Reserva {
     public static int ReservasCreadas = 0;
 
     // constructor de la clase Reserva
-    public Reserva(Date fecha, Usuario usuario, TipoEspacio tipoEspacio, String motivo, TipoEstado tipoEstado) {
-        ReservasCreadas++;
-        this.codigoUnico = ReservasCreadas;
+    public Reserva(int codigoUnico, Date fecha, Usuario usuario, TipoEspacio tipoEspacio, String motivo,
+            TipoEstado tipoEstado) {
+        this.codigoUnico = codigoUnico;
         this.fecha = fecha;
         this.usuario = usuario;
         this.tipoEspacio = tipoEspacio;
@@ -24,9 +24,6 @@ public class Reserva {
     }
 
     // getters y setters
-    public void Reservar(Date fecha, TipoEstado estado) {
-    }
-
     public int getCodigoUnico() {
         return codigoUnico;
     }
