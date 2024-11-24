@@ -40,36 +40,32 @@ public class Estudiante extends Usuario {
                 + ", toString()=" + super.toString() + "]";
     }
 
-
-
     @Override
-    public void reservar(){
+    public void reservar() {
         Scanner sc = new Scanner(System.in);
         // El estudiante debe ingresar la fecha de la reserva
         System.out.println("Ingrese la fecha de la reserva(dddd-mm-dd): ");
         String fechaReserva = sc.nextLine();
-        //Mostrar los espacios disponibles en esa fecha
+        // Mostrar los espacios disponibles en esa fecha
         System.out.println("* Espacios disponibles *");
-        for (Espacio space: Sistema.espacios){
+        for (Espacio space : Sistema.espacios) {
         }
 
-       
-        
         sc.close();
     }
-    
-
 
     @Override
     public void notificarReserva() {
 
     }
-@Override
-    public void mostrarMenu(){
+
+    @Override
+    public void mostrarMenu() {
         System.out.println("............ Cargando menú ...............");
         System.out.println("............ Menú Estudiante ..............");
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
+        
         while (opcion != 3) {
             System.out.println("1. Reservar");
             System.out.println("2. Consultar Reserva");

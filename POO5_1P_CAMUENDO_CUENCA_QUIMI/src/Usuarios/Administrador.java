@@ -43,7 +43,7 @@ public class Administrador extends Usuario {
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
         while (opcion != 3) {
-            System.out.println("1. Reservar");
+            System.out.println("1. Gestionar reserva");
             System.out.println("2. Consultar Reserva");
             System.out.println("3. Salir");
             System.out.println("Seleccione una opción: ");
