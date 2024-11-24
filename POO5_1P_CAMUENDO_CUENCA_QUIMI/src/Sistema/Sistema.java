@@ -67,7 +67,7 @@ public class Sistema {
                     break;
             }
 
-            mostrarmenu();
+            iniciarSeccion();
         }
 
         /*
@@ -87,7 +87,7 @@ public class Sistema {
     // public void iniciarSeccion() {
     // }
 
-    public static void mostrarmenu() {
+    public static void iniciarSeccion() {
         Scanner s = new Scanner(System.in);
         System.out.println("╔════════════════════════════════════════════════════╗");
         System.out.println("║  Sistema De Reserva de Espacios en la Universidad  ║");
@@ -98,7 +98,8 @@ public class Sistema {
         String contrasenia = s.nextLine();
         System.out.println(usuario + ' ' + contrasenia);
 
-        if (verificar(usuario, contrasenia))
+        if (verificar(usuario, contrasenia)){
+        }
         s.close();
     }
 
@@ -132,7 +133,7 @@ public class Sistema {
 
             }
         }
-        
+
         System.out.println("Credenciales incorrectas");
         return false;
     }
