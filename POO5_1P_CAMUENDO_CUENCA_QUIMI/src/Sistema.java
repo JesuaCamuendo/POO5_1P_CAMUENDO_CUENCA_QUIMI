@@ -12,7 +12,11 @@ public class Sistema {
     public static void main(String[] args) {
         ManejoArchivos m = new ManejoArchivos();
 
-        m.LeerFichero("C:\\Users\\Usuario\\OneDrive\\Documentos\\GitHub\\-POO4_1P_CAMUENDO_CUENCA_QUIMI\\POO5_1P_CAMUENDO_CUENCA_QUIMI\\src\\Archivos\\usuarios.txt");
+        ArrayList<String[]> espacio = m.LeerFichero("usuarios");
+        //prueba de que sirve
+        for (String[] esp:espacio){
+            System.out.println(esp[7]);
+        }
     }
 
     public void iniciarSeccion() {
