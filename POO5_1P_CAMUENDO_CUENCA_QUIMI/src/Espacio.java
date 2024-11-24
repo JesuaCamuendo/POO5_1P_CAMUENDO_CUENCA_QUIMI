@@ -6,10 +6,10 @@ public class Espacio {
     private String nombre;
     private int capacidad;
     private String estado;
-    private TipoRol rolPermitido;
+    private TipoRolPermitido rolPermitido;
 
 
-    public Espacio(String codigoEspacio, TipoEspacio tipo, String nombre, int capacidad, String estado, TipoRol rolPermitido) {
+    public Espacio(String codigoEspacio, TipoEspacio tipo, String nombre, int capacidad, String estado, TipoRolPermitido rolPermitido) {
         this.codigoEspacio = codigoEspacio;
         this.tipo = tipo;
         this.nombre = nombre;
@@ -67,12 +67,12 @@ public class Espacio {
         this.estado = estado;
     }
 
-    public TipoRol getRolPermitido() {
+    public TipoRolPermitido getRolPermitido() {
         return rolPermitido;
     }
 
 
-    public void setRolPermitido(TipoRol rolPermitido) {
+    public void setRolPermitido(TipoRolPermitido rolPermitido) {
         this.rolPermitido = rolPermitido;
     }
 
