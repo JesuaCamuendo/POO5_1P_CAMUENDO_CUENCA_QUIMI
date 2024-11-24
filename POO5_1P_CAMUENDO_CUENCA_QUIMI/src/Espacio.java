@@ -6,6 +6,7 @@ public class Espacio {
     private String nombre;
     private int capacidad;
     private String estado;
+    private TipoRol rolPermitido;
 
 
     public Espacio(String codigoEspacio, TipoEspacio tipo, String nombre, int capacidad, String estado) {
@@ -66,7 +67,9 @@ public class Espacio {
         this.estado = estado;
     }
 
-    
+    public boolean mostrarDisponibilidad(){
+        return this.estado.equalsIgnoreCase("DISPONIBLE");
+        }
 
     @Override
     public String toString() {
