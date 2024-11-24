@@ -9,7 +9,7 @@ public class Espacio {
     private TipoRol rolPermitido;
 
 
-    public Espacio(String codigoEspacio, TipoEspacio tipo, String nombre, int capacidad, String estado) {
+    public Espacio(String codigoEspacio, TipoEspacio tipo, String nombre, int capacidad, String estado, TipoRol rolPermitido) {
         this.codigoEspacio = codigoEspacio;
         this.tipo = tipo;
         this.nombre = nombre;
@@ -83,11 +83,8 @@ public class Espacio {
 
     @Override
     public String toString() {
-        return "Espacio [codigoEspacio=" + codigoEspacio + ", tipo=" + tipo + ", nombre=" + nombre + ", capacidad="
-                + capacidad + ", estado=" + estado + ", getCodigoEspacio()=" + getCodigoEspacio() + ", getTipo()="
-                + getTipo() + ", getNombre()=" + getNombre() + ", getCapacidad()=" + getCapacidad() + ", getEstado()="
-                + getEstado() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-                + super.toString() + "]";
+        return "Espacio: \nCodigoEspacio : " + codigoEspacio + " Tipo : " + tipo + ", Nombre : " + nombre + ", Capacidad : "
+                + capacidad + ", Estado." + estado;
     }
 
     
