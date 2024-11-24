@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class Sistema {
 
-    public ArrayList<Reserva> reservas;
+    public static ArrayList<Reserva> reservas= new ArrayList<>();
     public ArrayList<Usuario> usuarios;
     public ArrayList<Espacio> espacios;
 
