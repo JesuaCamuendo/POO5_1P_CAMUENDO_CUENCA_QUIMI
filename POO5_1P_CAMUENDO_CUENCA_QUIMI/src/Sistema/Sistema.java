@@ -1,8 +1,18 @@
 
-package POO5_1P_CAMUENDO_CUENCA_QUIMI.src;
+package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Sistema;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Espacio;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.ManejoArchivos;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Reserva;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEspacio;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRol;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRolPermitido;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios.Administrador;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios.Estudiante;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios.Profesor;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios.Usuario;
 
 public class Sistema {
 
@@ -12,16 +22,17 @@ public class Sistema {
 
 
     public static void main(String[] args) {
-        mostrarmenu();
         ManejoArchivos m = new ManejoArchivos();
         ArrayList<String[]> datos = m.LeerFichero("espacios");
+
+
         for (String[] atributo : datos) {
             String codigoEspacio = atributo[0].trim();
             TipoEspacio tipo = TipoEspacio.valueOf(atributo[1].trim());
             String nombre = atributo[2].trim();
             int capacidad = Integer.parseInt(atributo[3].trim());
             String estado = atributo[4].trim();
-            TipoRol rolPermitido= TipoRol.valueOf(atributo[5].trim());
+            TipoRolPermitido rolPermitido= TipoRolPermitido.valueOf(atributo[5].trim());
 
             Espacio espacio= new Espacio(codigoEspacio, tipo, nombre, capacidad, estado, rolPermitido);
             espacios.add(espacio);
@@ -30,6 +41,11 @@ public class Sistema {
         System.out.println(e);
        }
 
+        ArrayList<String[]> espacio = m.LeerFichero("usuarios");
+        // prueba de que sirve
+       // for (String[] esp : espacio) {
+           // System.out.println(esp[7]);
+        //}
         
         ArrayList<String[]> usuario = m.LeerFichero("usuarios");
         ArrayList<String[]> estudiante = m.LeerFichero("estudiante");
@@ -67,14 +83,8 @@ public class Sistema {
        // return false;
   //  }
 
-    public static void mostrarmenu() {
-        Scanner s = new Scanner(System.in);
-        System.out.println("╔════════════════════════════════════════════════════╗");
-        System.out.println("║  Sistema De Reserva de Espacios en la Universidad  ║");
-        System.out.println("╚════════════════════════════════════════════════════╝");
-        System.out.print('\n'+"Ingrese su usuario: "); String usuario = s.nextLine();
-        System.out.print("Ingrese su contraseña: "); String contrasenia = s.nextLine();
-        System.out.println(usuario+' '+contrasenia); s.close();
-    }
+    //public void mostrarmenu() {
+
+   // }
 
 }

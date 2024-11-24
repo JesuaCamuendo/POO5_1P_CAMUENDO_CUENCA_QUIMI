@@ -2,6 +2,10 @@ package POO5_1P_CAMUENDO_CUENCA_QUIMI.src;
 
 import java.util.Date;
 
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEspacio;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEstado;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios.Usuario;
+
 public class Reserva {
 
     private int codigoUnico;
@@ -13,10 +17,10 @@ public class Reserva {
     public static int ReservasCreadas = 0;
 
     // constructor de la clase Reserva
-    public Reserva(Date fecha, Usuario usuario, TipoEspacio tipoEspacio, String motivo,
+    public Reserva(int codigoUnico, Date fecha, Usuario usuario, TipoEspacio tipoEspacio, String motivo,
             TipoEstado tipoEstado) {
         ReservasCreadas++;
-        this.codigoUnico = ReservasCreadas;
+        this.codigoUnico = codigoUnico;
         this.fecha = fecha;
         this.usuario = usuario;
         this.tipoEspacio = tipoEspacio;

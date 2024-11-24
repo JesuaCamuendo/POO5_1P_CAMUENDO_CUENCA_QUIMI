@@ -1,6 +1,10 @@
-package POO5_1P_CAMUENDO_CUENCA_QUIMI.src;
+package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios;
 
 import java.util.Scanner;
+
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Espacio;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRol;
+
 import java.util.ArrayList;
 public class Estudiante extends Usuario {
 

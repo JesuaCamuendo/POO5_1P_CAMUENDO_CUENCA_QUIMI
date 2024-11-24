@@ -1,11 +1,9 @@
-package POO5_1P_CAMUENDO_CUENCA_QUIMI.src;
+package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
+
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEspacio;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRol;
 
 public class Profesor extends Usuario {
     private String facultad;
@@ -58,12 +56,6 @@ public class Profesor extends Usuario {
 
     @Override
     public void reservar() {
-        Scanner sc = new Scanner(System.in);
-        Date fecha;
-        TipoEspacio tipoEspacio;
-        String motivo;
-
-        sc.close();
 
     }
 
