@@ -12,7 +12,30 @@ public class Sistema {
 
     public static void main(String[] args) {
         ManejoArchivos m = new ManejoArchivos();
+        ArrayList<Espacio> espacios = new ArrayList<>();
+        ArrayList<String[]> datos = m.LeerFichero("espacios");
+        for (String[] atributo : datos) {
+            String codigoEspacio = atributo[0].trim();
+            TipoEspacio tipo = TipoEspacio.valueOf(atributo[1].trim());
+            String nombre = atributo[2].trim();
+            int capacidad = Integer.parseInt(atributo[3].trim());
+            String estado = atributo[4].trim();
+            TipoRol rolPermitido= TipoRol.valueOf(atributo[5].trim());
 
+            Espacio espacio= new Espacio(codigoEspacio, tipo, nombre, capacidad, estado, rolPermitido);
+            espacios.add(espacio);
+        }
+       for (Espacio e:espacios){
+        System.out.println(e);
+       }
+
+<<<<<<< HEAD
+        ArrayList<String[]> espacio = m.LeerFichero("usuarios");
+        // prueba de que sirve
+       // for (String[] esp : espacio) {
+           // System.out.println(esp[7]);
+        //}
+=======
         ArrayList<String[]> usuario = m.LeerFichero("usuarios");
         ArrayList<String[]> estudiante = m.LeerFichero("estudiante");
         ArrayList<String[]> profesor = m.LeerFichero("profesor");
@@ -40,17 +63,18 @@ public class Sistema {
             }
         }
         
+>>>>>>> 20fd3fd0fdcb83e4f6e7d76e30e3db3b3c9316fb
     }
 
-    public void iniciarSeccion() {
-    }
+   // public void iniciarSeccion() {
+   // }
 
-    public boolean verificar(){
-        return false;
-    }
+    //public boolean verificar() {
+       // return false;
+  //  }
 
-    public void mostrarmenu(){
-        
-    }
+    //public void mostrarmenu() {
+
+   // }
 
 }

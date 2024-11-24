@@ -69,10 +69,6 @@ public class Estudiante extends Usuario {
 
     @Override
     public void reservar(){
-
-    }
-    
-    public void reservar(ArrayList<Espacio> espacioDisponible, ArrayList<Reserva> reserva ) {
         Scanner sc = new Scanner(System.in);
         // El estudiante debe ingresar la fecha de la reserva
         System.out.println("Ingrese la fecha de la reserva(dddd-mm-dd): ");
@@ -80,8 +76,12 @@ public class Estudiante extends Usuario {
 
         //Mostrar los espacios disponibles en esa fecha
         System.out.println("* Espacios disponibles *");
+        ArrayList<Espacio> espacios= new ArrayList<>();
+        ArrayList<String> datos = new ArrayList<>();
         
+        sc.close();
     }
+    
 
 
     @Override
