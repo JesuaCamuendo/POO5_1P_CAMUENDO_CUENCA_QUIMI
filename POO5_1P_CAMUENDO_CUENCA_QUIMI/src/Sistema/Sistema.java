@@ -17,11 +17,13 @@ public class Sistema {
     public static ArrayList<Espacio> espacios;
 
     public static void main(String[] args) {
+
         ManejoArchivos m = new ManejoArchivos();
         espacios = new ArrayList<>();
         usuarios = new ArrayList<>();
-        ArrayList<String[]> datos = m.LeerFichero("espacios");
+        reservas= new ArrayList<>();
 
+        ArrayList<String[]> datos = m.LeerFichero("espacios");
         for (String[] atributo : datos) {
             String codigoEspacio = atributo[0].trim();
             TipoEspacio tipo = TipoEspacio.valueOf(atributo[1].trim());
@@ -34,11 +36,11 @@ public class Sistema {
             espacios.add(espacio);
         }
 
+
         ArrayList<String[]> usuario = m.LeerFichero("usuarios");
         ArrayList<String[]> estudiante = m.LeerFichero("estudiantes");
         ArrayList<String[]> profesor = m.LeerFichero("profesores");
         ArrayList<String[]> administrador = m.LeerFichero("administradores");
-
         for (String[] u : usuario) {
             int i = 0;
             String rol = u[7].trim();
@@ -46,29 +48,31 @@ public class Sistema {
             switch (tipo) {
                 case E:
                     Usuario es = new Estudiante(u[0].trim(), u[1].trim(), u[2].trim(), u[3].trim(), u[4].trim(),
-                            u[5].trim(), u[6].trim(), tipo, estudiante.get(i)[4].trim(),
-                            estudiante.get(i)[5].trim());
+                    u[5].trim(), u[6].trim(), tipo, estudiante.get(i)[4].trim(),
+                    estudiante.get(i)[5].trim());
                     i++;
                     usuarios.add(es);
-                    break;
+                break;
                 case A:
                     Usuario ad = new Administrador(u[0].trim(), u[1].trim(), u[2].trim(), u[3].trim(), u[4].trim(),
-                            u[5].trim(), u[6].trim(), tipo,
-                            administrador.get(i)[4].trim());
+                    u[5].trim(), u[6].trim(), tipo,
+                    administrador.get(i)[4].trim());
                     i++;
                     usuarios.add(ad);
-                    break;
+                break;
                 case P:
                     Usuario pr = new Profesor(u[0].trim(), u[1].trim(), u[2].trim(), u[3].trim(), u[4].trim(),
-                            u[5].trim(), u[6].trim(), tipo, profesor.get(i)[4].trim(),
-                            profesor.get(i)[5].trim());
+                    u[5].trim(), u[6].trim(), tipo, profesor.get(i)[4].trim(),
+                    profesor.get(i)[5].trim());
                     i++;
                     usuarios.add(pr);
-                    break;
-            }
-
-            iniciarSeccion();
+                break;
         }
+    }
+
+        iniciarSeccion();
+    }
+
 
         /*
          * reservas= new ArrayList<>();
@@ -82,11 +86,9 @@ public class Sistema {
          * TipoEstado tipoEstado = TipoEstado.valueOf(atributo[5]);
          * }
          */
-    }
 
-    // public void iniciarSeccion() {
-    // }
 
+    
     public static void iniciarSeccion() {
         Scanner s = new Scanner(System.in);
         System.out.println("╔════════════════════════════════════════════════════╗");
@@ -96,7 +98,6 @@ public class Sistema {
         String usuario = s.nextLine();
         System.out.print("Ingrese su contraseña: ");
         String contrasenia = s.nextLine();
-        System.out.println(usuario + ' ' + contrasenia);
 
         verificar(usuario, contrasenia);
         s.close();
@@ -105,13 +106,15 @@ public class Sistema {
     // Verificar que al usuario
     public static boolean verificar(String usuario, String contrasenia) {
 
+        boolean veracidad=false;
+
         for (Usuario e : usuarios) {
 
             // Si es instancia de Estudiante
             if (e instanceof Estudiante && e.getUsuario().equals(usuario) && e.getContrasenia().equals(contrasenia)) {
                     Estudiante estudiante = (Estudiante) e;
                     estudiante.mostrarMenu();
-                    return true;
+                    veracidad = true;
                 
             }
 
@@ -119,7 +122,7 @@ public class Sistema {
             else if (e instanceof Profesor && e.getUsuario().equals(usuario) && e.getContrasenia().equals(contrasenia)) {
                     Profesor profesor = (Profesor) e;
                     profesor.mostrarMenu();
-                    return true;
+                    veracidad = true;
                 
             }
 
@@ -127,13 +130,16 @@ public class Sistema {
             else if (e instanceof Administrador && e.getUsuario().equals(usuario) && e.getContrasenia().equals(contrasenia))  {
                     Administrador administrador = (Administrador) e;
                     administrador.mostrarMenu();
-                    return true;
+                    veracidad = true;
                 
 
             }
+            
         }
-
-        System.out.println("Credenciales incorrectas");
-        return false;
+        if (veracidad==false){
+            System.out.println("Credenciales incorrectas");
+        }
+        
+        return veracidad;
     }
 }
