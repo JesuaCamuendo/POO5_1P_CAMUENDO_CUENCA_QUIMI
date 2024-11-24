@@ -67,6 +67,16 @@ public class Espacio {
         this.estado = estado;
     }
 
+    public TipoRol getRolPermitido() {
+        return rolPermitido;
+    }
+
+
+    public void setRolPermitido(TipoRol rolPermitido) {
+        this.rolPermitido = rolPermitido;
+    }
+
+    
     public boolean mostrarDisponibilidad(){
         return this.estado.equalsIgnoreCase("DISPONIBLE");
         }
