@@ -7,6 +7,7 @@ import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Espacio;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.ManejoArchivos;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Reserva;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEspacio;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEstado;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRol;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRolPermitido;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios.Administrador;
@@ -73,7 +74,16 @@ public class Sistema {
                     break;
             }
         }
-        
+        ArrayList<String[]> datosReservas = m.LeerFichero("reservas");
+        for (String[] atributo : datosReservas) {
+            int codigoUnico = Integer.parseInt(atributo[0]);
+            Date fecha = new Date(Long.parseLong(atributo[1]));
+            Usuario usuario = Integer.parseInt(atributo[2]);
+            TipoEspacio tipoEspacio = TipoEspacio.valueOf(atributo[3]);
+            String motivo = atributo[4];
+            TipoEstado tipoEstado = TipoEstado.valueOf(atributo[5]);
+        }
+
     }
 
    // public void iniciarSeccion() {
