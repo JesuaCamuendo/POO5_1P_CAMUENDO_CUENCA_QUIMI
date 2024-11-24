@@ -73,7 +73,7 @@ public class Sistema {
         for (String[] atributo : datosReservas) {
             int codigoUnico = Integer.parseInt(atributo[0]);
             Date fecha = new Date(Long.parseLong(atributo[1]));
-            Usuario usuario = Integer.parseInt(atributo[2]);
+            Usuario usuario = atributo[2];
             TipoEspacio tipoEspacio = TipoEspacio.valueOf(atributo[3]);
             String motivo = atributo[4];
             TipoEstado tipoEstado = TipoEstado.valueOf(atributo[5]);
