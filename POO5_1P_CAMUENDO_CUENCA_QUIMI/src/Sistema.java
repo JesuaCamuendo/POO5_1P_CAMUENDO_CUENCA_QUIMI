@@ -12,7 +12,6 @@ public class Sistema {
 
     public static void main(String[] args) {
         ManejoArchivos m = new ManejoArchivos();
-        ArrayList<Espacio> espacios = new ArrayList<>();
         ArrayList<String[]> datos = m.LeerFichero("espacios");
         for (String[] atributo : datos) {
             String codigoEspacio = atributo[0].trim();
@@ -29,13 +28,7 @@ public class Sistema {
         System.out.println(e);
        }
 
-<<<<<<< HEAD
-        ArrayList<String[]> espacio = m.LeerFichero("usuarios");
-        // prueba de que sirve
-       // for (String[] esp : espacio) {
-           // System.out.println(esp[7]);
-        //}
-=======
+        
         ArrayList<String[]> usuario = m.LeerFichero("usuarios");
         ArrayList<String[]> estudiante = m.LeerFichero("estudiante");
         ArrayList<String[]> profesor = m.LeerFichero("profesor");
@@ -63,7 +56,6 @@ public class Sistema {
             }
         }
         
->>>>>>> 20fd3fd0fdcb83e4f6e7d76e30e3db3b3c9316fb
     }
 
    // public void iniciarSeccion() {
