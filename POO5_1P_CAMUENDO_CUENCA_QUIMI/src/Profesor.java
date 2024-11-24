@@ -13,7 +13,7 @@ public class Profesor extends Usuario {
 
     // contructor de la clase Profesor
     public Profesor(String codigoUnico, String cedula, String nombre, String apellido, String usuario,
-            String contrasenia, String correo, char rol, String facultad, String materia) {
+            String contrasenia, String correo, TipoRol rol, String facultad, String materia) {
         super(codigoUnico, cedula, nombre, apellido, usuario, contrasenia, correo, rol);
         this.facultad = facultad;
         this.materia = materia;
@@ -48,17 +48,7 @@ public class Profesor extends Usuario {
     }
 
     // Sobreescritura de metodos abstractos
-    @Override
-    public void consultarReserva() {
-        // TODO Auto-generated method stub
 
-    }
-
-    @Override
-    public void gestionarReserva() {
-        // TODO Auto-generated method stub
-
-    }
 
     @Override
     public void notificarReserva() {
