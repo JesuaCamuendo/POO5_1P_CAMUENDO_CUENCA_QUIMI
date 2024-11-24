@@ -98,8 +98,7 @@ public class Sistema {
         String contrasenia = s.nextLine();
         System.out.println(usuario + ' ' + contrasenia);
 
-        if (verificar(usuario, contrasenia)){
-        }
+        verificar(usuario, contrasenia);
         s.close();
     }
 

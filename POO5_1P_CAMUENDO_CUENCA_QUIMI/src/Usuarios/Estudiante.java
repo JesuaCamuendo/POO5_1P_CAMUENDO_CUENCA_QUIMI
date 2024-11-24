@@ -1,11 +1,10 @@
 package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios;
 
 import java.util.Scanner;
-
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Sistema.Sistema;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Espacio;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRol;
 
-import java.util.ArrayList;
 public class Estudiante extends Usuario {
 
     private String matricula;
@@ -49,9 +48,10 @@ public class Estudiante extends Usuario {
         // El estudiante debe ingresar la fecha de la reserva
         System.out.println("Ingrese la fecha de la reserva(dddd-mm-dd): ");
         String fechaReserva = sc.nextLine();
-
         //Mostrar los espacios disponibles en esa fecha
         System.out.println("* Espacios disponibles *");
+        for (Espacio space: Sistema.espacios){
+        }
 
        
         
