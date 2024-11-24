@@ -1,4 +1,7 @@
-package POO5_1P_CAMUENDO_CUENCA_QUIMI.src;
+package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios;
+
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRol;
+
 public class Administrador extends Usuario{
     private String cargo;
 

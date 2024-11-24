@@ -1,4 +1,8 @@
 package POO5_1P_CAMUENDO_CUENCA_QUIMI.src;
+
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEspacio;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRolPermitido;
+
 public class Espacio {
 
     private String codigoEspacio;

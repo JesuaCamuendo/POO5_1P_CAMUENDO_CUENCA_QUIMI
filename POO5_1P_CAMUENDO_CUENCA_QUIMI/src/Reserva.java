@@ -2,6 +2,10 @@ package POO5_1P_CAMUENDO_CUENCA_QUIMI.src;
 
 import java.util.Date;
 
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEspacio;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEstado;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios.Usuario;
+
 public class Reserva {
 
     private int codigoUnico;
