@@ -2,6 +2,7 @@
 package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Sistema;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Espacio;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.ManejoArchivos;
@@ -42,12 +43,6 @@ public class Sistema {
         System.out.println(e);
        }
 
-        ArrayList<String[]> espacio = m.LeerFichero("usuarios");
-        // prueba de que sirve
-       // for (String[] esp : espacio) {
-           // System.out.println(esp[7]);
-        //}
-        
         ArrayList<String[]> usuario = m.LeerFichero("usuarios");
         ArrayList<String[]> estudiante = m.LeerFichero("estudiante");
         ArrayList<String[]> profesor = m.LeerFichero("profesor");
@@ -93,8 +88,14 @@ public class Sistema {
        // return false;
   //  }
 
-    //public void mostrarmenu() {
-
-   // }
+     public static void mostrarmenu() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("╔════════════════════════════════════════════════════╗");
+        System.out.println("║  Sistema De Reserva de Espacios en la Universidad  ║");
+        System.out.println("╚════════════════════════════════════════════════════╝");
+        System.out.print('\n'+"Ingrese su usuario: "); String usuario = s.nextLine();
+        System.out.print("Ingrese su contraseña: "); String contrasenia = s.nextLine();
+        System.out.println(usuario+' '+contrasenia); s.close();
+    }
 
 }
