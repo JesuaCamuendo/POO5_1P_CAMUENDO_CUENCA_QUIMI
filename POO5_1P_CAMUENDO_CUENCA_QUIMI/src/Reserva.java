@@ -7,20 +7,21 @@ public class Reserva {
     private int codigoUnico;
     private Date fecha;
     private Usuario usuario;
-    private Espacio espacio;
+    private TipoEspacio tipoEspacio;
     private String motivo;
-    private TipoEstado estado;
-    public static int ReservasCreadas=0;
+    private TipoEstado tipoEstado;
+    public static int ReservasCreadas = 0;
 
     // constructor de la clase Reserva
-    public Reserva(Date fecha, Usuario usuario, Espacio espacio, String motivo, TipoEstado estado) {
+    public Reserva(Date fecha, Usuario usuario, TipoEspacio tipoEspacio, String motivo,
+            TipoEstado tipoEstado) {
         ReservasCreadas++;
         this.codigoUnico = ReservasCreadas;
         this.fecha = fecha;
         this.usuario = usuario;
-        this.espacio = espacio;
+        this.tipoEspacio = tipoEspacio;
         this.motivo = motivo;
-        this.estado = estado;
+        this.tipoEstado = tipoEstado;
     }
 
     // getters y setters
@@ -48,12 +49,12 @@ public class Reserva {
         this.usuario = usuario;
     }
 
-    public Espacio getEspacio() {
-        return espacio;
+    public TipoEspacio getTipoEspacio() {
+        return tipoEspacio;
     }
 
-    public void setEspacio(Espacio espacio) {
-        this.espacio = espacio;
+    public void setTipoEspacio(TipoEspacio tipoEspacio) {
+        this.tipoEspacio = tipoEspacio;
     }
 
     public String getMotivo() {
@@ -64,23 +65,19 @@ public class Reserva {
         this.motivo = motivo;
     }
 
-    public TipoEstado getEstado() {
-        return estado;
+    public TipoEstado getTipoEstado() {
+        return tipoEstado;
     }
 
-    public void setEstado(TipoEstado estado) {
-        this.estado = estado;
-    }
-
-    // metodo Reservar
-    public void Reservar(Date fecha, TipoEstado estado) {
+    public void setTipoEstado(TipoEstado tipoEstado) {
+        this.tipoEstado = tipoEstado;
     }
 
     // metodo toString
     @Override
     public String toString() {
-        return "Reserva [codigoUnico=" + codigoUnico + ", fecha=" + fecha + ", usuario=" + usuario + ", espacio="
-                + espacio + ", motivo=" + motivo + ", estado=" + estado + "]";
+        return "Reserva [codigoUnico=" + codigoUnico + ", fecha=" + fecha + ", usuario=" + usuario + ", tipoEspacio="
+                + tipoEspacio + ", motivo=" + motivo + ", tipoEstado=" + tipoEstado + "]";
     }
 
 }

@@ -1,7 +1,7 @@
 package POO5_1P_CAMUENDO_CUENCA_QUIMI.src;
 
 import java.util.Scanner;
-
+import java.util.ArrayList;
 public class Estudiante extends Usuario {
 
     private String matricula;
@@ -37,8 +37,7 @@ public class Estudiante extends Usuario {
                 + ", toString()=" + super.toString() + "]";
     }
 
-   
-    public void mostrarMenu() {
+    public void mostrarMenuEstudiante() {
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
         while (opcion != 3) {
@@ -50,7 +49,7 @@ public class Estudiante extends Usuario {
             opcion = sc.nextInt();
             sc.nextLine();
 
-            switch ((opcion)) {
+            switch (opcion) {
                 case 1:
                     gestionarReserva();
                     break;
@@ -59,11 +58,29 @@ public class Estudiante extends Usuario {
                     break;
                 case 3:
                     System.out.println("Salida Exitosa");
+                    break;
                 default:
                     System.out.println("Opción no valida");
             }
         }
 
+        sc.close();
+    }
+
+    @Override
+    public void reservar(){
+
+    }
+    
+    public void reservar(ArrayList<Espacio> espacioDisponible, ArrayList<Reserva> reserva ) {
+        Scanner sc = new Scanner(System.in);
+        // El estudiante debe ingresar la fecha de la reserva
+        System.out.println("Ingrese la fecha de la reserva(dddd-mm-dd): ");
+        String fechaReserva = sc.nextLine();
+
+        //Mostrar los espacios disponibles en esa fecha
+        System.out.println("* Espacios disponibles *");
+        
     }
 
     @Override
@@ -73,6 +90,11 @@ public class Estudiante extends Usuario {
 
     @Override
     public void consultarReserva() {
+
+    }
+
+    @Override
+    public void notificarReserva() {
 
     }
 
