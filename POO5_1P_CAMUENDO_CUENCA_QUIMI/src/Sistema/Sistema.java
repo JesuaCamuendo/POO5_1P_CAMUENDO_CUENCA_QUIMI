@@ -41,13 +41,11 @@ public class Sistema {
         System.out.println(e);
        }
 
-<<<<<<< HEAD
         ArrayList<String[]> espacio = m.LeerFichero("usuarios");
         // prueba de que sirve
        // for (String[] esp : espacio) {
            // System.out.println(esp[7]);
         //}
-=======
         
         ArrayList<String[]> usuario = m.LeerFichero("usuarios");
         ArrayList<String[]> estudiante = m.LeerFichero("estudiante");
@@ -76,7 +74,6 @@ public class Sistema {
             }
         }
         
->>>>>>> a5af250f2e9b22dee7a9c2d2f185b82d5de161a9
     }
 
    // public void iniciarSeccion() {
