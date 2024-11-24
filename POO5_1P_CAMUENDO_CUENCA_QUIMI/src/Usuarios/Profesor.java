@@ -1,6 +1,9 @@
-package POO5_1P_CAMUENDO_CUENCA_QUIMI.src;
+package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios;
 
 import java.util.Scanner;
+
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEspacio;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRol;
 
 public class Profesor extends Usuario {
     private String facultad;
