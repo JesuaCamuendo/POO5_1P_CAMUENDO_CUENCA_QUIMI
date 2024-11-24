@@ -8,7 +8,7 @@ public class Estudiante extends Usuario {
     private String carrera;
 
     public Estudiante(String codigoUnico, String cedula, String nombre, String apellido, String usuario,
-            String contrasenia, String correo, char rol, String matricula, String carrera) {
+            String contrasenia, String correo, TipoRol rol, String matricula, String carrera) {
         super(codigoUnico, cedula, nombre, apellido, usuario, contrasenia, correo, rol);
         this.matricula = matricula;
         this.carrera = carrera;
@@ -51,10 +51,10 @@ public class Estudiante extends Usuario {
 
             switch (opcion) {
                 case 1:
-                    gestionarReserva();
+                    //gestionarReserva();
                     break;
                 case 2:
-                    consultarReserva();
+                    //consultarReserva();
                     break;
                 case 3:
                     System.out.println("Salida Exitosa");
@@ -83,15 +83,6 @@ public class Estudiante extends Usuario {
         
     }
 
-    @Override
-    public void gestionarReserva() {
-
-    }
-
-    @Override
-    public void consultarReserva() {
-
-    }
 
     @Override
     public void notificarReserva() {

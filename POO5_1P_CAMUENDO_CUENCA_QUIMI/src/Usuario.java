@@ -8,10 +8,10 @@ public abstract class Usuario {
     private String usuario;
     private String contrasenia;
     private String correo;
-    private char rol;
+    private TipoRol rol;
 
     Usuario(String codigoUnico, String cedula, String nombre, String apellido, String usuario
-    , String contrasenia, String correo, char rol){
+    , String contrasenia, String correo, TipoRol rol){
         this.codigoUnico = codigoUnico;
         this.cedula = cedula;
         this.nombre = nombre;
@@ -27,11 +27,8 @@ public abstract class Usuario {
 
     public abstract void reservar();
 
-    public abstract void gestionarReserva();
-
-    public abstract void consultarReserva();
-
-    public abstract void notificarReserva();
+    //metodo para enviar correo
+    public void notificarReserva(){};
 
 
     public String toString() {
@@ -69,7 +66,7 @@ public abstract class Usuario {
         return contrasenia;
     }
 
-    public char getRol() {
+    public TipoRol getRol() {
         return rol;
     }
 
@@ -101,7 +98,7 @@ public abstract class Usuario {
         this.correo = correo;
     }
 
-    public void setRol(char rol) {
+    public void setRol(TipoRol rol) {
         this.rol = rol;
     }
 
