@@ -13,9 +13,10 @@ public class Reserva {
     public static int ReservasCreadas = 0;
 
     // constructor de la clase Reserva
-    public Reserva(int codigoUnico, Date fecha, Usuario usuario, TipoEspacio tipoEspacio, String motivo,
+    public Reserva(Date fecha, Usuario usuario, TipoEspacio tipoEspacio, String motivo,
             TipoEstado tipoEstado) {
-        this.codigoUnico = codigoUnico;
+        ReservasCreadas++;
+        this.codigoUnico = ReservasCreadas;
         this.fecha = fecha;
         this.usuario = usuario;
         this.tipoEspacio = tipoEspacio;
