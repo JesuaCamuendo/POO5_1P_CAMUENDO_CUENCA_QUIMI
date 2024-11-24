@@ -1,8 +1,10 @@
 package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios;
 
+import java.util.Scanner;
+
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRol;
 
-public class Administrador extends Usuario{
+public class Administrador extends Usuario {
     private String cargo;
 
     public Administrador(String codigoUnico, String cedula, String nombre, String apellido, String usuario,
@@ -19,9 +21,8 @@ public class Administrador extends Usuario{
         this.cargo = cargo;
     }
 
-
     @Override
-    public String toString(){
+    public String toString() {
         return super.toString() + ", cargo=" + cargo + "]";
     }
 
@@ -33,5 +34,37 @@ public class Administrador extends Usuario{
     @Override
     public void notificarReserva() {
         // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void mostrarMenu() {
+        System.out.println("............ Cargando menú ...............");
+        System.out.println(".......... Menú Administrador .............");
+        Scanner sc = new Scanner(System.in);
+        int opcion = 0;
+        while (opcion != 3) {
+            System.out.println("1. Reservar");
+            System.out.println("2. Consultar Reserva");
+            System.out.println("3. Salir");
+            System.out.println("Seleccione una opción: ");
+            opcion = sc.nextInt();
+            sc.nextLine();
+
+            switch (opcion) {
+                case 1:
+                    reservar();
+                    break;
+                case 2:
+                    notificarReserva();
+                    break;
+                case 3:
+                    System.out.println("Salida Exitosa");
+                    break;
+                default:
+                    System.out.println("Opción no valida");
+            }
+        }
+
+        sc.close();
     }
 }

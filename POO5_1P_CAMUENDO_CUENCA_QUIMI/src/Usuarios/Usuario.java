@@ -32,6 +32,8 @@ public abstract class Usuario {
     //metodo para enviar correo
     public void notificarReserva(){};
 
+    public abstract void mostrarMenu();
+
 
     public String toString() {
         return "Usuario [codigoUnico=" + codigoUnico + ", cedula=" + cedula + ", nombre="

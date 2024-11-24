@@ -41,35 +41,7 @@ public class Estudiante extends Usuario {
                 + ", toString()=" + super.toString() + "]";
     }
 
-    public void mostrarMenuEstudiante() {
-        Scanner sc = new Scanner(System.in);
-        int opcion = 0;
-        while (opcion != 3) {
-            System.out.println("Menú Estudiante");
-            System.out.println("1. Reservar");
-            System.out.println("2. Consultar Reserva");
-            System.out.println("3. Salir");
-            System.out.println("Seleccione una opción: ");
-            opcion = sc.nextInt();
-            sc.nextLine();
 
-            switch (opcion) {
-                case 1:
-                    //gestionarReserva();
-                    break;
-                case 2:
-                    //consultarReserva();
-                    break;
-                case 3:
-                    System.out.println("Salida Exitosa");
-                    break;
-                default:
-                    System.out.println("Opción no valida");
-            }
-        }
-
-        sc.close();
-    }
 
     @Override
     public void reservar(){
@@ -80,8 +52,8 @@ public class Estudiante extends Usuario {
 
         //Mostrar los espacios disponibles en esa fecha
         System.out.println("* Espacios disponibles *");
-        ArrayList<Espacio> espacios= new ArrayList<>();
-        ArrayList<String> datos = new ArrayList<>();
+
+       
         
         sc.close();
     }
@@ -91,6 +63,37 @@ public class Estudiante extends Usuario {
     @Override
     public void notificarReserva() {
 
+    }
+@Override
+    public void mostrarMenu(){
+        System.out.println("............ Cargando menú ...............");
+        System.out.println("............ Menú Estudiante ..............");
+        Scanner sc = new Scanner(System.in);
+        int opcion = 0;
+        while (opcion != 3) {
+            System.out.println("1. Reservar");
+            System.out.println("2. Consultar Reserva");
+            System.out.println("3. Salir");
+            System.out.println("Seleccione una opción: ");
+            opcion = sc.nextInt();
+            sc.nextLine();
+
+            switch (opcion) {
+                case 1:
+                    reservar();
+                    break;
+                case 2:
+                    notificarReserva();
+                    break;
+                case 3:
+                    System.out.println("Salida Exitosa");
+                    break;
+                default:
+                    System.out.println("Opción no valida");
+            }
+        }
+
+        sc.close();
     }
 
 }
