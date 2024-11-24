@@ -1,10 +1,5 @@
 package POO5_1P_CAMUENDO_CUENCA_QUIMI.src;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
 
 public class Profesor extends Usuario {
@@ -68,12 +63,6 @@ public class Profesor extends Usuario {
 
     @Override
     public void reservar() {
-        Scanner sc = new Scanner(System.in);
-        Date fecha;
-        TipoEspacio tipoEspacio;
-        String motivo;
-
-        sc.close();
 
     }
 
