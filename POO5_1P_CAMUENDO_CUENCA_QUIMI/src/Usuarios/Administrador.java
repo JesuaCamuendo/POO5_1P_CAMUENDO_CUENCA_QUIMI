@@ -67,6 +67,6 @@ public class Administrador extends Usuario {
             }
         }
         System.out.println("Salida Exitosa");
-        sc.close();
+        //sc.close();
     }
 }

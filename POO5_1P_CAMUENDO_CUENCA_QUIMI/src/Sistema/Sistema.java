@@ -19,7 +19,6 @@ public class Sistema {
     public static ArrayList<Usuario> usuarios;
     public static ArrayList<Espacio> espacios;
     private static String usuario;
-
     public static void main(String[] args) throws ParseException {
 
         ManejoArchivos m = new ManejoArchivos();
@@ -130,7 +129,6 @@ public class Sistema {
             if (e instanceof Estudiante && e.getUsuario().equals(usuario) && e.getContrasenia().equals(contrasenia)) {
                     Estudiante estudiante = (Estudiante) e;
                     estudiante.mostrarMenu();
-                    veracidad = true;
                 
             }
 
@@ -138,7 +136,6 @@ public class Sistema {
             else if (e instanceof Profesor && e.getUsuario().equals(usuario) && e.getContrasenia().equals(contrasenia)) {
                     Profesor profesor = (Profesor) e;
                     profesor.mostrarMenu();
-                    veracidad = true;
                 
             }
 
@@ -146,7 +143,6 @@ public class Sistema {
             else if (e instanceof Administrador && e.getUsuario().equals(usuario) && e.getContrasenia().equals(contrasenia))  {
                     Administrador administrador = (Administrador) e;
                     administrador.mostrarMenu();
-                    veracidad = true;
                 
 
             }

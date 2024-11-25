@@ -108,7 +108,7 @@ public class Profesor extends Usuario {
             }
         }
         
-        sc.close();
+       // sc.close();
 
     }
 
