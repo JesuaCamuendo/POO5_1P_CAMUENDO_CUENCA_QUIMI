@@ -1,7 +1,10 @@
 
 package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Sistema;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Espacio;
@@ -16,7 +19,7 @@ public class Sistema {
     public static ArrayList<Usuario> usuarios;
     public static ArrayList<Espacio> espacios;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
         ManejoArchivos m = new ManejoArchivos();
         espacios = new ArrayList<>();
@@ -67,39 +70,50 @@ public class Sistema {
                     i++;
                     usuarios.add(pr);
                 break;
+            }
         }
-    }
+
+        
+        
+        ArrayList<String[]> datosReservas = m.LeerFichero("reservas");
+        for(String[] atributo : datosReservas){  
+            int codigoReserva = Integer.parseInt(atributo[0].trim());
+            String codigoUnico = atributo[1].trim();
+            String cedula = atributo[2].trim();
+            Date fecha;
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            fecha = formato.parse(atributo[3].trim());
+            String codigoEspacio = atributo[4].trim();   
+            TipoEspacio tipoEspacio = TipoEspacio.valueOf(atributo[5].trim());
+            TipoEstado tipoEstado = TipoEstado.valueOf(atributo[6].trim());
+            String motivo = atributo[7].trim();
+            
+            Reserva reserva = new Reserva(codigoReserva, codigoUnico, cedula, fecha, codigoEspacio, tipoEspacio, tipoEstado, motivo);
+            reservas.add(reserva);
+         }
 
         iniciarSeccion();
-    }
-
-
-        /*
-         * reservas= new ArrayList<>();
-         * ArrayList<String[]> datosReservas = m.LeerFichero("reservas");
-         * for(String[] atributo : datosReservas){
-         * int codigoUnico = Integer.parseInt(atributo[0]);
-         * Date fecha = new Date(Long.parseLong(atributo[1]));
-         * Usuario usuario = atributo[2];
-         * TipoEspacio tipoEspacio = TipoEspacio.valueOf(atributo[3]);
-         * String motivo = atributo[4];
-         * TipoEstado tipoEstado = TipoEstado.valueOf(atributo[5]);
-         * }
-         */
-
+    }   
 
     
     public static void iniciarSeccion() {
         Scanner s = new Scanner(System.in);
-        System.out.println("╔════════════════════════════════════════════════════╗");
-        System.out.println("║  Sistema De Reserva de Espacios en la Universidad  ║");
-        System.out.println("╚════════════════════════════════════════════════════╝");
-        System.out.print('\n' + "Ingrese su usuario: ");
-        String usuario = s.nextLine();
-        System.out.print("Ingrese su contraseña: ");
-        String contrasenia = s.nextLine();
-
+        String usuario = "null";
+        String contrasenia = "null";
+        boolean veracidad = false;
+        while (veracidad==false){
+            System.out.println("╔════════════════════════════════════════════════════╗");
+            System.out.println("║  Sistema De Reserva de Espacios en la Universidad  ║");
+            System.out.println("╚════════════════════════════════════════════════════╝");
+            System.out.print('\n' + "Ingrese su usuario: ");
+            usuario = s.nextLine();
+            System.out.print("Ingrese su contraseña: ");
+            contrasenia = s.nextLine();
+            veracidad = verificar(usuario, contrasenia);
+        }
         verificar(usuario, contrasenia);
+        
+        
         s.close();
     }
 
@@ -137,7 +151,7 @@ public class Sistema {
             
         }
         if (veracidad==false){
-            System.out.println("Credenciales incorrectas");
+            System.out.println('\n'+"Credenciales incorrectas VUELVA A INTENTARLO por favor"+'\n');
         }
         
         return veracidad;

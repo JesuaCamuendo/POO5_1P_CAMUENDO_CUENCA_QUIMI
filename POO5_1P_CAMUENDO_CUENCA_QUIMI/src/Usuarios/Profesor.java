@@ -2,7 +2,6 @@ package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios;
 
 import java.util.Scanner;
 
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEspacio;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRol;
 
 public class Profesor extends Usuario {
@@ -50,7 +49,6 @@ public class Profesor extends Usuario {
 
     @Override
     public void notificarReserva() {
-        // TODO Auto-generated method stub
 
     }
 
@@ -60,15 +58,15 @@ public class Profesor extends Usuario {
     }
 @Override
     public void mostrarMenu(){
-        System.out.println("............ Cargando menú ...............");
-        System.out.println("............ Menú Profesor ...............");
+        System.out.println('\n'+"............ Cargando menú ...............");
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
         while (opcion != 3) {
+            System.out.println('\n'+"............ Menú Profesor ...............");
             System.out.println("1. Reservar");
             System.out.println("2. Consultar Reserva");
-            System.out.println("3. Salir");
-            System.out.println("Seleccione una opción: ");
+            System.out.println("3. Salir"+'\n');
+            System.out.print("Seleccione una opción: ");
             opcion = sc.nextInt();
             sc.nextLine();
 
@@ -80,13 +78,13 @@ public class Profesor extends Usuario {
                     notificarReserva();
                     break;
                 case 3:
-                    System.out.println("Salida Exitosa");
+                    System.out.println("-------------- Salida Exitosa --------------");
                     break;
                 default:
-                    System.out.println("Opción no valida");
+                    System.out.println("-------------- Opción no valida --------------");
             }
         }
-
+        
         sc.close();
 
     }

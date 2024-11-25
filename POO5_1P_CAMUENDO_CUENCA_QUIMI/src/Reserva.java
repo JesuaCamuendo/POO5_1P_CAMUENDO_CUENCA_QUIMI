@@ -4,37 +4,56 @@ import java.util.Date;
 
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEspacio;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEstado;
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios.Usuario;
 
 public class Reserva {
 
-    private int codigoUnico;
+    private int codigoReserva;
+    private String codigoUnico;
+    private String cedula;
     private Date fecha;
-    private Usuario usuario;
-    private TipoEspacio tipoEspacio;
+    private String codigoEspacio;
     private String motivo;
+    private TipoEspacio tipoEspacio;
     private TipoEstado tipoEstado;
     public static int ReservasCreadas = 0;
 
     // constructor de la clase Reserva
-    public Reserva(int codigoUnico, Date fecha, Usuario usuario, TipoEspacio tipoEspacio, String motivo,
-            TipoEstado tipoEstado) {
+    public Reserva(int codigoReserva, String codigoUnico, String cedula, Date fecha, String codigoEspacio, 
+            TipoEspacio tipoEspacio, TipoEstado tipoEstado, String motivo) {
         ReservasCreadas++;
+        this.codigoReserva = codigoReserva;
         this.codigoUnico = codigoUnico;
+        this.cedula = cedula;
         this.fecha = fecha;
-        this.usuario = usuario;
-        this.tipoEspacio = tipoEspacio;
+        this.codigoEspacio = codigoEspacio;
         this.motivo = motivo;
+        this.tipoEspacio = tipoEspacio;
         this.tipoEstado = tipoEstado;
     }
 
     // getters y setters
-    public int getCodigoUnico() {
+    public int getCodigoReserva() {
+        return codigoReserva;
+    }
+
+    public String getCodigoUnico() {
         return codigoUnico;
     }
 
-    public void setCodigoUnico(int codigoUnico) {
+    public void setCodigoUnico(String codigoUnico) {
         this.codigoUnico = codigoUnico;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCodigoReserva(int codigoReserva) {
+        this.codigoReserva = codigoReserva;
+    }
+    
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
     public Date getFecha() {
@@ -45,12 +64,12 @@ public class Reserva {
         this.fecha = fecha;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public String getCodigoEspacio() {
+        return codigoEspacio;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setCodigoEspacio(String codigoEspacio) {
+        this.codigoEspacio = codigoEspacio;
     }
 
     public TipoEspacio getTipoEspacio() {
@@ -80,7 +99,7 @@ public class Reserva {
     // metodo toString
     @Override
     public String toString() {
-        return "Reserva [codigoUnico=" + codigoUnico + ", fecha=" + fecha + ", usuario=" + usuario + ", tipoEspacio="
+        return "Reserva [codigoUnico=" + codigoReserva + ", fecha=" + fecha + ", usuario=" + codigoUnico + ", tipoEspacio="
                 + tipoEspacio + ", motivo=" + motivo + ", tipoEstado=" + tipoEstado + "]";
     }
 
