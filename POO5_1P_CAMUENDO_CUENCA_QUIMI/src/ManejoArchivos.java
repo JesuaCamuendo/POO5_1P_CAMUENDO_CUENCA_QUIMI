@@ -4,9 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.Buffer;
-import java.nio.file.FileAlreadyExistsException;
 import java.util.ArrayList;
 
 public class ManejoArchivos {
@@ -31,5 +30,14 @@ public class ManejoArchivos {
     }
 
     public void EcribirArchivo(String nombreArchivo, String linea) {
+        nombreArchivo = "POO5_1P_CAMUENDO_CUENCA_QUIMI\\src\\Archivos\\"+nombreArchivo+".txt";
+        try {
+            FileWriter escritura = new FileWriter(nombreArchivo,true);
+            escritura.write(linea+'\n');
+            escritura.close();
+            System.out.println("Escritura exitosa c:");
+        } catch (IOException exception) {
+            exception.printStackTrace(System.out);
+        }
     }
 }

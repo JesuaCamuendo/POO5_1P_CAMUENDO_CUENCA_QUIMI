@@ -1,11 +1,8 @@
 
 package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Sistema;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -95,7 +92,6 @@ public class Sistema {
             reservas.add(reserva);
          }
 
-    
         iniciarSeccion();
     }   
 
