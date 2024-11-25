@@ -91,8 +91,11 @@ public class Sistema {
             Reserva reserva = new Reserva(codigoReserva, codigoUnico, cedula, fecha, codigoEspacio, tipoEspacio, tipoEstado, motivo);
             reservas.add(reserva);
          }
-
+         
+        //m.EcribirArchivo("reservas", "aaaaaaaaaaaaa");
         iniciarSeccion();
+        //Estudiante e = new Estudiante(getUsuario(), getUsuario(), getUsuario(), getUsuario(), getUsuario(), getUsuario(), getUsuario(), null, getUsuario(), getUsuario());
+        //e.mostrarMenu();
     }   
 
     

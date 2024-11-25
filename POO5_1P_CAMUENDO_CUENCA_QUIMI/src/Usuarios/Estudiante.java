@@ -51,10 +51,45 @@ public class Estudiante extends Usuario {
     @Override
     public void reservar(){
         Scanner sc = new Scanner(System.in);
-        // El estudiante/profesor debe ingresar la fecha de la reserva
+        boolean veracidad = false;
+        // El estudiante debe ingresar la fecha de la reserva
         System.out.println('\n'+"-------- RESERVAR --------");
         System.out.print("Ingrese la fecha de la reserva [YYYY-MM-DD]: ");
         String fechaReserva = sc.nextLine();
+
+        if (fechaReserva.length()==10){
+            String numero = fechaReserva.substring(0,4);
+            if(fechaReserva.charAt(4)=='-' && fechaReserva.charAt(7)=='-'){
+                if(numero.matches("[0-9]*")){
+                    numero = fechaReserva.substring(5,7);
+                    if(numero.matches("[0-9]*")){
+                        numero = fechaReserva.substring(8);
+                        if(numero.matches("[0-9]*")){
+                            veracidad = true;
+                        }
+                    }
+                }
+            }
+        }
+        while (veracidad == false) {
+            System.out.println("Error al ingresar la fecha, por favor use el formato [YYYY-MM-DD]");
+            fechaReserva = sc.nextLine();
+            if (fechaReserva.length()==10){
+                String numero = fechaReserva.substring(0,4);
+                if(fechaReserva.charAt(4)=='-' && fechaReserva.charAt(7)=='-'){
+                    if(numero.matches("[0-9]*")){
+                        numero = fechaReserva.substring(5,7);
+                        if(numero.matches("[0-9]*")){
+                            numero = fechaReserva.substring(8);
+                            if(numero.matches("[0-9]*")){
+                                veracidad = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        veracidad = false;
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-mm-dd");
         Date fecha = new Date();
         try {
@@ -63,38 +98,59 @@ public class Estudiante extends Usuario {
             e.printStackTrace();
         };
         System.out.print('\n'+"Elija el tipo de espacio que desea reservar [CANCHA/AULA]: ");
-        String espacio = sc.nextLine().toUpperCase().trim();
-        //while(espacio != "CANCHA" || espacio != "AULA"){
-        //    System.out.print('\n'+"OPCION NO VALIDA. ELIJA ENTRE CANCHA/AULA:  ");
-        //    espacio = sc.nextLine().trim().toUpperCase(); 
-        //}
-        TipoEspacio tipo = TipoEspacio.valueOf(espacio.toUpperCase());
+        String espacio = sc.nextLine().toUpperCase();
+        int c1 = espacio.compareTo("CANCHA");
+        int c2 = espacio.compareTo("AULA");
+        if (c1 == 0 || c2 == 0) {
+            veracidad = true;
+        }
+        while(veracidad==false){
+            System.out.print('\n'+"OPCIÓN NO VALIDA. ELIJA ENTRE CANCHA/AULA:  ");
+            espacio = sc.nextLine().toUpperCase(); 
+            c1 = espacio.compareTo("CANCHA");
+            c2 = espacio.compareTo("AULA");
+            if (c1 == 0 || c2 == 0) {
+                veracidad = true;
+            }
+        }
+        veracidad = false;
+        TipoEspacio tipo = TipoEspacio.valueOf(espacio);
         switch (tipo) {
             case CANCHA:
-            System.out.println('\n'+"--- Espacios Disponibles ---");
+            System.out.println('\n'+"----- Espacios Disponibles -----");
             System.out.println("Código de Espacio  |     Nombre");
             for (Espacio space: Sistema.espacios){
                 if(space.getTipo() == tipo && space.mostrarDisponibilidad()){
-                    System.out.println("        "+space.getCodigoEspacio()+"    |  "+space.getNombre());
+                    System.out.println("        "+space.getCodigoEspacio()+"        |  "+space.getNombre());
                 }
             }
             System.out.print('\n'+"Elija la Cancha a reservar, colocando su Código (1XX): ");
             String codigoEspacio = sc.nextLine();
             System.out.print('\n'+"Mencione el motivo de la reserva: ");
             String motivo = sc.nextLine();
-            System.out.print('\n'+"Desea crear su reserva en la CANCHA con código: "+codigoEspacio+" para el: "+fecha+" [SI/NO]");
+            System.out.print('\n'+"Desea crear su reserva en la CANCHA con código: "+codigoEspacio+" para el: "+fechaReserva+" [SI/NO]: ");
             String confirmacion = sc.nextLine().toUpperCase();
-            //while(confirmacion != "SI" || confirmacion != "NO" ){
-            //    System.out.print('\n'+"OPCION NO VALIDA. ELIJA ENTRE: SI / NO ");
-            //    confirmacion = sc.nextLine();
-            //}
+            c1 = confirmacion.compareTo("SI");
+            c2 = confirmacion.compareTo("NO");
+            if (c1 == 0 || c2 == 0) {
+                veracidad = true;
+            }
+            while(veracidad==false){
+                System.out.print('\n'+"OPCIÓN NO VALIDA. ELIJA ENTRE SI / NO:  ");
+                confirmacion = sc.nextLine().toUpperCase(); 
+                c1 = confirmacion.compareTo("SI");
+                c2 = confirmacion.compareTo("NO");
+                if (c1 == 0 || c2 == 0) {
+                veracidad = true;
+                }
+            }
             if(confirmacion == "SI"){
                 ManejoArchivos m = new ManejoArchivos();
                 String usuario = Sistema.getUsuario();
                 String cedula = "null";
                 String codigoUnico = "null";
                 for(Usuario user: Sistema.usuarios){
-                    if(user.getUsuario().equals(usuario)){
+                    if(user.getUsuario().compareTo(usuario)==0){
                         cedula = user.getCedula();
                         codigoUnico = user.getCodigoUnico();
                     }
