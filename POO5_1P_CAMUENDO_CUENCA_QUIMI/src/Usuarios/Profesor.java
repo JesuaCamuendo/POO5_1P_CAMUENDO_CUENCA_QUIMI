@@ -1,7 +1,13 @@
 package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Espacio;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Sistema.Sistema;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEspacio;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRol;
 
 public class Profesor extends Usuario {
@@ -48,13 +54,30 @@ public class Profesor extends Usuario {
 
 
     @Override
-    public void notificarReserva() {
+    public void ConsultarReserva() {
 
     }
 
     @Override
     public void reservar() {
-
+             Scanner sc = new Scanner(System.in);
+        // El estudiante/profesor debe ingresar la fecha de la reserva
+        System.out.println('\n'+"-------- RESERVAR --------");
+        System.out.print("Ingrese la fecha de la reserva (YYYY-MM-DD): ");
+        String fechaReserva = sc.nextLine();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-mm-dd");
+        try {
+            Date fecha = formato.parse(fechaReserva);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        System.out.print('\n'+"Elija el tipo de espacio que desea reservar (LABORATORIO/AULA/AUDITORIO): ");
+            String espacio = sc.nextLine().toUpperCase().trim();
+            while(espacio != "LABORATORIO" || espacio != "AULA" || espacio != "AUDITORIO"){
+                System.out.print('\n'+"OPCION NO VALIDA. ELIJA ENTRE: LABORATORIO/AULA/AUDITORIO: "); 
+            }
+            TipoEspacio tipo = TipoEspacio.valueOf(espacio.toUpperCase());
+        sc.close();
     }
 @Override
     public void mostrarMenu(){
@@ -75,7 +98,7 @@ public class Profesor extends Usuario {
                 reservar();
                     break;
                 case 2:
-                    notificarReserva();
+                    ConsultarReserva();
                     break;
                 case 3:
                     System.out.println("-------------- Salida Exitosa --------------");
@@ -85,7 +108,7 @@ public class Profesor extends Usuario {
             }
         }
         
-        sc.close();
+       // sc.close();
 
     }
 
