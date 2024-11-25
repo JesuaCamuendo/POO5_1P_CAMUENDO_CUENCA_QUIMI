@@ -26,15 +26,17 @@ public class Administrador extends Usuario {
         return super.toString() + ", cargo=" + cargo + "]";
     }
 
-    @Override
+    
     public void reservar() {
         // TODO Auto-generated method stub
     }
 
     @Override
-    public void notificarReserva() {
+    public void ConsultarReserva() {
         // TODO Auto-generated method stub
     }
+
+    public void GestionarReserva(){}
 
     @Override
     public void mostrarMenu() {
@@ -43,7 +45,7 @@ public class Administrador extends Usuario {
         int opcion = 0;
         while (opcion != 3) {
             System.out.println('\n'+".......... Menú Administrador ..........");
-            System.out.println("1. Reservar");
+            System.out.println("1. Gestionar Reserva");
             System.out.println("2. Consultar Reserva");
             System.out.println("3. Salir"+'\n');
             System.out.print("Seleccione una opción: ");
@@ -52,10 +54,10 @@ public class Administrador extends Usuario {
 
             switch (opcion) {
                 case 1:
-                    reservar();
+                    GestionarReserva();
                     break;
                 case 2:
-                    notificarReserva();
+                    ConsultarReserva();
                     break;
                 case 3:
                     System.out.println("-------------- Salida Exitosa --------------");

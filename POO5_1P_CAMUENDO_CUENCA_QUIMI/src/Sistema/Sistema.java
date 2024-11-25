@@ -18,6 +18,7 @@ public class Sistema {
     public static ArrayList<Reserva> reservas;
     public static ArrayList<Usuario> usuarios;
     public static ArrayList<Espacio> espacios;
+    private static String usuario;
 
     public static void main(String[] args) throws ParseException {
 
@@ -80,9 +81,8 @@ public class Sistema {
             int codigoReserva = Integer.parseInt(atributo[0].trim());
             String codigoUnico = atributo[1].trim();
             String cedula = atributo[2].trim();
-            Date fecha;
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-            fecha = formato.parse(atributo[3].trim());
+            Date fecha = formato.parse(atributo[3].trim());
             String codigoEspacio = atributo[4].trim();   
             TipoEspacio tipoEspacio = TipoEspacio.valueOf(atributo[5].trim());
             TipoEstado tipoEstado = TipoEstado.valueOf(atributo[6].trim());
@@ -98,7 +98,6 @@ public class Sistema {
     
     public static void iniciarSeccion() {
         Scanner s = new Scanner(System.in);
-        String usuario = "null";
         String contrasenia = "null";
         boolean veracidad = false;
         while (veracidad==false){
@@ -155,5 +154,9 @@ public class Sistema {
         }
         
         return veracidad;
+    }
+
+    public static String getUsuario() {
+        return usuario;
     }
 }

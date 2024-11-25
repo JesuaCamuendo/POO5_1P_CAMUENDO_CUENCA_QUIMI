@@ -1,5 +1,13 @@
 package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Espacio;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Sistema.Sistema;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEspacio;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRol;
 
 public abstract class Usuario {
@@ -29,8 +37,7 @@ public abstract class Usuario {
 
     public abstract void reservar();
 
-    //metodo para enviar correo
-    public void notificarReserva(){};
+    public abstract void ConsultarReserva();
 
     public abstract void mostrarMenu();
 
