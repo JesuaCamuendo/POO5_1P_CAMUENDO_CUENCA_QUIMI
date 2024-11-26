@@ -4,6 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import javax.mail.*;
+import io.github.cdimascio.dotenv.*;
+import java.util.Properties;
 
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Espacio;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Sistema.Sistema;
@@ -42,7 +45,12 @@ public abstract class Usuario {
     public abstract void mostrarMenu();
 
     public void enviarCorreo(){
-        
+     
+    }
+
+    public void cargarDatos(){
+        Dotenv dot= Dotenv.load();
+
     }
 
 
