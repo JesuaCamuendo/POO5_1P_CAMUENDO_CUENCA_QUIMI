@@ -35,7 +35,7 @@ public class ManejoArchivos {
             FileWriter escritura = new FileWriter(nombreArchivo,true);
             escritura.write(linea+'\n');
             escritura.close();
-            System.out.println("Escritura exitosa c:");
+            System.out.println("Escritura exitosa c:"+'\n');
         } catch (IOException exception) {
             exception.printStackTrace(System.out);
         }

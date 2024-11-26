@@ -91,10 +91,7 @@ public class Sistema {
             reservas.add(reserva);
          }
          
-        //m.EcribirArchivo("reservas", "aaaaaaaaaaaaa");
         iniciarSeccion();
-        //Estudiante e = new Estudiante(getUsuario(), getUsuario(), getUsuario(), getUsuario(), getUsuario(), getUsuario(), getUsuario(), null, getUsuario(), getUsuario());
-        //e.mostrarMenu();
     }   
 
     
