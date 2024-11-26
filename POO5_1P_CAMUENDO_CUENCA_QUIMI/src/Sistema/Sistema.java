@@ -112,7 +112,6 @@ public class Sistema {
             contrasenia = s.nextLine();
             veracidad = verificar(usuario, contrasenia);
         }
-        verificar(usuario, contrasenia);
         
         
         s.close();
@@ -129,6 +128,7 @@ public class Sistema {
             if (e instanceof Estudiante && e.getUsuario().equals(usuario) && e.getContrasenia().equals(contrasenia)) {
                     Estudiante estudiante = (Estudiante) e;
                     estudiante.mostrarMenu();
+                    veracidad = true;
                 
             }
 
