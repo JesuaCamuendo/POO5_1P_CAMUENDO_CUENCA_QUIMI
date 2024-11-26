@@ -41,6 +41,10 @@ public abstract class Usuario {
 
     public abstract void mostrarMenu();
 
+    public void enviarCorreo(){
+        
+    }
+
 
     public String toString() {
         return "Usuario [codigoUnico=" + codigoUnico + ", cedula=" + cedula + ", nombre="
