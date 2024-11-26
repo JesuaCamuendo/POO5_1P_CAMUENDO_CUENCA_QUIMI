@@ -1,6 +1,5 @@
 package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios;
 
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -226,7 +225,7 @@ public class Estudiante extends Usuario {
             }
             System.out.print('\n'+"Mencione el motivo de la reserva: ");
             String motivo1 = s.nextLine();
-            System.out.print('\n'+"Desea crear su reserva en la CANCHA con código: "+codigoEspacio1+" para el: "+fechaReserva+" [SI/NO]: ");
+            System.out.print('\n'+"Desea crear su reserva en el AULA con código: "+codigoEspacio1+" para el: "+fechaReserva+" [SI/NO]: ");
             String confirmacion1 = s.nextLine().toUpperCase();
             c1 = confirmacion1.compareTo("SI");
             c2 = confirmacion1.compareTo("NO");
