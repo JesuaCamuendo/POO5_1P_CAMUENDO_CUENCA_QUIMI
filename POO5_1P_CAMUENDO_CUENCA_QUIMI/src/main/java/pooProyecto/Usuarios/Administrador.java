@@ -44,12 +44,12 @@ public class Administrador extends Usuario {
                     String fecha = dateFormat.format(reserva.getFecha());
                     String nombreUsuario = sinTildes(usuario.getNombre());
                     String apellidoUsuario = sinTildes(usuario.getApellido());
-                    if (usuario instanceof Estudiante) {
+                    if (usuario instanceof Estudiante && !(usuario instanceof Administrador)) {
                         Estudiante e = (Estudiante) usuario;
                         System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
                                 + fecha + " - " + nombreUsuario + " " + apellidoUsuario
                                 + " - " + e.getMatricula() + " - " + usuario.getRol());
-                    } else {
+                    } else if (usuario instanceof Estudiante && !(usuario instanceof Administrador)){
                         Profesor p = (Profesor) usuario;
                         System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
                                 + fecha + " - " + nombreUsuario + " " + apellidoUsuario
