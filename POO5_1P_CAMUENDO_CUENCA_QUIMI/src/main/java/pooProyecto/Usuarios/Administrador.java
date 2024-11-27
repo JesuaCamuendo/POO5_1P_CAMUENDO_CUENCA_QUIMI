@@ -49,7 +49,7 @@ public class Administrador extends Usuario {
                         System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
                                 + fecha + " - " + nombreUsuario + " " + apellidoUsuario
                                 + " - " + e.getMatricula() + " - " + usuario.getRol());
-                    } else if (usuario instanceof Estudiante && !(usuario instanceof Administrador)){
+                    } else if (usuario instanceof Profesor && !(usuario instanceof Administrador)){
                         Profesor p = (Profesor) usuario;
                         System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
                                 + fecha + " - " + nombreUsuario + " " + apellidoUsuario
