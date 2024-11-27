@@ -39,15 +39,15 @@ public class Administrador extends Usuario {
         System.out.println("Número de reservas creadas: " + Reserva.ReservasCreadas);
         for (Reserva reserva : Sistema.reservas) {
             for (Usuario usuario : Sistema.usuarios) {
-                if (reserva.getCodigoReserva().equals(usuario.getCodigoReserva())) {
+                if (reserva.getCodigoUnico().equals(usuario.getCodigoUnico())) {
                     if (usuario instanceof Estudiante) {
                         Estudiante e = (Estudiante) usuario;
-                        System.out.println(reserva.getCodigoReserva() + " - " + reserva.getEstado() + " - "
+                        System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
                                 + reserva.getFecha() + " - " + usuario.getNombre() + " " + usuario.getApellido()
                                 + " - " + e.getMatricula() + " - " + usuario.getRol());
                     } else {
                         Profesor p = (Profesor) usuario;
-                        System.out.println(reserva.getCodigoReserva() + " - " + reserva.getEstado() + " - "
+                        System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
                                 + reserva.getFecha() + " - " + usuario.getNombre() + " " + usuario.getApellido()
                                 + " - " + p.getMateria() + " - " + usuario.getRol());
                     }
