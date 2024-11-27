@@ -1,4 +1,4 @@
-package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios;
+package pooProyecto.Usuarios;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,14 +6,13 @@ import java.util.Date;
 import java.util.Scanner;
 import javax.mail.*;
 import javax.mail.internet.MimeMessage;
-
 import io.github.cdimascio.dotenv.*;
 import java.util.Properties;
 
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Espacio;
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Sistema.Sistema;
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEspacio;
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRol;
+import pooProyecto.Sistema.*;
+import pooProyecto.Recursos.Espacio;
+import pooProyecto.Tipos.TipoEspacio;
+import pooProyecto.Tipos.TipoRol;
 
 public abstract class Usuario {
     private String codigoUnico;
@@ -63,7 +62,6 @@ public abstract class Usuario {
             }
         });
     }
-
 
     public String toString() {
         return "Usuario [codigoUnico=" + codigoUnico + ", cedula=" + cedula + ", nombre="

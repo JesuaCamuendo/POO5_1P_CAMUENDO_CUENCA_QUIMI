@@ -1,8 +1,11 @@
-package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios;
+package pooProyecto.Usuarios;
 
 import java.util.Scanner;
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Sistema;
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRol;
+
+import pooProyecto.Sistema.*;
+import pooProyecto.Tipos.TipoRol;
+import pooProyecto.Recursos.*;
+
 
 public class Administrador extends Usuario {
     private String cargo;
@@ -33,7 +36,7 @@ public class Administrador extends Usuario {
     @Override
     public void ConsultarReserva() {
         System.out.println("-----------------Consulta de reserva----------------");
-        System.out.println("Número de reservas creadas: " + Reserva.ReservasCreadas());
+        System.out.println("Número de reservas creadas: " + Reserva.ReservasCreadas);
         for (Reserva reserva : Sistema.reservas) {
             for (Usuario usuario : Sistema.usuarios) {
                 if (reserva.getCodigoReserva().equals(usuario.getCodigoReserva())) {

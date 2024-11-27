@@ -1,15 +1,16 @@
-package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios;
+package pooProyecto.Usuarios;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Espacio;
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Reserva;
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Sistema.Sistema;
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEspacio;
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRol;
+import pooProyecto.Sistema.*;
+import pooProyecto.Recursos.Espacio;
+import pooProyecto.Recursos.Reserva;
+import pooProyecto.Tipos.TipoEspacio;
+import pooProyecto.Tipos.TipoRol;
+
 
 public class Profesor extends Usuario {
     private String facultad;

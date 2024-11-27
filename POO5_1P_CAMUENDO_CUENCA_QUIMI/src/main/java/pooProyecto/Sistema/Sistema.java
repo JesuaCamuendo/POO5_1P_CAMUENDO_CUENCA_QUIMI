@@ -1,4 +1,4 @@
-package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Sistema;
+package pooProyecto.Sistema;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,10 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Espacio;
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.ManejoArchivos;
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Reserva;
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios.*;
+import pooProyecto.Recursos.*;
+import pooProyecto.Tipos.*;
+import pooProyecto.Usuarios.*;
 
 public class Sistema {
 

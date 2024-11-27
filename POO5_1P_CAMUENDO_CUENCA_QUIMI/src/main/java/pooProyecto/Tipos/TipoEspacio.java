@@ -1,4 +1,4 @@
-package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos;
+package pooProyecto.Tipos;
 public enum TipoEspacio {
       LABORATORIO, AUDITORIO, CANCHA, AULA
 }

@@ -1,9 +1,8 @@
-package POO5_1P_CAMUENDO_CUENCA_QUIMI.src;
+package pooProyecto.Recursos;
 
 import java.util.Date;
 
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEspacio;
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEstado;
+import pooProyecto.Tipos.*;
 
 public class Reserva {
 
@@ -96,12 +95,22 @@ public class Reserva {
         this.tipoEstado = tipoEstado;
     }
 
+    
+
     // metodo toString
     @Override
     public String toString() {
         return "Reserva [codigoUnico=" + codigoReserva + ", fecha=" + fecha + ", usuario=" + codigoUnico
                 + ", tipoEspacio="
                 + tipoEspacio + ", motivo=" + motivo + ", tipoEstado=" + tipoEstado + "]";
+    }
+
+    public static int getReservasCreadas() {
+        return ReservasCreadas;
+    }
+
+    public static void setReservasCreadas(int reservasCreadas) {
+        ReservasCreadas = reservasCreadas;
     }
 
 }

@@ -1,4 +1,4 @@
-package POO5_1P_CAMUENDO_CUENCA_QUIMI.src;
+package pooProyecto.Recursos;
 
 import java.io.BufferedReader;
 import java.io.File;

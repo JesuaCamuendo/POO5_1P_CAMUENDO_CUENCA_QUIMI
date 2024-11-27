@@ -1,7 +1,6 @@
-package POO5_1P_CAMUENDO_CUENCA_QUIMI.src;
+package pooProyecto.Recursos;
 
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEspacio;
-import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRolPermitido;
+import pooProyecto.Tipos.*;
 
 public class Espacio {
 
