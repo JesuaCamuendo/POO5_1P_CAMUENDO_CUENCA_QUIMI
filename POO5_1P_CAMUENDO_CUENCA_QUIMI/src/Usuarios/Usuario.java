@@ -23,8 +23,8 @@ public abstract class Usuario {
     private String correo;
     private TipoRol rol;
 
-    Usuario(String codigoUnico, String cedula, String nombre, String apellido, String usuario
-    , String contrasenia, String correo, TipoRol rol){
+    Usuario(String codigoUnico, String cedula, String nombre, String apellido, String usuario, String contrasenia,
+            String correo, TipoRol rol) {
         this.codigoUnico = codigoUnico;
         this.cedula = cedula;
         this.nombre = nombre;
@@ -33,8 +33,6 @@ public abstract class Usuario {
         this.contrasenia = contrasenia;
         this.correo = correo;
         this.rol = rol;
-    
-    
 
     }
 
@@ -44,21 +42,38 @@ public abstract class Usuario {
 
     public abstract void mostrarMenu();
 
-    public void enviarCorreo(){
-     
-    }
-
-    public void cargarDatos(){
-        Dotenv dot= Dotenv.load();
+    public void enviarCorreo() {
+        cargarDatos();
+        
 
     }
 
+    public void cargarDatos() {
+        Dotenv dot = Dotenv.load();
+        Sreing host = dot.get();
+        String port = dot.get();
+        String user = dot.get();
+        String pass = dot.get();
+
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", host);
+        prop.put("mail.smtp.port", port);
+        prop.put("mail.smtp.auth", true);
+        prop.put("mail.smtp.starttls.enable", true);
+
+        Session sesion = Session.getInstance(prop, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(user, pass);
+            }
+        });
+
+    }
 
     public String toString() {
         return "Usuario [codigoUnico=" + codigoUnico + ", cedula=" + cedula + ", nombre="
-           + nombre + ", apellido=" + apellido + ", usuario=" + usuario + ", contraseña=" + contrasenia
-           + ", correo=" + correo + ", rol=" + rol;
-        
+                + nombre + ", apellido=" + apellido + ", usuario=" + usuario + ", contraseña=" + contrasenia
+                + ", correo=" + correo + ", rol=" + rol;
+
     }
 
     public String getCodigoUnico() {
