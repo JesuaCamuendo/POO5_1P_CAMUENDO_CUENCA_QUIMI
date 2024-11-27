@@ -128,7 +128,7 @@ public class Profesor extends Usuario {
             System.out.println("Correo enviado con éxito a " + correoDestinatario);
 
         } catch (Exception e) {
-            ystem.out.println("Error al enviar el correo: " + e.getMessage());        }
+            System.out.println("Error al enviar el correo: " + e.getMessage());        }
     }
 
 }
