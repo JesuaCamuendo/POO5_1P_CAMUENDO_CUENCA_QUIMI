@@ -10,10 +10,8 @@ import javax.mail.*;
 import javax.mail.internet.MimeMessage;
 import io.github.cdimascio.dotenv.*;
 import java.util.Properties;
-
-import pooProyecto.Sistema.*;
 import pooProyecto.Tipos.*;
-import pooProyecto.Recursos.*;
+
 
 public abstract class Usuario {
     private String codigoUnico;

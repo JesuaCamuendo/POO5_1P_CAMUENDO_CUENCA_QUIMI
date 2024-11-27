@@ -130,7 +130,7 @@ public class Sistema {
             else if (e instanceof Profesor && e.getUsuario().equals(usuario) && e.getContrasenia().equals(contrasenia)) {
                     Profesor profesor = (Profesor) e;
                     profesor.mostrarMenu();
-                    veracidad = true;
+                    veracidad= true;
                 
             }
 
@@ -138,8 +138,7 @@ public class Sistema {
             else if (e instanceof Administrador && e.getUsuario().equals(usuario) && e.getContrasenia().equals(contrasenia))  {
                     Administrador administrador = (Administrador) e;
                     administrador.mostrarMenu();
-                    veracidad = true;
-                
+                    veracidad= true;
 
             }
             

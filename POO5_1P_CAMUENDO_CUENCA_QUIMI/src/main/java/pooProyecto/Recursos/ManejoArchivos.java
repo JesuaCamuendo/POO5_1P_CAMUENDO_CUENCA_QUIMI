@@ -32,7 +32,7 @@ public class ManejoArchivos {
     }
 
     public void EcribirArchivo(String nombreArchivo, String linea) {
-        nombreArchivo = "POO5_1P_CAMUENDO_CUENCA_QUIMI\\src\\Archivos\\"+nombreArchivo+".txt";
+        nombreArchivo = "POO5_1P_CAMUENDO_CUENCA_QUIMI\\src\\main\\java\\pooProyecto\\Archivos\\"+nombreArchivo+".txt";
         try {
             FileWriter escritura = new FileWriter(nombreArchivo,true);
             escritura.write(linea+'\n');
