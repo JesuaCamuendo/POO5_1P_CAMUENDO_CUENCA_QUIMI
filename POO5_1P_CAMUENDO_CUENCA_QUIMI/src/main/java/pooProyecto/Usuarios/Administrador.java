@@ -35,24 +35,22 @@ public class Administrador extends Usuario {
 
     @Override
     public void ConsultarReserva() {
-        System.out.println("-----------------Consulta de reserva----------------");
-        System.out.println("Número de reservas creadas: " + Reserva.ReservasCreadas);
+        System.out.println("\n-----------------Consulta de reserva----------------");
+        System.out.println("\nNúmero de reservas creadas: " + Reserva.ReservasCreadas);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (Reserva reserva : Sistema.reservas) {
             for (Usuario usuario : Sistema.usuarios) {
                 if (reserva.getCodigoUnico().equals(usuario.getCodigoUnico())) {
                     String fecha = dateFormat.format(reserva.getFecha());
-                    String nombreUsuario = sinTildes(usuario.getNombre());
-                    String apellidoUsuario = sinTildes(usuario.getApellido());
                     if (usuario instanceof Estudiante ) {
                         Estudiante e = (Estudiante) usuario;
                         System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
-                                + fecha + " - " + nombreUsuario + " " + apellidoUsuario
+                                + fecha + " - " +usuario.getNombre() + " " + usuario.getApellido()
                                 + " - " + e.getMatricula() + " - " + usuario.getRol());
                     } else if (usuario instanceof Profesor){
                         Profesor p = (Profesor) usuario;
                         System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
-                                + fecha + " - " + nombreUsuario + " " + apellidoUsuario
+                                + fecha + " - " + usuario.getNombre() + " " + usuario.getApellido()
                                 + " - " + p.getMateria() + " - " + usuario.getRol());
                     }
                 }
@@ -71,7 +69,7 @@ public class Administrador extends Usuario {
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
         while (opcion != 3) {
-            System.out.println('\n' + ".......... Menú Administrador ..........");
+            System.out.println('\n' + "------------- Menú Administrador -----------");
             System.out.println("1. Gestionar Reserva");
             System.out.println("2. Consultar Reserva");
             System.out.println("3. Salir" + '\n');
