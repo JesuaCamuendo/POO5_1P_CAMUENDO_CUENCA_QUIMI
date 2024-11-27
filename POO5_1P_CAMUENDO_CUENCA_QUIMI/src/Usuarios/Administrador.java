@@ -1,7 +1,7 @@
 package POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Usuarios;
 
 import java.util.Scanner;
-
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Sistema;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRol;
 
 public class Administrador extends Usuario {
@@ -26,28 +26,48 @@ public class Administrador extends Usuario {
         return super.toString() + ", cargo=" + cargo + "]";
     }
 
-    
     public void reservar() {
         // TODO Auto-generated method stub
     }
 
     @Override
     public void ConsultarReserva() {
-        // TODO Auto-generated method stub
+        System.out.println("-----------------Consulta de reserva----------------");
+        System.out.println("Número de reservas creadas: " + Reserva.ReservasCreadas());
+        for (Reserva reserva : Sistema.reservas) {
+            for (Usuario usuario : Sistema.usuarios) {
+                if (reserva.getCodigoReserva().equals(usuario.getCodigoReserva())) {
+                    if (usuario instanceof Estudiante) {
+                        Estudiante e = (Estudiante) usuario;
+                        System.out.println(reserva.getCodigoReserva() + " - " + reserva.getEstado() + " - "
+                                + reserva.getFecha() + " - " + usuario.getNombre() + " " + usuario.getApellido()
+                                + " - " + e.getMatricula() + " - " + usuario.getRol());
+                    } else {
+                        Profesor p = (Profesor) usuario;
+                        System.out.println(reserva.getCodigoReserva() + " - " + reserva.getEstado() + " - "
+                                + reserva.getFecha() + " - " + usuario.getNombre() + " " + usuario.getApellido()
+                                + " - " + p.getMateria() + " - " + usuario.getRol());
+                    }
+                }
+
+            }
+        }
+
     }
 
-    public void GestionarReserva(){}
+    public void GestionarReserva() {
+    }
 
     @Override
     public void mostrarMenu() {
-        System.out.println('\n'+"............ Cargando menú ...............");
+        System.out.println('\n' + "............ Cargando menú ...............");
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
         while (opcion != 3) {
-            System.out.println('\n'+".......... Menú Administrador ..........");
+            System.out.println('\n' + ".......... Menú Administrador ..........");
             System.out.println("1. Gestionar Reserva");
             System.out.println("2. Consultar Reserva");
-            System.out.println("3. Salir"+'\n');
+            System.out.println("3. Salir" + '\n');
             System.out.print("Seleccione una opción: ");
             opcion = sc.nextInt();
             sc.nextLine();
@@ -67,6 +87,6 @@ public class Administrador extends Usuario {
             }
         }
         System.out.println("Salida Exitosa");
-        //sc.close();
+        // sc.close();
     }
 }
