@@ -1,11 +1,12 @@
 package pooProyecto.Usuarios;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 import pooProyecto.Sistema.*;
 import pooProyecto.Tipos.TipoRol;
 import pooProyecto.Recursos.*;
-
 
 public class Administrador extends Usuario {
     private String cargo;
@@ -37,18 +38,20 @@ public class Administrador extends Usuario {
     public void ConsultarReserva() {
         System.out.println("-----------------Consulta de reserva----------------");
         System.out.println("Número de reservas creadas: " + Reserva.ReservasCreadas);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         for (Reserva reserva : Sistema.reservas) {
             for (Usuario usuario : Sistema.usuarios) {
                 if (reserva.getCodigoUnico().equals(usuario.getCodigoUnico())) {
+                    String fecha = dateFormat.format(reserva.getFecha());
                     if (usuario instanceof Estudiante) {
                         Estudiante e = (Estudiante) usuario;
                         System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
-                                + reserva.getFecha() + " - " + usuario.getNombre() + " " + usuario.getApellido()
+                                + fecha + " - " + usuario.getNombre() + " " + usuario.getApellido()
                                 + " - " + e.getMatricula() + " - " + usuario.getRol());
                     } else {
                         Profesor p = (Profesor) usuario;
                         System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
-                                + reserva.getFecha() + " - " + usuario.getNombre() + " " + usuario.getApellido()
+                                + fecha + " - " + usuario.getNombre() + " " + usuario.getApellido()
                                 + " - " + p.getMateria() + " - " + usuario.getRol());
                     }
                 }
