@@ -51,8 +51,6 @@ public class Profesor extends Usuario {
     }
 
     // Sobreescritura de metodos abstractos
-
-
     @Override
     public void ConsultarReserva() {
 
@@ -60,9 +58,9 @@ public class Profesor extends Usuario {
 
     @Override
     public void reservar() {
-             Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         // El estudiante/profesor debe ingresar la fecha de la reserva
-        System.out.println('\n'+"-------- RESERVAR --------");
+        System.out.println('\n' + "-------- RESERVAR --------");
         System.out.print("Ingrese la fecha de la reserva (YYYY-MM-DD): ");
         String fechaReserva = sc.nextLine();
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-mm-dd");
@@ -71,31 +69,32 @@ public class Profesor extends Usuario {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        System.out.print('\n'+"Elija el tipo de espacio que desea reservar (LABORATORIO/AULA/AUDITORIO): ");
-            String espacio = sc.nextLine().toUpperCase().trim();
-            while(espacio != "LABORATORIO" || espacio != "AULA" || espacio != "AUDITORIO"){
-                System.out.print('\n'+"OPCION NO VALIDA. ELIJA ENTRE: LABORATORIO/AULA/AUDITORIO: "); 
-            }
-            TipoEspacio tipo = TipoEspacio.valueOf(espacio.toUpperCase());
+        System.out.print('\n' + "Elija el tipo de espacio que desea reservar (LABORATORIO/AULA/AUDITORIO): ");
+        String espacio = sc.nextLine().toUpperCase().trim();
+        while (espacio != "LABORATORIO" || espacio != "AULA" || espacio != "AUDITORIO") {
+            System.out.print('\n' + "OPCION NO VALIDA. ELIJA ENTRE: LABORATORIO/AULA/AUDITORIO: ");
+        }
+        TipoEspacio tipo = TipoEspacio.valueOf(espacio.toUpperCase());
         sc.close();
     }
-@Override
-    public void mostrarMenu(){
-        System.out.println('\n'+"............ Cargando menú ...............");
+
+    @Override
+    public void mostrarMenu() {
+        System.out.println('\n' + "............ Cargando menú ...............");
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
         while (opcion != 3) {
-            System.out.println('\n'+"............ Menú Profesor ...............");
+            System.out.println('\n' + "............ Menú Profesor ...............");
             System.out.println("1. Reservar");
             System.out.println("2. Consultar Reserva");
-            System.out.println("3. Salir"+'\n');
+            System.out.println("3. Salir" + '\n');
             System.out.print("Seleccione una opción: ");
             opcion = sc.nextInt();
             sc.nextLine();
 
             switch (opcion) {
                 case 1:
-                reservar();
+                    reservar();
                     break;
                 case 2:
                     ConsultarReserva();
@@ -107,9 +106,24 @@ public class Profesor extends Usuario {
                     System.out.println("-------------- Opción no valida --------------");
             }
         }
-        
-       // sc.close();
 
+        // sc.close();
+
+    }
+
+    //sobrecarga del metodo enviar correo
+    public void enviarCorreo(String correoRemitente, String correoDestinatario){
+        try {
+            Message mes = new MimeMessage(session);
+            mes.setFrom(new InternetAddress(user, correoRemitente));
+            mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(correoDestinatario));
+            mes.setSubject("Asunto del correo");
+            mes.setText("Contenido del correo");
+            Transport.send(mes);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

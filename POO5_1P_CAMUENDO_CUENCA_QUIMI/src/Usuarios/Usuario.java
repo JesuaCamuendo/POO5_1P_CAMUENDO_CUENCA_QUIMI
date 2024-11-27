@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 import javax.mail.*;
+import javax.mail.internet.MimeMessage;
+
 import io.github.cdimascio.dotenv.*;
 import java.util.Properties;
 
@@ -42,15 +44,9 @@ public abstract class Usuario {
 
     public abstract void mostrarMenu();
 
-    public void enviarCorreo() {
-        cargarDatos();
-        
-
-    }
-
-    public void cargarDatos() {
+    protected void enviarCorreo() {
         Dotenv dot = Dotenv.load();
-        Sreing host = dot.get();
+        String host = dot.get();
         String port = dot.get();
         String user = dot.get();
         String pass = dot.get();
@@ -61,13 +57,13 @@ public abstract class Usuario {
         prop.put("mail.smtp.auth", true);
         prop.put("mail.smtp.starttls.enable", true);
 
-        Session sesion = Session.getInstance(prop, new Authenticator() {
+        Session session = Session.getInstance(prop, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(user, pass);
             }
         });
-
     }
+
 
     public String toString() {
         return "Usuario [codigoUnico=" + codigoUnico + ", cedula=" + cedula + ", nombre="
