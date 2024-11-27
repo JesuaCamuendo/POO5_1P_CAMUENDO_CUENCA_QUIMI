@@ -30,7 +30,8 @@ public class Administrador extends Usuario {
     }
 
     public void reservar() {
-        // TODO Auto-generated method stub
+        System.out.println("---------------Gestionar Reserva-----------------");
+        
     }
 
     @Override
@@ -60,9 +61,6 @@ public class Administrador extends Usuario {
 
     }
 
-    public void GestionarReserva() {
-    }
-
     @Override
     public void mostrarMenu() {
         System.out.println('\n' + "............ Cargando menú ...............");
@@ -79,7 +77,7 @@ public class Administrador extends Usuario {
 
             switch (opcion) {
                 case 1:
-                    GestionarReserva();
+                    reservar();
                     break;
                 case 2:
                     ConsultarReserva();
