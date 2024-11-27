@@ -18,7 +18,7 @@ public class Reserva {
     public static int ReservasCreadas = 0;
 
     // constructor de la clase Reserva
-    public Reserva(int codigoReserva, String codigoUnico, String cedula, Date fecha, String codigoEspacio, 
+    public Reserva(int codigoReserva, String codigoUnico, String cedula, Date fecha, String codigoEspacio,
             TipoEspacio tipoEspacio, TipoEstado tipoEstado, String motivo) {
         ReservasCreadas++;
         this.codigoReserva = codigoReserva;
@@ -51,7 +51,7 @@ public class Reserva {
     public void setCodigoReserva(int codigoReserva) {
         this.codigoReserva = codigoReserva;
     }
-    
+
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
@@ -99,7 +99,13 @@ public class Reserva {
     // metodo toString
     @Override
     public String toString() {
+<<<<<<< HEAD
         return "Datos de la reserva"+"\nCódigo reserva: "+codigoReserva+" - Fecha: "+fecha+" -Tipo espacio: "+tipoEspacio;
+=======
+        return "Reserva [codigoUnico=" + codigoReserva + ", fecha=" + fecha + ", usuario=" + codigoUnico
+                + ", tipoEspacio="
+                + tipoEspacio + ", motivo=" + motivo + ", tipoEstado=" + tipoEstado + "]";
+>>>>>>> f01ef705749b296198d49d352c04f0e02baf25af
     }
 
 }
