@@ -43,15 +43,17 @@ public class Administrador extends Usuario {
             for (Usuario usuario : Sistema.usuarios) {
                 if (reserva.getCodigoUnico().equals(usuario.getCodigoUnico())) {
                     String fecha = dateFormat.format(reserva.getFecha());
+                    String nombreUsuario = sinTildes(usuario.getNombre());
+                    String apellidoUsuario = sinTildes(usuario.getApellido());
                     if (usuario instanceof Estudiante) {
                         Estudiante e = (Estudiante) usuario;
                         System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
-                                + fecha + " - " + usuario.getNombre() + " " + usuario.getApellido()
+                                + fecha + " - " + nombreUsuario + " " + apellidoUsuario
                                 + " - " + e.getMatricula() + " - " + usuario.getRol());
                     } else {
                         Profesor p = (Profesor) usuario;
                         System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
-                                + fecha + " - " + usuario.getNombre() + " " + usuario.getApellido()
+                                + fecha + " - " + nombreUsuario + " " + apellidoUsuario
                                 + " - " + p.getMateria() + " - " + usuario.getRol());
                     }
                 }

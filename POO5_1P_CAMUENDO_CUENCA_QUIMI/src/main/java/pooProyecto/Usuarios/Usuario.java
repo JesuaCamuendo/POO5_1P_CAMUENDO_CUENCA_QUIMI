@@ -1,5 +1,7 @@
 package pooProyecto.Usuarios;
 
+import java.nio.charset.StandardCharsets;
+import java.text.Normalizer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -133,4 +135,11 @@ public abstract class Usuario {
         this.rol = rol;
     }
 
+    public static String sinTildes(String palabra) {
+        palabra = Normalizer.normalize(palabra, Normalizer.Form.NFD);
+        palabra = palabra.replace("\\p{M}", "");
+        byte[] b = palabra.getBytes(StandardCharsets.UTF_8);
+        palabra = new String(b, StandardCharsets.UTF_8);
+        return palabra;
+    }
 }

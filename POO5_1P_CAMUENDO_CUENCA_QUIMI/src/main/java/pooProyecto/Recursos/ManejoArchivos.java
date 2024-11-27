@@ -2,10 +2,12 @@ package pooProyecto.Recursos;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class ManejoArchivos {
@@ -14,7 +16,7 @@ public class ManejoArchivos {
         ArrayList<String[]> l = new ArrayList<>();
         File archivo = new File(nombreArchivo);
         try{
-        BufferedReader entrada = new BufferedReader(new FileReader(archivo));
+        BufferedReader entrada = new BufferedReader((new InputStreamReader(new FileInputStream(archivo), "UTF-8")));
         String cadena = entrada.readLine();
             while (cadena !=null){
                 l.add(cadena.split("\\|"));

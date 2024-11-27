@@ -194,7 +194,7 @@ public class Profesor extends Usuario {
 
     //sobrecarga del metodo enviar correo
     public void enviarCorreo(String correoRemitente, String correoDestinatario){
-        try {
+      /*   try {
             Session session = enviarCorreo();
 
             //se crea el mensaje
@@ -209,7 +209,7 @@ public class Profesor extends Usuario {
             System.out.println("Correo enviado con éxito a " + correoDestinatario);
 
         } catch (Exception e) {
-            System.out.println("Error al enviar el correo: " + e.getMessage());        }
+            System.out.println("Error al enviar el correo: " + e.getMessage());        }*/
     }
 
 }
