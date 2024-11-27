@@ -10,9 +10,8 @@ import io.github.cdimascio.dotenv.*;
 import java.util.Properties;
 
 import pooProyecto.Sistema.*;
-import pooProyecto.Recursos.Espacio;
-import pooProyecto.Tipos.TipoEspacio;
-import pooProyecto.Tipos.TipoRol;
+import pooProyecto.Tipos.*;
+import pooProyecto.Recursos.*;
 
 public abstract class Usuario {
     private String codigoUnico;
