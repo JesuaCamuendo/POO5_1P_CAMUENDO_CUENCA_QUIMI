@@ -114,16 +114,21 @@ public class Profesor extends Usuario {
     //sobrecarga del metodo enviar correo
     public void enviarCorreo(String correoRemitente, String correoDestinatario){
         try {
+            Session session = enviarCorreo();
+
+            //se crea el mensaje
             Message mes = new MimeMessage(session);
             mes.setFrom(new InternetAddress(user, correoRemitente));
             mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(correoDestinatario));
-            mes.setSubject("Asunto del correo");
+            mes.setSubject("Reserva realizada");
             mes.setText("Contenido del correo");
+
+            //se envia el mensaje
             Transport.send(mes);
+            System.out.println("Correo enviado con éxito a " + correoDestinatario);
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+            ystem.out.println("Error al enviar el correo: " + e.getMessage());        }
     }
 
 }

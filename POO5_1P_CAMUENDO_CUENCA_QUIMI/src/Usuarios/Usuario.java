@@ -44,12 +44,12 @@ public abstract class Usuario {
 
     public abstract void mostrarMenu();
 
-    protected void enviarCorreo() {
+    protected Session enviarCorreo() {
         Dotenv dot = Dotenv.load();
-        String host = dot.get();
-        String port = dot.get();
-        String user = dot.get();
-        String pass = dot.get();
+        String host = dot.get("MAIL_HOST");
+        String port = dot.get("MAIL_PORT");
+        String user = dot.get("MAIL_USER");
+        String pass = dot.get("MAIL_PASS");
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", host);
@@ -57,7 +57,7 @@ public abstract class Usuario {
         prop.put("mail.smtp.auth", true);
         prop.put("mail.smtp.starttls.enable", true);
 
-        Session session = Session.getInstance(prop, new Authenticator() {
+        return Session.getInstance(prop, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(user, pass);
             }
