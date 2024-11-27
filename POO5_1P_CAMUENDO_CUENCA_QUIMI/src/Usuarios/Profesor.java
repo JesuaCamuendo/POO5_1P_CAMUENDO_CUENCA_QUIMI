@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Espacio;
+import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Reserva;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Sistema.Sistema;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoEspacio;
 import POO5_1P_CAMUENDO_CUENCA_QUIMI.src.Tipos.TipoRol;
@@ -52,17 +53,11 @@ public class Profesor extends Usuario {
 
     // Sobreescritura de metodos abstractos
 
-
-    @Override
-    public void ConsultarReserva() {
-
-    }
-
     @Override
     public void reservar() {
-             Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         // El estudiante/profesor debe ingresar la fecha de la reserva
-        System.out.println('\n'+"-------- RESERVAR --------");
+        System.out.println('\n' + "-------- RESERVAR --------");
         System.out.print("Ingrese la fecha de la reserva (YYYY-MM-DD): ");
         String fechaReserva = sc.nextLine();
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-mm-dd");
@@ -71,31 +66,110 @@ public class Profesor extends Usuario {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        System.out.print('\n'+"Elija el tipo de espacio que desea reservar (LABORATORIO/AULA/AUDITORIO): ");
-            String espacio = sc.nextLine().toUpperCase().trim();
-            while(espacio != "LABORATORIO" || espacio != "AULA" || espacio != "AUDITORIO"){
-                System.out.print('\n'+"OPCION NO VALIDA. ELIJA ENTRE: LABORATORIO/AULA/AUDITORIO: "); 
-            }
-            TipoEspacio tipo = TipoEspacio.valueOf(espacio.toUpperCase());
-        sc.close();
+        System.out.print('\n' + "Elija el tipo de espacio que desea reservar (LABORATORIO/AULA/AUDITORIO): ");
+        String espacio = sc.nextLine().toUpperCase().trim();
+        while (espacio != "LABORATORIO" || espacio != "AULA" || espacio != "AUDITORIO") {
+            System.out.print('\n' + "OPCION NO VALIDA. ELIJA ENTRE: LABORATORIO/AULA/AUDITORIO: ");
+        }
+        TipoEspacio tipo = TipoEspacio.valueOf(espacio.toUpperCase());
+        //sc.close();
     }
-@Override
-    public void mostrarMenu(){
-        System.out.println('\n'+"............ Cargando menú ...............");
+
+    @Override
+    public void ConsultarReserva() {
+        System.out.println("\n-------------- Consultar reserva --------------  ");
+        System.out.print("Ingrese la fecha de reserva [YYYY-MM-DD]: ");
+        Scanner s = new Scanner(System.in);
+        boolean veracidad = false;
+        String fechaReserva = s.nextLine();
+        if (fechaReserva.length() == 10) {
+            String numero = fechaReserva.substring(0, 4);
+            if (fechaReserva.charAt(4) == '-' && fechaReserva.charAt(7) == '-') {
+                if (numero.matches("[0-9]*")) {
+                    numero = fechaReserva.substring(5, 7);
+                    if (numero.matches("[0-9]*")) {
+                        numero = fechaReserva.substring(8);
+                        if (numero.matches("[0-9]*")) {
+                            veracidad = true;
+                        }
+                    }
+                }
+            }
+        }
+        while (veracidad == false) {
+            System.out.print("Error al ingresar la fecha, por favor use el formato [YYYY-MM-DD]: ");
+            fechaReserva = s.nextLine();
+            if (fechaReserva.length() == 10) {
+                String numero = fechaReserva.substring(0, 4);
+                if (fechaReserva.charAt(4) == '-' && fechaReserva.charAt(7) == '-') {
+                    if (numero.matches("[0-9]*")) {
+                        numero = fechaReserva.substring(5, 7);
+                        if (numero.matches("[0-9]*")) {
+                            numero = fechaReserva.substring(8);
+                            if (numero.matches("[0-9]*")) {
+                                veracidad = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        veracidad = false;
+        try {
+            SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date fechaReservada = inputDateFormat.parse(fechaReserva);
+
+            boolean reservaBuscada = false;
+            for (Reserva reserva : Sistema.reservas) {
+                if (reserva.getFecha().equals(fechaReservada)) {
+                    reservaBuscada = true;
+                    String fechaFormateada = outputDateFormat.format(reserva.getFecha());
+                    System.out.println("\n------------------Datos de la reserva--------------------");
+                    System.out.println("Código reserva: " + reserva.getCodigoReserva() + " - Fecha: " + fechaFormateada
+                            + " - Tipo espacio: " + reserva.getTipoEspacio());
+                    for (Espacio espacio : Sistema.espacios) {
+                        if (reserva.getCodigoEspacio().equals(espacio.getCodigoEspacio())) {
+                            System.out.println("Nombre espacio: " + espacio.getNombre() + " - Capacidad: "
+                                    + espacio.getCapacidad() + " - Estado: " + espacio.getEstado());
+                        }
+                    }
+                    for (Usuario usuario : Sistema.usuarios) {
+                        if (reserva.getCodigoUnico().equals(usuario.getCodigoUnico())) {
+                            System.out.println(
+                                    "Nombre: " + usuario.getNombre() + " - Apellido: " + usuario.getApellido());
+                        }
+                    }
+                }
+            }
+
+            if (!reservaBuscada) {
+                System.out.println("No se encontraron reservas para esta fecha");
+            }
+        } catch (ParseException e) {
+            System.out.println("Error al procesar la fecha");
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void mostrarMenu() {
+        System.out.println('\n' + "............ Cargando menú ...............");
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
         while (opcion != 3) {
-            System.out.println('\n'+"............ Menú Profesor ...............");
+            System.out.println('\n' + "--------------  Menú Profesor -------------- ");
             System.out.println("1. Reservar");
             System.out.println("2. Consultar Reserva");
-            System.out.println("3. Salir"+'\n');
+            System.out.println("3. Salir" + '\n');
             System.out.print("Seleccione una opción: ");
             opcion = sc.nextInt();
             sc.nextLine();
 
             switch (opcion) {
                 case 1:
-                reservar();
+                    reservar();
                     break;
                 case 2:
                     ConsultarReserva();
@@ -107,8 +181,8 @@ public class Profesor extends Usuario {
                     System.out.println("-------------- Opción no valida --------------");
             }
         }
-        
-       // sc.close();
+
+        // sc.close();
 
     }
 

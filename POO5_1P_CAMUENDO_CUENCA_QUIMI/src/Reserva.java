@@ -99,8 +99,7 @@ public class Reserva {
     // metodo toString
     @Override
     public String toString() {
-        return "Reserva [codigoUnico=" + codigoReserva + ", fecha=" + fecha + ", usuario=" + codigoUnico + ", tipoEspacio="
-                + tipoEspacio + ", motivo=" + motivo + ", tipoEstado=" + tipoEstado + "]";
+        return "Datos de la reserva"+"\nCódigo reserva: "+codigoReserva+" - Fecha: "+fecha+" -Tipo espacio: "+tipoEspacio;
     }
 
 }
