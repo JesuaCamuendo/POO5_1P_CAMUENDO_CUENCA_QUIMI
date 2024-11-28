@@ -317,40 +317,46 @@ public class Estudiante extends Usuario {
             SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date fechaReservada = inputDateFormat.parse(fechaReserva);
-            boolean reservaBuscada = false;
-            for (Reserva reserva : Sistema.reservas) {
-                if (reserva.getFecha().equals(fechaReservada)) {
-                    for (Usuario usuario : Sistema.usuarios) {
-                        if (usuario.getUsuario().equals(Sistema.getUsuario())) {
-                            reservaBuscada = true;
-
-                            String fechaFormateada = outputDateFormat.format(reserva.getFecha());
-                            System.out.println("\n------------------Datos de la reserva--------------------");
-                            System.out.println("Código reserva: " + reserva.getCodigoReserva() + " - Fecha: "
-                                    + fechaFormateada + " - Tipo espacio: " + reserva.getTipoEspacio());
-                            for (Espacio espacio : Sistema.espacios) {
-                                if (reserva.getCodigoEspacio().equals(espacio.getCodigoEspacio())) {
-                                    System.out.println("Nombre espacio: " + espacio.getNombre() + " - Capacidad: "
-                                            + espacio.getCapacidad() + " - Estado: " + espacio.getEstado()
-                                            + " - Nombre: "
-                                            + usuario.getNombre() + " - Apellido: " + usuario.getApellido());
-                                }
+        
+            boolean reservaBuscada = false; 
+            Usuario usu = null;
+        
+            // Identificar al usuario que inició sesión
+            for (Usuario usuario : Sistema.usuarios) {
+                if (usuario.getUsuario().equals(Sistema.getUsuario())) {
+                    usu = usuario;
+                    break; 
+                }
+            }
+            if (usu != null) {
+                for (Reserva reserva : Sistema.reservas) {
+                    if (reserva.getFecha().equals(fechaReservada) &&
+                        reserva.getCedula().equals(usu.getCedula())) { // Verifica la reserva del usuario
+                        reservaBuscada = true;
+                        String fechaFormato = outputDateFormat.format(reserva.getFecha());
+                        System.out.println("\n------------------Datos de la reserva--------------------");
+                        System.out.println("Código reserva: " + reserva.getCodigoReserva() + " - Fecha: " + fechaFormato
+                                + " - Tipo espacio: " + reserva.getTipoEspacio());
+        
+                        for (Espacio espacio : Sistema.espacios) {
+                            if (reserva.getCodigoEspacio().equals(espacio.getCodigoEspacio())) {
+                                System.out.println("Nombre espacio: " + espacio.getNombre() + " - Capacidad: "
+                                        + espacio.getCapacidad() + " - Estado: " + espacio.getEstado()+"\nUsuario actual: " + usu.getNombre() + " " + usu.getApellido());
                             }
-
                         }
                     }
                 }
+                if (!reservaBuscada) {
+                    System.out.println("\nNo se encontraron reservas para esta fecha.");
+                }
+            } else {
+                System.out.println("Usuario no encontrado en el sistema.");
             }
-            if (!reservaBuscada) {
-                System.out.println("No se encontraron reservas para esta fecha");
-            }
-        } catch (
-
-        ParseException e) {
+        } catch (ParseException e) {
             System.out.println("Error al procesar la fecha");
             e.printStackTrace();
         }
-
+        
     }
 
     @Override
