@@ -18,6 +18,7 @@ public class Sistema {
     private static String usuario;
     public static void main(String[] args) throws ParseException {
 
+
         ManejoArchivos m = new ManejoArchivos();
         espacios = new ArrayList<>();
         usuarios = new ArrayList<>();
@@ -42,36 +43,39 @@ public class Sistema {
         ArrayList<String[]> profesor = m.LeerFichero("profesores");
         ArrayList<String[]> administrador = m.LeerFichero("administradores");
         for (String[] u : usuario) {
-            int i = 0;
             String rol = u[7].trim();
             TipoRol tipo = Enum.valueOf(TipoRol.class, rol);
             switch (tipo) {
                 case E:
-                    Usuario es = new Estudiante(u[0].trim(), u[1].trim(), u[2].trim(), u[3].trim(), u[4].trim(),
-                    u[5].trim(), u[6].trim(), tipo, estudiante.get(i)[4].trim(),
-                    estudiante.get(i)[5].trim());
-                    i++;
-                    usuarios.add(es);
+                for(String[] est : estudiante ){
+                    if(u[0].trim().equals(est[0].trim())){
+                        Usuario es = new Estudiante(u[0].trim(), u[1].trim(), u[2].trim(), u[3].trim(), u[4].trim(),
+                        u[5].trim(), u[6].trim(), tipo, est[4].trim(),est[5].trim());
+                        usuarios.add(es);
+                    }
+                }
                 break;
                 case A:
-                    Usuario ad = new Administrador(u[0].trim(), u[1].trim(), u[2].trim(), u[3].trim(), u[4].trim(),
-                    u[5].trim(), u[6].trim(), tipo,
-                    administrador.get(i)[4].trim());
-                    i++;
-                    usuarios.add(ad);
+                for(String[] adm : administrador ){
+                    if(u[0].trim().equals(adm[0].trim())){
+                        Usuario ad = new Administrador(u[0].trim(), u[1].trim(), u[2].trim(), u[3].trim(), u[4].trim(),
+                        u[5].trim(), u[6].trim(), tipo, adm[4]);
+                        usuarios.add(ad);
+                    }
+                }
                 break;
                 case P:
-                    Usuario pr = new Profesor(u[0].trim(), u[1].trim(), u[2].trim(), u[3].trim(), u[4].trim(),
-                    u[5].trim(), u[6].trim(), tipo, profesor.get(i)[4].trim(),
-                    profesor.get(i)[5].trim());
-                    i++;
-                    usuarios.add(pr);
+                for(String[] pro : profesor ){
+                    if(u[0].trim().equals(pro[0].trim())){
+                        Usuario pr = new Profesor(u[0].trim(), u[1].trim(), u[2].trim(), u[3].trim(), u[4].trim(),
+                        u[5].trim(), u[6].trim(), tipo, pro[4],pro[5]);
+                        usuarios.add(pr);
+                    }
+                }
                 break;
             }
         }
 
-        
-        
         ArrayList<String[]> datosReservas = m.LeerFichero("reservas");
         for(String[] atributo : datosReservas){  
             int codigoReserva = Integer.parseInt(atributo[0].trim());

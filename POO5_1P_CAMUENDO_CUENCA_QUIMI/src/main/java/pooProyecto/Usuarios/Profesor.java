@@ -342,7 +342,7 @@ public class Profesor extends Usuario {
                     String usuario = Sistema.getUsuario();
                     String cedula = "null";
                     String codigoUnico = "null";
-                    TipoEstado tipoEstado = TipoEstado.valueOf("PENDIENTE");
+                    TipoEstado tipoEstado = TipoEstado.valueOf("APROBADO");
                     for (Usuario user : Sistema.usuarios) {
                         if (user.getUsuario().compareTo(usuario) == 0) {
                             cedula = user.getCedula();
@@ -352,7 +352,7 @@ public class Profesor extends Usuario {
                     String codigoReserva = String.valueOf(5001 + Reserva.ReservasCreadas);
                     String linea = codigoReserva + " | " + codigoUnico + " | " + cedula + " | " + fechaReserva + " | "
                             + codigoEspacio2 + " | " + espacio + " | " +
-                            "PENDIENTE" + " | " + motivo2;
+                            "APROBADO" + " | " + motivo2;
                     m.EcribirArchivo("reservas", linea);
                     int cod = Integer.parseInt(codigoReserva);
                     Reserva reserva = new Reserva(cod, codigoUnico, cedula, fecha, codigoEspacio2, tipo, tipoEstado,
