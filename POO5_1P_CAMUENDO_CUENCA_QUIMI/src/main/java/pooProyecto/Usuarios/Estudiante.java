@@ -386,6 +386,8 @@ public class Estudiante extends Usuario {
             System.out.println("3. Salir" + '\n');
             System.out.print("Seleccione una opción: ");
             opcion = sc.nextInt();
+
+            
             switch (opcion) {
                 case 1:
                     reservar();
