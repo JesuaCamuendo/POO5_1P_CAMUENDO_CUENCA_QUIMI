@@ -15,7 +15,6 @@ import pooProyecto.Sistema.*;
 import pooProyecto.Recursos.*;
 import pooProyecto.Tipos.*;
 
-
 public class Profesor extends Usuario {
     private String facultad;
     private String materia;
@@ -203,6 +202,7 @@ public class Profesor extends Usuario {
                     Reserva reserva = new Reserva(cod, codigoUnico, cedula, fecha, codigoEspacio, tipo, tipoEstado,
                             motivo);
                     Sistema.reservas.add(reserva);
+                    enviarCorreo("mrodriguez@universidad.edu");
                 }
                 break;
             case AULA:
@@ -280,6 +280,7 @@ public class Profesor extends Usuario {
                     Reserva reserva = new Reserva(cod, codigoUnico, cedula, fecha, codigoEspacio1, tipo, tipoEstado,
                             motivo1);
                     Sistema.reservas.add(reserva);
+                    enviarCorreo("mrodriguez@universidad.edu");
                 }
                 break;
             case AUDITORIO:
@@ -357,6 +358,7 @@ public class Profesor extends Usuario {
                     Reserva reserva = new Reserva(cod, codigoUnico, cedula, fecha, codigoEspacio2, tipo, tipoEstado,
                             motivo2);
                     Sistema.reservas.add(reserva);
+                    enviarCorreo("mrodriguez@universidad.edu");
                 }
                 break;
             default:
@@ -476,24 +478,26 @@ public class Profesor extends Usuario {
 
     }
 
-    //sobrecarga del metodo enviar correo
-    public void enviarCorreo(String correoRemitente, String correoDestinatario){
-      /*   try {
+    // sobrecarga del metodo enviar correo
+    public void enviarCorreo(String correoRemitente) {
+        try {
             Session session = enviarCorreo();
-
-            //se crea el mensaje
+            String destinatario = "jcuencasaez3@gmail.com";
+            // se crea el mensaje
             Message mes = new MimeMessage(session);
-            mes.setFrom(new InternetAddress(user, correoRemitente));
-            mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(correoDestinatario));
+            mes.setFrom(new InternetAddress(correoRemitente));
+            mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
             mes.setSubject("Reserva realizada");
-            mes.setText("Contenido del correo");
+            mes.setText("Se le notifica que el profesor NOMBRES y APELLIDOS ha realizado una reserva con código CÓDIGO para la fecha FECHA en el auditorio NOMBRE LABORATORIO para la materia Fundamentos de Programación.");
 
-            //se envia el mensaje
+            // se envia el mensaje
             Transport.send(mes);
-            System.out.println("Correo enviado con éxito a " + correoDestinatario);
+            System.out.println("Correo enviado con éxito al administrador.");
 
         } catch (Exception e) {
-            System.out.println("Error al enviar el correo: " + e.getMessage());        }*/
+            e.printStackTrace();
+            System.out.println("Error al enviar el correo de notificación.");
+        }
     }
 
 }
