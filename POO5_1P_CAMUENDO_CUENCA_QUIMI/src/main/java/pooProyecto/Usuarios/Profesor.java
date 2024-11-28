@@ -2,6 +2,7 @@ package pooProyecto.Usuarios;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import javax.mail.*;
@@ -11,10 +12,8 @@ import io.github.cdimascio.dotenv.*;
 import java.util.Properties;
 
 import pooProyecto.Sistema.*;
-import pooProyecto.Recursos.Espacio;
-import pooProyecto.Recursos.Reserva;
-import pooProyecto.Tipos.TipoEspacio;
-import pooProyecto.Tipos.TipoRol;
+import pooProyecto.Recursos.*;
+import pooProyecto.Tipos.*;
 
 
 public class Profesor extends Usuario {
@@ -352,7 +351,7 @@ public class Profesor extends Usuario {
                     String codigoReserva = String.valueOf(5001 + Reserva.ReservasCreadas);
                     String linea = codigoReserva + " | " + codigoUnico + " | " + cedula + " | " + fechaReserva + " | "
                             + codigoEspacio2 + " | " + espacio + " | " +
-                            "PENDIENTE" + " | " + motivo1;
+                            "PENDIENTE" + " | " + motivo2;
                     m.EcribirArchivo("reservas", linea);
                     int cod = Integer.parseInt(codigoReserva);
                     Reserva reserva = new Reserva(cod, codigoUnico, cedula, fecha, codigoEspacio2, tipo, tipoEstado,
