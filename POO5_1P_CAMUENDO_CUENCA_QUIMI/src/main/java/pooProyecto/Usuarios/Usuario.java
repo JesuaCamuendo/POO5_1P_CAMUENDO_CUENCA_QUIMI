@@ -49,11 +49,12 @@ public abstract class Usuario {
         String user = dot.get("MAIL_USER");
         String pass = dot.get("MAIL_PASS");
 
+
         Properties prop = new Properties();
         prop.put("mail.smtp.host", host);
         prop.put("mail.smtp.port", port);
-        prop.put("mail.smtp.auth", true);
-        prop.put("mail.smtp.starttls.enable", true);
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true");
 
         return Session.getInstance(prop, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
