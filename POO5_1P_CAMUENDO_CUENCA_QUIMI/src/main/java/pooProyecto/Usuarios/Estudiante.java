@@ -317,33 +317,36 @@ public class Estudiante extends Usuario {
             SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date fechaReservada = inputDateFormat.parse(fechaReserva);
-
             boolean reservaBuscada = false;
             for (Reserva reserva : Sistema.reservas) {
                 if (reserva.getFecha().equals(fechaReservada)) {
-                    reservaBuscada = true;
-                    String fechaFormateada = outputDateFormat.format(reserva.getFecha());
-                    System.out.println("\n------------------Datos de la reserva--------------------");
-                    System.out.println("Código reserva: " + reserva.getCodigoReserva() + " - Fecha: " + fechaFormateada + " - Tipo espacio: " + reserva.getTipoEspacio());
-                    for (Espacio espacio : Sistema.espacios) {
-                        if (reserva.getCodigoEspacio().equals(espacio.getCodigoEspacio())) {
-                            System.out.println("Nombre espacio: " + espacio.getNombre() + " - Capacidad: "
-                                    + espacio.getCapacidad() + " - Estado: " + espacio.getEstado());
-                        }
-                    }
                     for (Usuario usuario : Sistema.usuarios) {
-                        if (reserva.getCodigoUnico().equals(usuario.getCodigoUnico())) {
-                            System.out.println(
-                                    "Nombre: " + usuario.getNombre() + " - Apellido: " + usuario.getApellido());
+                        if (usuario.getUsuario().equals(Sistema.getUsuario())) {
+                            reservaBuscada = true;
+
+                            String fechaFormateada = outputDateFormat.format(reserva.getFecha());
+                            System.out.println("\n------------------Datos de la reserva--------------------");
+                            System.out.println("Código reserva: " + reserva.getCodigoReserva() + " - Fecha: "
+                                    + fechaFormateada + " - Tipo espacio: " + reserva.getTipoEspacio());
+                            for (Espacio espacio : Sistema.espacios) {
+                                if (reserva.getCodigoEspacio().equals(espacio.getCodigoEspacio())) {
+                                    System.out.println("Nombre espacio: " + espacio.getNombre() + " - Capacidad: "
+                                            + espacio.getCapacidad() + " - Estado: " + espacio.getEstado()
+                                            + " - Nombre: "
+                                            + usuario.getNombre() + " - Apellido: " + usuario.getApellido());
+                                }
+                            }
+
                         }
                     }
                 }
             }
-
             if (!reservaBuscada) {
                 System.out.println("No se encontraron reservas para esta fecha");
             }
-        } catch (ParseException e) {
+        } catch (
+
+        ParseException e) {
             System.out.println("Error al procesar la fecha");
             e.printStackTrace();
         }
