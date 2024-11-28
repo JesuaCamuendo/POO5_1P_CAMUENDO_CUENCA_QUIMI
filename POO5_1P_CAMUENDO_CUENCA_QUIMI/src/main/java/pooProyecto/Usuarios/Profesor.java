@@ -593,7 +593,7 @@ public class Profesor extends Usuario {
     public void enviarCorreo(String correoRemitente,String nombre,String apellido,String codigo,String fecha,String espacio,String materia){
         try {
             Session session = enviarCorreo();
-            String destinatario = "jesua.camuendo@gmail.com";
+            String destinatario = "jcuencasaez3@gmail.com";
             // se crea el mensaje
             Message mes = new MimeMessage(session);
             mes.setFrom(new InternetAddress(correoRemitente));
