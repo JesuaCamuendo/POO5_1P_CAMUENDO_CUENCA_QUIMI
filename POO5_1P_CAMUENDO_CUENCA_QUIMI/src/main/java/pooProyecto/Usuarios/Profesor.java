@@ -133,12 +133,16 @@ public class Profesor extends Usuario {
         String correo = "null";
         TipoEstado tipoEstado = TipoEstado.valueOf("APROBADO");
         String nombre = "null";
+        String apellido = "null";
+        String Nombreespacio = "null";
         //Hallar los datos del Profesor que está usando el programa
         for (Usuario user : Sistema.usuarios) {
             if (user.getUsuario().compareTo(usuario) == 0) {
                 cedula = user.getCedula();
                 codigoUnico = user.getCodigoUnico();
                 correo = user.getCorreo();
+                nombre = user.getNombre();
+                apellido = user.getApellido();
             }
         }
         String codigoReserva = String.valueOf(5001 + Reserva.ReservasCreadas);
@@ -191,7 +195,7 @@ public class Profesor extends Usuario {
                 //obtener nombre del espacio
                 for(Espacio esp : Sistema.espacios){
                     if(codigoEspacio.equals(esp.getCodigoEspacio())){
-                        nombre = esp.getNombre();
+                        Nombreespacio = esp.getNombre();
                     }
                 }
                 //Mostrar materias disponibles
@@ -226,7 +230,7 @@ public class Profesor extends Usuario {
                         }
                     }
                 }
-                System.out.print('\n' + "Desea crear su reserva en el "+nombre+" con código " + codigoEspacio
+                System.out.print('\n' + "Desea crear su reserva en el "+Nombreespacio+" con código " + codigoEspacio
                 + " para la fecha " + fechaReserva + " [SI/NO]: ");
                 String confirmacion = s.nextLine().toUpperCase();
                 c1 = confirmacion.compareTo("SI");
@@ -251,7 +255,7 @@ public class Profesor extends Usuario {
                     Reserva reserva = new Reserva(cod, codigoUnico, cedula, fecha, codigoEspacio, tipo, tipoEstado,
                             motivo);
                     Sistema.reservas.add(reserva);
-                    enviarCorreo(correo);
+                    enviarCorreo(correo,nombre,apellido,codigoReserva,fechaReserva,Nombreespacio,motivo);
                 }
                 break;
             case AULA:
@@ -294,7 +298,7 @@ public class Profesor extends Usuario {
                 //obtener nombre del espacio
                 for(Espacio esp : Sistema.espacios){
                     if(codigoEspacio1.equals(esp.getCodigoEspacio())){
-                        nombre = esp.getNombre();
+                        Nombreespacio = esp.getNombre();
                     }
                 }
                 //Mostrar materias disponibles
@@ -329,7 +333,7 @@ public class Profesor extends Usuario {
                         }
                     }
                 }
-                System.out.print('\n' + "Desea crear su reserva en el "+nombre+" con código " + codigoEspacio1 + " para la fecha "
+                System.out.print('\n' + "Desea crear su reserva en el "+Nombreespacio+" con código " + codigoEspacio1 + " para la fecha "
                         + fechaReserva + " [SI/NO]: ");
                 String confirmacion1 = s.nextLine().toUpperCase();
                 c1 = confirmacion1.compareTo("SI");
@@ -354,7 +358,7 @@ public class Profesor extends Usuario {
                     Reserva reserva = new Reserva(cod, codigoUnico, cedula, fecha, codigoEspacio1, tipo, tipoEstado,
                             motivo1);
                     Sistema.reservas.add(reserva);
-                    enviarCorreo(correo);
+                    enviarCorreo("jesua.camuendo@gmail.com",nombre,apellido,codigoReserva,fechaReserva,Nombreespacio,motivo1);
                 }
                 break;
             case AUDITORIO:
@@ -397,7 +401,7 @@ public class Profesor extends Usuario {
                 //obtener nombre del espacio
                 for(Espacio esp : Sistema.espacios){
                     if(codigoEspacio2.equals(esp.getCodigoEspacio())){
-                        nombre = esp.getNombre();
+                        Nombreespacio = esp.getNombre();
                     }
                 }
                 //Mostrar materias disponibles
@@ -433,7 +437,7 @@ public class Profesor extends Usuario {
                     }
                 }
                 veracidad = false;
-                System.out.print('\n' + "Desea crear su reserva en el "+nombre+" con código " + codigoEspacio2 + " para la fecha "
+                System.out.print('\n' + "Desea crear su reserva en el "+Nombreespacio+" con código " + codigoEspacio2 + " para la fecha "
                  + fechaReserva + " [SI/NO]: ");
                 String confirmacion2 = s.nextLine().toUpperCase();
                 c1 = confirmacion2.compareTo("SI");
@@ -457,7 +461,7 @@ public class Profesor extends Usuario {
                     m.EcribirArchivo("reservas", linea);
                     Reserva reserva = new Reserva(cod,codigoUnico,cedula,fecha,codigoEspacio2,tipo,tipoEstado,motivo2);
                     Sistema.reservas.add(reserva);
-                    enviarCorreo(correo);
+                    enviarCorreo(correo,nombre,apellido,codigoReserva,fechaReserva,Nombreespacio,motivo2);
                 }
                 break;
             default:
@@ -586,17 +590,17 @@ public class Profesor extends Usuario {
     }
 
     // sobrecarga del metodo enviar correo
-    public void enviarCorreo(String correoRemitente) {
+    public void enviarCorreo(String correoRemitente,String nombre,String apellido,String codigo,String fecha,String espacio,String materia){
         try {
             Session session = enviarCorreo();
-            String destinatario = "jcuencasaez3@gmail.com";
+            String destinatario = "jesua.camuendo@gmail.com";
             // se crea el mensaje
             Message mes = new MimeMessage(session);
             mes.setFrom(new InternetAddress(correoRemitente));
             mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
             mes.setSubject("Reserva realizada");
-            mes.setText("Se le notifica que el profesor NOMBRES y APELLIDOS ha realizado una reserva con código CÓDIGO para la fecha FECHA en el auditorio NOMBRE LABORATORIO para la materia Fundamentos de Programación.");
-
+            mes.setText("Se le notifica que el profesor "+nombre+" "+apellido+" ha realizado una reserva con código "+codigo+
+            " para la fecha "+fecha+" en el "+espacio+" para la materia "+materia);
             // se envia el mensaje
             Transport.send(mes);
             System.out.println("Correo enviado con éxito al administrador.");
