@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import pooProyecto.Sistema.*;
 import pooProyecto.Tipos.TipoRol;
+import java.util.ArrayList;
 import pooProyecto.Recursos.*;
 
 public class Administrador extends Usuario {
@@ -29,39 +30,44 @@ public class Administrador extends Usuario {
         return super.toString() + ", cargo=" + cargo + "]";
     }
 
-    //Para Administrador este método funciona como gestionador de reservas
+    // Para Administrador este método funciona como gestionador de reservas
     public void reservar() {
         System.out.println("---------------Gestionar Reserva-----------------");
-        
+
     }
 
     @Override
     public void ConsultarReserva() {
         System.out.println("\n-----------------Consulta de reserva----------------");
         System.out.println("\nNúmero de reservas creadas: " + Reserva.ReservasCreadas);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         for (Reserva reserva : Sistema.reservas) {
+            Usuario usu= null;
+            String fecha = formatoFecha.format(reserva.getFecha());
             for (Usuario usuario : Sistema.usuarios) {
-                if (reserva.getCodigoUnico().equals(usuario.getCodigoUnico())) {
-                    String fecha = dateFormat.format(reserva.getFecha());
-                    if (usuario instanceof Estudiante ) {
-                        Estudiante e = (Estudiante) usuario;
-                        System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
-                                + fecha + " - " +usuario.getNombre() + " " + usuario.getApellido()
-                                + " - " + e.getMatricula() + " - " + usuario.getRol());
-                    } else if (usuario instanceof Profesor){
-                        Profesor p = (Profesor) usuario;
-                        System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
-                                + fecha + " - " + usuario.getNombre() + " " + usuario.getApellido()
-                                + " - " + p.getMateria() + " - " + usuario.getRol());
-                    }
+                if (usuario.getCedula().equals(reserva.getCedula())) {
+                   usu= usuario;
                 }
-
+            }
+            if (usu instanceof Estudiante ) {
+                Estudiante e = (Estudiante) usu;
+                System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
+                        + fecha + " - " +usu.getNombre() + " " + usu.getApellido()
+                        + " - " + e.getMatricula() + " - " + usu.getRol());
+            } else if (usu instanceof Profesor){
+                Profesor p = (Profesor) usu;
+                System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
+                        + fecha + " - " + usu.getNombre() + " " + usu.getApellido()
+                        + " - " + p.getMateria() + " - " + usu.getRol());
+            }else{
+                Administrador a= (Administrador) usu;
+                System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
+                        + fecha + " - " + usu.getNombre() + " " + usu.getApellido()
+                        + " - " + a.getCargo() + " - " + usu.getRol());
             }
         }
 
     }
-
     @Override
     public void mostrarMenu() {
         System.out.println('\n' + "............ Cargando menú ...............");
@@ -94,3 +100,6 @@ public class Administrador extends Usuario {
         // sc.close();
     }
 }
+
+
+
