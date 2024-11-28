@@ -29,6 +29,7 @@ public class Administrador extends Usuario {
         return super.toString() + ", cargo=" + cargo + "]";
     }
 
+    //Para Administrador este método funciona como gestionador de reservas
     public void reservar() {
         System.out.println("---------------Gestionar Reserva-----------------");
         

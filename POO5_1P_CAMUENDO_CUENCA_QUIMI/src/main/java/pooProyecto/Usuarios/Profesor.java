@@ -61,24 +61,309 @@ public class Profesor extends Usuario {
 
     @Override
     public void reservar() {
-        Scanner sc = new Scanner(System.in);
-        // El estudiante/profesor debe ingresar la fecha de la reserva
+        Scanner s = new Scanner(System.in);
+        boolean veracidad = false;
+        // El estudiante debe ingresar la fecha de la reserva
         System.out.println('\n' + "-------- RESERVAR --------");
-        System.out.print("Ingrese la fecha de la reserva (YYYY-MM-DD): ");
-        String fechaReserva = sc.nextLine();
+        System.out.print("Ingrese la fecha de la reserva [YYYY-MM-DD]: ");
+        String fechaReserva = s.nextLine();
+        if (fechaReserva.length() == 10) {
+            String numero = fechaReserva.substring(0, 4);
+            if (fechaReserva.charAt(4) == '-' && fechaReserva.charAt(7) == '-') {
+                if (numero.matches("[0-9]*")) {
+                    numero = fechaReserva.substring(5, 7);
+                    if (numero.matches("[0-9]*")) {
+                        numero = fechaReserva.substring(8);
+                        if (numero.matches("[0-9]*")) {
+                            veracidad = true;
+                        }
+                    }
+                }
+            }
+        }
+        while (veracidad == false) {
+            System.out.print("Error al ingresar la fecha, por favor use el formato [YYYY-MM-DD]: ");
+            fechaReserva = s.nextLine();
+            if (fechaReserva.length() == 10) {
+                String numero = fechaReserva.substring(0, 4);
+                if (fechaReserva.charAt(4) == '-' && fechaReserva.charAt(7) == '-') {
+                    if (numero.matches("[0-9]*")) {
+                        numero = fechaReserva.substring(5, 7);
+                        if (numero.matches("[0-9]*")) {
+                            numero = fechaReserva.substring(8);
+                            if (numero.matches("[0-9]*")) {
+                                veracidad = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        veracidad = false;
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-mm-dd");
+        Date fecha = new Date();
         try {
-            Date fecha = formato.parse(fechaReserva);
+            fecha = formato.parse(fechaReserva);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        System.out.print('\n' + "Elija el tipo de espacio que desea reservar (LABORATORIO/AULA/AUDITORIO): ");
-        String espacio = sc.nextLine().toUpperCase().trim();
-        while (espacio != "LABORATORIO" || espacio != "AULA" || espacio != "AUDITORIO") {
-            System.out.print('\n' + "OPCION NO VALIDA. ELIJA ENTRE: LABORATORIO/AULA/AUDITORIO: ");
+        ;
+        System.out.print('\n' + "Elija el tipo de espacio que desea reservar [LABORATORIO/AULA/AUDITORIO]: ");
+        String espacio = s.nextLine().toUpperCase();
+        int c1 = espacio.compareTo("LABORATORIO");
+        int c2 = espacio.compareTo("AULA");
+        int c3 = espacio.compareTo("AUDITORIO");
+        if (c1 == 0 || c2 == 0 || c3 == 0) {
+            veracidad = true;
         }
-        TipoEspacio tipo = TipoEspacio.valueOf(espacio.toUpperCase());
-        //sc.close();
+        while (veracidad == false) {
+            System.out.print('\n' + "OPCION NO VALIDA. ELIJA ENTRE LABORATORIO/AULA/AUDITORIO:  ");
+            espacio = s.nextLine().toUpperCase();
+            c1 = espacio.compareTo("LABORATORIO");
+            c2 = espacio.compareTo("AULA");
+            c3 = espacio.compareTo("AUDITORIO");
+            if (c1 == 0 || c2 == 0 || c3 == 0) {
+                veracidad = true;
+            }
+        }
+        veracidad = false;
+        TipoEspacio tipo = TipoEspacio.valueOf(espacio);
+        ManejoArchivos m = new ManejoArchivos();
+        switch (tipo) {
+            case LABORATORIO:
+                System.out.println('\n' + "------- Espacios Disponibles -------");
+                System.out.println("Código de Espacio  |     Nombre");
+                ArrayList<String> codigos = new ArrayList<>();
+                for (Espacio space : Sistema.espacios) {
+                    if (space.getTipo() == tipo && space.mostrarDisponibilidad()) {
+                        System.out.println("        " + space.getCodigoEspacio() + "        |  " + space.getNombre());
+                        codigos.add(space.getCodigoEspacio());
+                    }
+                }
+                System.out.print('\n' + "Elija el Laboratorio a reservar, colocando su Código (1XX): ");
+                String codigoEspacio = s.nextLine();
+                if (codigoEspacio.matches("[0-9]*")) {
+                    if (codigoEspacio.length() == 3) {
+                        for (String st : codigos) {
+                            if (st.compareTo(codigoEspacio) == 0) {
+                                veracidad = true;
+                            }
+                        }
+                    }
+                }
+                while (veracidad == false) {
+                    System.out.print('\n' + "OPCION NO EXISTE. ELEGIR ENTRE LOS CODIGOS MOSTRADOS (1XX):  ");
+                    codigoEspacio = s.nextLine().toUpperCase();
+                    if (codigoEspacio.matches("[0-9]*")) {
+                        if (codigoEspacio.length() == 3) {
+                            for (String st : codigos) {
+                                if (st.compareTo(codigoEspacio) == 0) {
+                                    veracidad = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                veracidad = false;
+                System.out.print('\n' + "Mencione el motivo de la reserva: ");
+                String motivo = s.nextLine();
+                System.out.print('\n' + "Desea crear su reserva en el LABORATORIO con código: " + codigoEspacio
+                        + " para el: " + fechaReserva + " [SI/NO]: ");
+                String confirmacion = s.nextLine().toUpperCase();
+                c1 = confirmacion.compareTo("SI");
+                c2 = confirmacion.compareTo("NO");
+                if (c1 == 0 || c2 == 0) {
+                    veracidad = true;
+                }
+                while (veracidad == false) {
+                    System.out.print('\n' + "OPCIÓN NO VALIDA. ELIJA ENTRE SI / NO:  ");
+                    confirmacion = s.nextLine().toUpperCase();
+                    c1 = confirmacion.compareTo("SI");
+                    c2 = confirmacion.compareTo("NO");
+                    if (c1 == 0 || c2 == 0) {
+                        veracidad = true;
+                    }
+                }
+                if (confirmacion.compareTo("SI") == 0) {
+                    String usuario = Sistema.getUsuario();
+                    String cedula = "null";
+                    String codigoUnico = "null";
+                    TipoEstado tipoEstado = TipoEstado.valueOf("PENDIENTE");
+                    for (Usuario user : Sistema.usuarios) {
+                        if (user.getUsuario().compareTo(usuario) == 0) {
+                            cedula = user.getCedula();
+                            codigoUnico = user.getCodigoUnico();
+                        }
+                    }
+                    String codigoReserva = String.valueOf(5001 + Reserva.ReservasCreadas);
+                    String linea = codigoReserva + " | " + codigoUnico + " | " + cedula + " | " + fechaReserva + " | "
+                            + codigoEspacio + " | " + espacio + " | " +
+                            "PENDIENTE" + " | " + motivo;
+                    m.EcribirArchivo("reservas", linea);
+                    int cod = Integer.parseInt(codigoReserva);
+                    Reserva reserva = new Reserva(cod, codigoUnico, cedula, fecha, codigoEspacio, tipo, tipoEstado,
+                            motivo);
+                    Sistema.reservas.add(reserva);
+                }
+                break;
+            case AULA:
+                veracidad = false;
+                System.out.println('\n' + "------- Espacios Disponibles -------");
+                System.out.println("Código de Espacio  |     Nombre");
+                ArrayList<String> codigos1 = new ArrayList<>();
+                for (Espacio space : Sistema.espacios) {
+                    if (space.getTipo() == tipo && space.mostrarDisponibilidad()) {
+                        System.out.println("        " + space.getCodigoEspacio() + "        |    " + space.getNombre());
+                        codigos1.add(space.getCodigoEspacio());
+                    }
+                }
+                System.out.print('\n' + "Elija el AULA a reservar, colocando su Código (1XX): ");
+                String codigoEspacio1 = s.nextLine();
+                if (codigoEspacio1.matches("[0-9]*")) {
+                    if (codigoEspacio1.length() == 3) {
+                        for (String st : codigos1) {
+                            if (st.compareTo(codigoEspacio1) == 0) {
+                                veracidad = true;
+                            }
+                        }
+                    }
+                }
+                while (veracidad == false) {
+                    System.out.print('\n' + "OPCION NO EXISTE. ELEGIR ENTRE LOS CODIGOS MOSTRADOS (1XX):  ");
+                    codigoEspacio1 = s.nextLine().toUpperCase();
+                    if (codigoEspacio1.matches("[0-9]*")) {
+                        if (codigoEspacio1.length() == 3) {
+                            for (String st : codigos1) {
+                                if (st.compareTo(codigoEspacio1) == 0) {
+                                    veracidad = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                veracidad = false;
+                System.out.print('\n' + "Mencione el motivo de la reserva: ");
+                String motivo1 = s.nextLine();
+                System.out.print('\n' + "Desea crear su reserva en el AULA con código: " + codigoEspacio1 + " para el: "
+                        + fechaReserva + " [SI/NO]: ");
+                String confirmacion1 = s.nextLine().toUpperCase();
+                c1 = confirmacion1.compareTo("SI");
+                c2 = confirmacion1.compareTo("NO");
+                if (c1 == 0 || c2 == 0) {
+                    veracidad = true;
+                }
+                while (veracidad == false) {
+                    System.out.print('\n' + "OPCIÓN NO VALIDA. ELIJA ENTRE SI / NO:  ");
+                    confirmacion1 = s.nextLine().toUpperCase();
+                    c1 = confirmacion1.compareTo("SI");
+                    c2 = confirmacion1.compareTo("NO");
+                    if (c1 == 0 || c2 == 0) {
+                        veracidad = true;
+                    }
+                }
+                if (confirmacion1.compareTo("SI") == 0) {
+                    String usuario = Sistema.getUsuario();
+                    String cedula = "null";
+                    String codigoUnico = "null";
+                    TipoEstado tipoEstado = TipoEstado.valueOf("PENDIENTE");
+                    for (Usuario user : Sistema.usuarios) {
+                        if (user.getUsuario().compareTo(usuario) == 0) {
+                            cedula = user.getCedula();
+                            codigoUnico = user.getCodigoUnico();
+                        }
+                    }
+                    String codigoReserva = String.valueOf(5001 + Reserva.ReservasCreadas);
+                    String linea = codigoReserva + " | " + codigoUnico + " | " + cedula + " | " + fechaReserva + " | "
+                            + codigoEspacio1 + " | " + espacio + " | " +
+                            "PENDIENTE" + " | " + motivo1;
+                    m.EcribirArchivo("reservas", linea);
+                    int cod = Integer.parseInt(codigoReserva);
+                    Reserva reserva = new Reserva(cod, codigoUnico, cedula, fecha, codigoEspacio1, tipo, tipoEstado,
+                            motivo1);
+                    Sistema.reservas.add(reserva);
+                }
+                break;
+            case AUDITORIO:
+                veracidad = false;
+                System.out.println('\n' + "------- Espacios Disponibles -------");
+                System.out.println("Código de Espacio  |     Nombre");
+                ArrayList<String> codigos2 = new ArrayList<>();
+                for (Espacio space : Sistema.espacios) {
+                    if (space.getTipo() == tipo && space.mostrarDisponibilidad()) {
+                        System.out.println("        " + space.getCodigoEspacio() + "        |    " + space.getNombre());
+                        codigos2.add(space.getCodigoEspacio());
+                    }
+                }
+                System.out.print('\n' + "Elija el AULA a reservar, colocando su Código (1XX): ");
+                String codigoEspacio2 = s.nextLine();
+                if (codigoEspacio2.matches("[0-9]*")) {
+                    if (codigoEspacio2.length() == 3) {
+                        for (String st : codigos2) {
+                            if (st.compareTo(codigoEspacio2) == 0) {
+                                veracidad = true;
+                            }
+                        }
+                    }
+                }
+                while (veracidad == false) {
+                    System.out.print('\n' + "OPCION NO EXISTE. ELEGIR ENTRE LOS CODIGOS MOSTRADOS (1XX):  ");
+                    codigoEspacio2 = s.nextLine().toUpperCase();
+                    if (codigoEspacio2.matches("[0-9]*")) {
+                        if (codigoEspacio2.length() == 3) {
+                            for (String st : codigos2) {
+                                if (st.compareTo(codigoEspacio2) == 0) {
+                                    veracidad = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                veracidad = false;
+                System.out.print('\n' + "Mencione el motivo de la reserva: ");
+                String motivo2 = s.nextLine();
+                System.out.print('\n' + "Desea crear su reserva en el AULA con código: " + codigoEspacio2 + " para el: "
+                        + fechaReserva + " [SI/NO]: ");
+                String confirmacion2 = s.nextLine().toUpperCase();
+                c1 = confirmacion2.compareTo("SI");
+                c2 = confirmacion2.compareTo("NO");
+                if (c1 == 0 || c2 == 0) {
+                    veracidad = true;
+                }
+                while (veracidad == false) {
+                    System.out.print('\n' + "OPCIÓN NO VALIDA. ELIJA ENTRE SI / NO:  ");
+                    confirmacion2 = s.nextLine().toUpperCase();
+                    c1 = confirmacion2.compareTo("SI");
+                    c2 = confirmacion2.compareTo("NO");
+                    if (c1 == 0 || c2 == 0) {
+                        veracidad = true;
+                    }
+                }
+                if (confirmacion2.compareTo("SI") == 0) {
+                    String usuario = Sistema.getUsuario();
+                    String cedula = "null";
+                    String codigoUnico = "null";
+                    TipoEstado tipoEstado = TipoEstado.valueOf("PENDIENTE");
+                    for (Usuario user : Sistema.usuarios) {
+                        if (user.getUsuario().compareTo(usuario) == 0) {
+                            cedula = user.getCedula();
+                            codigoUnico = user.getCodigoUnico();
+                        }
+                    }
+                    String codigoReserva = String.valueOf(5001 + Reserva.ReservasCreadas);
+                    String linea = codigoReserva + " | " + codigoUnico + " | " + cedula + " | " + fechaReserva + " | "
+                            + codigoEspacio2 + " | " + espacio + " | " +
+                            "PENDIENTE" + " | " + motivo1;
+                    m.EcribirArchivo("reservas", linea);
+                    int cod = Integer.parseInt(codigoReserva);
+                    Reserva reserva = new Reserva(cod, codigoUnico, cedula, fecha, codigoEspacio2, tipo, tipoEstado,
+                            motivo2);
+                    Sistema.reservas.add(reserva);
+                }
+                break;
+            default:
+                break;
+        }
+
     }
 
     @Override

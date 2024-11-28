@@ -148,6 +148,7 @@ public class Estudiante extends Usuario {
                         }
                     }
                 }
+                veracidad = false;
                 System.out.print('\n' + "Mencione el motivo de la reserva: ");
                 String motivo = s.nextLine();
                 System.out.print('\n' + "Desea crear su reserva en la CANCHA con código: " + codigoEspacio
@@ -224,6 +225,7 @@ public class Estudiante extends Usuario {
                         }
                     }
                 }
+                veracidad = false;
                 System.out.print('\n' + "Mencione el motivo de la reserva: ");
                 String motivo1 = s.nextLine();
                 System.out.print('\n' + "Desea crear su reserva en el AULA con código: " + codigoEspacio1 + " para el: "
