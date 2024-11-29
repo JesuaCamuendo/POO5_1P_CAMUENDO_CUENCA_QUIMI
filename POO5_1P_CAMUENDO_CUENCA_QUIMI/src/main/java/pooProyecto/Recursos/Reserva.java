@@ -101,7 +101,7 @@ public class Reserva {
     public static void setReservasCreadas(int reservasCreadas) {
         ReservasCreadas = reservasCreadas;
     }
-    
+
     // metodo toString
     @Override
     public String toString() {
