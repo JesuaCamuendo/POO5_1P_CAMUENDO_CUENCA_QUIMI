@@ -356,7 +356,7 @@ public class Estudiante extends Usuario {
                         for (Espacio espacio : Sistema.espacios) {
                             if (reserva.getCodigoEspacio().equals(espacio.getCodigoEspacio())) {
                                 System.out.println("Nombre espacio: " + espacio.getNombre() + " - Capacidad: "
-                                        + espacio.getCapacidad() + " - Estado: " + espacio.getEstado()+"\nUsuario actual: " + usu.getNombre() + " " + usu.getApellido());
+                                        + espacio.getCapacidad() + " - Estado: " + espacio.getEstado()+"\nUsuario: " + usu.getNombre() + " " + usu.getApellido());
                             }
                         }
                     }
