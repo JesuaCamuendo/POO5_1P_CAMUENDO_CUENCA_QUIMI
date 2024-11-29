@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 import pooProyecto.Sistema.*;
 import pooProyecto.Recursos.*;
 import pooProyecto.Tipos.*;
@@ -50,7 +56,7 @@ public class Estudiante extends Usuario {
         Scanner s = new Scanner(System.in);
         boolean veracidad = false;
         // El estudiante debe ingresar la fecha de la reserva
-        System.out.println('\n' + "-------- RESERVAR --------");
+        System.out.println('\n' + "----------- RESERVAR -----------");
         System.out.print("Ingrese la fecha de la reserva [YYYY-MM-DD]: ");
         String fechaReserva = s.nextLine();
         if (fechaReserva.length() == 10) {
@@ -121,20 +127,26 @@ public class Estudiante extends Usuario {
         String usuario = Sistema.getUsuario();
         String cedula = "null";
         String codigoUnico = "null";
+        String correo = "null";
+        String apellido = "null";
+        String Nombreespacio = "null";
         TipoEstado tipoEstado = TipoEstado.valueOf("PENDIENTE");
             for (Usuario user : Sistema.usuarios) {
                 if (user.getUsuario().compareTo(usuario) == 0) {
                     cedula = user.getCedula();
                     codigoUnico = user.getCodigoUnico();
+                    correo = user.getCorreo();
+                    nombre = user.getNombre();
+                    apellido = user.getApellido();
                 }
             }
         String codigoReserva = String.valueOf(5001 + Reserva.ReservasCreadas);
         int cod = Integer.parseInt(codigoReserva);
         switch (tipo) {
             case CANCHA:
-                System.out.println('\n' + "------- Espacios Disponibles -------");
+                System.out.println('\n' + "--------- Espacios Disponibles ---------");
                 System.out.println("Código de Espacio  |     Nombre");
-                System.out.println("------------------------------------------");
+                System.out.println("----------------------------------------------");
                 ArrayList<String> codigos = new ArrayList<>();
                 for (Espacio space : Sistema.espacios) {
                     if (space.getTipo() == tipo && space.mostrarDisponibilidad()) {
@@ -174,11 +186,11 @@ public class Estudiante extends Usuario {
                 //obtener nombre del espacio
                 for(Espacio esp : Sistema.espacios){
                     if(codigoEspacio.equals(esp.getCodigoEspacio())){
-                        nombre = esp.getNombre();
+                        Nombreespacio = esp.getNombre();
                     }
                 }
                 //Confirmar reserva
-                System.out.print('\n' + "Desea crear su reserva en la "+nombre+" con código: " + codigoEspacio
+                System.out.print('\n' + "Desea crear su reserva en la "+Nombreespacio+" con código: " + codigoEspacio
                         + " para el: " + fechaReserva + " [SI/NO]: ");
                 String confirmacion = s.nextLine().toUpperCase();
                 c1 = confirmacion.compareTo("SI");
@@ -204,13 +216,14 @@ public class Estudiante extends Usuario {
                     Reserva reserva = new Reserva(cod, codigoUnico, cedula, fecha, codigoEspacio, tipo, tipoEstado,
                             motivo);
                     Sistema.reservas.add(reserva);
+                    enviarCorreo(correo,nombre,apellido,codigoReserva,fechaReserva,Nombreespacio,motivo);
                 }
                 break;
             case AULA:
                 veracidad = false;
-                System.out.println('\n' + "------- Espacios Disponibles -------");
+                System.out.println('\n' + "--------- Espacios Disponibles ---------");
                 System.out.println("Código de Espacio  |     Nombre");
-                System.out.println("------------------------------------------");
+                System.out.println("----------------------------------------------");
                 ArrayList<String> codigos1 = new ArrayList<>();
                 for (Espacio space : Sistema.espacios) {
                     if (space.getTipo() == tipo && space.mostrarDisponibilidad()) {
@@ -248,7 +261,7 @@ public class Estudiante extends Usuario {
                 //obtener nombre del espacio
                 for(Espacio esp : Sistema.espacios){
                     if(codigoEspacio1.equals(esp.getCodigoEspacio())){
-                        nombre = esp.getNombre();
+                        Nombreespacio = esp.getNombre();
                     }
                 }
                 System.out.print('\n' + "Mencione el motivo de la reserva: ");
@@ -280,6 +293,7 @@ public class Estudiante extends Usuario {
                     Reserva reserva = new Reserva(cod, codigoUnico, cedula, fecha, codigoEspacio1, tipo, tipoEstado,
                             motivo1);
                     Sistema.reservas.add(reserva);
+                    enviarCorreo(correo,nombre,apellido,codigoReserva,fechaReserva,Nombreespacio,motivo1);
                 }
                 break;
             default:
@@ -401,6 +415,27 @@ public class Estudiante extends Usuario {
             }
         }
         // sc.close();
+    }
+// sobrecarga del metodo enviar correo
+    public void enviarCorreo(String correoRemitente,String nombre,String apellido,String codigo,String fecha,String espacio,String motivo){
+        try {
+            Session session = enviarCorreo();
+            String destinatario = "jcuencasaez3@gmail.com";
+            // se crea el mensaje
+            Message mes = new MimeMessage(session);
+            mes.setFrom(new InternetAddress(correoRemitente));
+            mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
+            mes.setSubject("Reserva realizada");
+            mes.setText("El estudiante "+nombre+" "+apellido+" ha realizado una reserva con código "+codigo+
+            " para la fecha "+fecha+" en "+espacio+".\nIngrese al sistemapara aprobar o rechzar la reserva.");
+            // se envia el mensaje
+            Transport.send(mes);
+            System.out.println('\n'+"Correo enviado con éxito al administrador.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error al enviar el correo de notificación.");
+        }
     }
 
 }

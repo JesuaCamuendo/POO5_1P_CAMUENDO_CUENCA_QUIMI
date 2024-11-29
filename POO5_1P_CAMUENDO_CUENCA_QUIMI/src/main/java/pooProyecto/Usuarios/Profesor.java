@@ -62,7 +62,7 @@ public class Profesor extends Usuario {
         Scanner s = new Scanner(System.in);
         boolean veracidad = false;
         // El estudiante debe ingresar la fecha de la reserva
-        System.out.println('\n' + "-------- RESERVAR --------");
+        System.out.println('\n' + "----------- RESERVAR -----------");
         System.out.print("Ingrese la fecha de la reserva [YYYY-MM-DD]: ");
         String fechaReserva = s.nextLine();
         if (fechaReserva.length() == 10) {
@@ -158,8 +158,9 @@ public class Profesor extends Usuario {
         materias[1] = materias[1].trim();
         switch (tipo) {
             case LABORATORIO:
-                System.out.println('\n' + "------- Espacios Disponibles -------");
+                System.out.println('\n' + "--------- Espacios Disponibles ---------");
                 System.out.println("Código de Espacio  |     Nombre");
+                System.out.println("----------------------------------------");
                 ArrayList<String> codigos = new ArrayList<>();
                 for (Espacio space : Sistema.espacios) {
                     if (space.getTipo() == tipo && space.mostrarDisponibilidad()) {
@@ -260,9 +261,9 @@ public class Profesor extends Usuario {
                 break;
             case AULA:
                 veracidad = false;
-                System.out.println('\n' + "------- Espacios Disponibles -------");
+                System.out.println('\n' + "--------- Espacios Disponibles ---------");
                 System.out.println("Código de Espacio  |     Nombre");
-                System.out.println("------------------------------------------");
+                System.out.println("----------------------------------------");
                 ArrayList<String> codigos1 = new ArrayList<>();
                 for (Espacio space : Sistema.espacios) {
                     if (space.getTipo() == tipo && space.mostrarDisponibilidad()) {
@@ -358,14 +359,14 @@ public class Profesor extends Usuario {
                     Reserva reserva = new Reserva(cod, codigoUnico, cedula, fecha, codigoEspacio1, tipo, tipoEstado,
                             motivo1);
                     Sistema.reservas.add(reserva);
-                    enviarCorreo("jesua.camuendo@gmail.com",nombre,apellido,codigoReserva,fechaReserva,Nombreespacio,motivo1);
+                    enviarCorreo(correo,nombre,apellido,codigoReserva,fechaReserva,Nombreespacio,motivo1);
                 }
                 break;
             case AUDITORIO:
                 veracidad = false;
-                System.out.println('\n' + "---------- Espacios Disponibles ----------");
+                System.out.println('\n' + "------------ Espacios Disponibles ------------");
                 System.out.println("Código de Espacio  |         Nombre");
-                System.out.println("------------------------------------------");
+                System.out.println("----------------------------------------------");
                 ArrayList<String> codigos2 = new ArrayList<>();
                 for (Espacio space : Sistema.espacios) {
                     if (space.getTipo() == tipo && space.mostrarDisponibilidad()) {
@@ -585,7 +586,7 @@ public class Profesor extends Usuario {
     public void enviarCorreo(String correoRemitente,String nombre,String apellido,String codigo,String fecha,String espacio,String materia){
         try {
             Session session = enviarCorreo();
-            String destinatario = "jesua.camuendo@gmail.com";
+            String destinatario = "jcuencasaez3@gmail.com";
             // se crea el mensaje
             Message mes = new MimeMessage(session);
             mes.setFrom(new InternetAddress(correoRemitente));
@@ -595,7 +596,7 @@ public class Profesor extends Usuario {
             " para la fecha "+fecha+" en el "+espacio+" para la materia "+materia);
             // se envia el mensaje
             Transport.send(mes);
-            System.out.println("Correo enviado con éxito al administrador.");
+            System.out.println('\n'+"Correo enviado con éxito al administrador.");
 
         } catch (Exception e) {
             e.printStackTrace();

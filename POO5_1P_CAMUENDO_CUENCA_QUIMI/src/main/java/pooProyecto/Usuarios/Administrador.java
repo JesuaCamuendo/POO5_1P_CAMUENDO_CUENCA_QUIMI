@@ -3,9 +3,14 @@ package pooProyecto.Usuarios;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 import pooProyecto.Sistema.*;
 import pooProyecto.Tipos.TipoRol;
-import java.util.ArrayList;
 import pooProyecto.Recursos.*;
 
 public class Administrador extends Usuario {
@@ -33,7 +38,98 @@ public class Administrador extends Usuario {
     // Para Administrador este método funciona como gestionador de reservas
     public void reservar() {
         System.out.println("---------------Gestionar Reserva-----------------");
-
+        System.out.print('\n' +"Ingrese el código de la reserva a gestionar: ");
+        Scanner sc = new Scanner(System.in);
+        String codigo = sc.nextLine();
+        ManejoArchivos m = new ManejoArchivos();
+        boolean veracidad = false;
+        String remitente = "null";
+        String cedula = "null";
+        String fecha = "null";
+        String tipoespacio = "null";
+        String nombrespacio = "null";
+        String capacidad = "null";
+        String nombre = "null";
+        String apellido = "null";
+        String codigoespacio = "null";
+        String destinatario = "null";
+        if (codigo.matches("[0-9]*")) {
+            if (codigo.length() == 4) {
+                for (Reserva reser : Sistema.reservas) {
+                    String codigoReserva = String.valueOf(reser.getCodigoReserva());
+                    if (codigoReserva.equals(codigo)) {
+                        cedula = reser.getCedula();
+                        fecha = String.valueOf(reser.getFecha());
+                        tipoespacio = String.valueOf(reser.getTipoEspacio());
+                        codigoespacio = reser.getCodigoEspacio();
+                        veracidad = true;
+                    }
+                }
+            }
+        }
+        while (veracidad==false) {
+            System.out.print('\n' +"Código inválido. Vuelva a intentarlo: ");
+            codigo = sc.nextLine();
+            if (codigo.length() == 4) {
+                for (Reserva reser : Sistema.reservas) {
+                    String codigoReserva = String.valueOf(reser.getCodigoReserva());
+                    if (codigoReserva.equals(codigo)) {
+                        cedula = reser.getCedula();
+                        fecha = String.valueOf(reser.getFecha());
+                        tipoespacio = String.valueOf(reser.getTipoEspacio());
+                        codigoespacio = reser.getCodigoEspacio();
+                        veracidad = true;
+                    }
+                }
+            }
+        }
+        veracidad = false;
+        for (Usuario user : Sistema.usuarios) {
+            if (user.getCedula().compareTo(cedula) == 0) {
+                nombre = user.getNombre();
+                apellido = user.getApellido();
+                destinatario = user.getCorreo();
+            }
+            if(user.getUsuario().equals(Sistema.getUsuario())){
+                remitente = user.getCorreo();
+            }
+        }
+        for (Espacio esp : Sistema.espacios) {
+            if (esp.getCodigoEspacio().compareTo(codigoespacio) == 0) {
+                nombrespacio = esp.getNombre();
+                capacidad = String.valueOf(esp.getCapacidad());
+            }
+        }
+        System.out.println('\n' +codigo+" - "+fecha+" - "+tipoespacio+" - "+nombrespacio+" - "+capacidad+" - "+
+        nombre+" "+apellido);
+        System.out.print('\n' +"Desea aprobar o rechazar esta reserva [APROBAR/RECHAZAR]: ");
+        String decision = sc.nextLine().toUpperCase();
+        int c1 = decision.compareTo("APROBAR");
+        int c2 = decision.compareTo("RECHAZAR");
+        if(c1 == 0 || c2 ==0){
+            veracidad = true;
+        }
+        while (veracidad==false) {
+            System.out.print('\n' +"Opción inválida. Ingrese APROBAR o RECHAZAR: ");
+            decision = sc.nextLine().toUpperCase();
+            c1 = decision.compareTo("APROBAR");
+            c2 = decision.compareTo("RECHAZAR");
+            if(c1 == 0 || c2 ==0){
+                veracidad = true;
+            }
+        }
+        String motivo = "null";
+        if (c1 == 0) {
+            motivo = "Sin motivo";
+            m.SobreescribirDesicion("reservas", decision, codigo);
+            enviarCorreo(remitente,destinatario,decision,codigo,motivo);
+        }
+        else if(c2 == 0){
+            System.out.print('\n' +"Ingrese el motivo del rechazo: ");
+            motivo = sc.nextLine();
+            m.SobreescribirDesicion("reservas", decision, codigo);
+            enviarCorreo(remitente,destinatario,decision,codigo,motivo);
+        }
     }
 
     @Override
@@ -98,6 +194,27 @@ public class Administrador extends Usuario {
         }
         System.out.println("Salida Exitosa");
         // sc.close();
+    }
+
+    public void enviarCorreo(String correoRemitente,String destinatario,String decision,String codigo,String motivo){
+        try {
+            Session session = enviarCorreo();
+            destinatario = "jcuencasaez3@gmail.com";
+            // se crea el mensaje
+            Message mes = new MimeMessage(session);
+            mes.setFrom(new InternetAddress(correoRemitente));
+            mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
+            mes.setSubject("Reserva "+decision);
+            mes.setText("Se ha "+decision+" con código "+codigo+" por el siguiente motivo: "+motivo+'.'+'\n'+'\n'
+            +"Atentamente,"+'\n'+"Departamento Administrativo");
+            // se envia el mensaje
+            Transport.send(mes);
+            System.out.println('\n'+"Correo enviado con éxito al estudiante.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error al enviar el correo de notificación.");
+        }
     }
 }
 
