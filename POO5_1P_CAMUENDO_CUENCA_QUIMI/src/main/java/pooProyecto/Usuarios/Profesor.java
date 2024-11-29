@@ -55,29 +55,57 @@ public class Profesor extends Usuario {
                 + ", hashCode()=" + hashCode() + "]";
     }
 
-
     // Sobreescritura de metodos abstractos
+
     @Override
     public void reservar() {
         Scanner s = new Scanner(System.in);
-        // El estudiante debe ingresar la fecha de la reserva
-        System.out.println('\n' + "-------- RESERVAR --------");
-        String fechaReserva;
-        do {
-            System.out.print("Ingrese la fecha de la reserva [YYYY-MM-DD]: ");
-            fechaReserva = s.nextLine();
-            if (!validarFormatoFecha(fechaReserva)) {
-                System.out.println("Error al ingresar la fecha, por favor use el formato [YYYY-MM-DD]: ");
-            }
-        } while (!validarFormatoFecha(fechaReserva));
-
-        Date fecha = convertirFecha(fechaReserva);
-
-
-
-
-
         boolean veracidad = false;
+        // El estudiante debe ingresar la fecha de la reserva
+        System.out.println('\n' + "----------- RESERVAR -----------");
+        System.out.print("Ingrese la fecha de la reserva [YYYY-MM-DD]: ");
+        String fechaReserva = s.nextLine();
+        if (fechaReserva.length() == 10) {
+            String numero = fechaReserva.substring(0, 4);
+            if (fechaReserva.charAt(4) == '-' && fechaReserva.charAt(7) == '-') {
+                if (numero.matches("[0-9]*")) {
+                    numero = fechaReserva.substring(5, 7);
+                    if (numero.matches("[0-9]*")) {
+                        numero = fechaReserva.substring(8);
+                        if (numero.matches("[0-9]*")) {
+                            veracidad = true;
+                        }
+                    }
+                }
+            }
+        }
+        while (veracidad == false) {
+            System.out.print("Error al ingresar la fecha, por favor use el formato [YYYY-MM-DD]: ");
+            fechaReserva = s.nextLine();
+            if (fechaReserva.length() == 10) {
+                String numero = fechaReserva.substring(0, 4);
+                if (fechaReserva.charAt(4) == '-' && fechaReserva.charAt(7) == '-') {
+                    if (numero.matches("[0-9]*")) {
+                        numero = fechaReserva.substring(5, 7);
+                        if (numero.matches("[0-9]*")) {
+                            numero = fechaReserva.substring(8);
+                            if (numero.matches("[0-9]*")) {
+                                veracidad = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        veracidad = false;
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-mm-dd");
+        Date fecha = new Date();
+        try {
+            fecha = formato.parse(fechaReserva);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        ;
         System.out.print('\n' + "Elija el tipo de espacio que desea reservar [LABORATORIO/AULA/AUDITORIO]: ");
         String espacio = s.nextLine().toUpperCase();
         int c1 = espacio.compareTo("LABORATORIO");
@@ -130,8 +158,9 @@ public class Profesor extends Usuario {
         materias[1] = materias[1].trim();
         switch (tipo) {
             case LABORATORIO:
-                System.out.println('\n' + "------- Espacios Disponibles -------");
+                System.out.println('\n' + "--------- Espacios Disponibles ---------");
                 System.out.println("Código de Espacio  |     Nombre");
+                System.out.println("----------------------------------------");
                 ArrayList<String> codigos = new ArrayList<>();
                 for (Espacio space : Sistema.espacios) {
                     if (space.getTipo() == tipo && space.mostrarDisponibilidad()) {
@@ -232,9 +261,9 @@ public class Profesor extends Usuario {
                 break;
             case AULA:
                 veracidad = false;
-                System.out.println('\n' + "------- Espacios Disponibles -------");
+                System.out.println('\n' + "--------- Espacios Disponibles ---------");
                 System.out.println("Código de Espacio  |     Nombre");
-                System.out.println("------------------------------------------");
+                System.out.println("----------------------------------------");
                 ArrayList<String> codigos1 = new ArrayList<>();
                 for (Espacio space : Sistema.espacios) {
                     if (space.getTipo() == tipo && space.mostrarDisponibilidad()) {
@@ -335,9 +364,9 @@ public class Profesor extends Usuario {
                 break;
             case AUDITORIO:
                 veracidad = false;
-                System.out.println('\n' + "---------- Espacios Disponibles ----------");
+                System.out.println('\n' + "------------ Espacios Disponibles ------------");
                 System.out.println("Código de Espacio  |         Nombre");
-                System.out.println("------------------------------------------");
+                System.out.println("----------------------------------------------");
                 ArrayList<String> codigos2 = new ArrayList<>();
                 for (Espacio space : Sistema.espacios) {
                     if (space.getTipo() == tipo && space.mostrarDisponibilidad()) {
@@ -486,68 +515,62 @@ public class Profesor extends Usuario {
             SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date fechaReservada = inputDateFormat.parse(fechaReserva);
-        
-            boolean reservaBuscada = false; 
-            Usuario usu = null;
-        
-            // Identificar al usuario que inició sesión
-            for (Usuario usuario : Sistema.usuarios) {
-                if (usuario.getUsuario().equals(Sistema.getUsuario())) {
-                    usu = usuario;
-                    break; 
-                }
-            }
-            if (usu != null) {
-                for (Reserva reserva : Sistema.reservas) {
-                    if (reserva.getFecha().equals(fechaReservada) &&
-                        reserva.getCedula().equals(usu.getCedula())) { // Verifica la reserva del usuario
-                        reservaBuscada = true;
-                        String fechaFormato = outputDateFormat.format(reserva.getFecha());
-                        System.out.println("\n------------------Datos de la reserva--------------------");
-                        System.out.println("Código reserva: " + reserva.getCodigoReserva() + " - Fecha: " + fechaFormato
-                                + " - Tipo espacio: " + reserva.getTipoEspacio());
-        
-                        for (Espacio espacio : Sistema.espacios) {
-                            if (reserva.getCodigoEspacio().equals(espacio.getCodigoEspacio())) {
-                                System.out.println("Nombre espacio: " + espacio.getNombre() + " - Capacidad: "
-                                        + espacio.getCapacidad() + " - Estado: " + espacio.getEstado()+"\nUsuario actual: " + usu.getNombre() + " " + usu.getApellido());
-                            }
+
+            boolean reservaBuscada = false;
+            for (Reserva reserva : Sistema.reservas) {
+                if (reserva.getFecha().equals(fechaReservada)) {
+                    reservaBuscada = true;
+                    String fechaFormateada = outputDateFormat.format(reserva.getFecha());
+                    System.out.println("\n------------------Datos de la reserva--------------------");
+                    System.out.println("Código reserva: " + reserva.getCodigoReserva() + " - Fecha: " + fechaFormateada
+                            + " - Tipo espacio: " + reserva.getTipoEspacio());
+                    for (Espacio espacio : Sistema.espacios) {
+                        if (reserva.getCodigoEspacio().equals(espacio.getCodigoEspacio())) {
+                            System.out.println("Nombre espacio: " + espacio.getNombre() + " - Capacidad: "
+                                    + espacio.getCapacidad() + " - Estado: " + espacio.getEstado());
+                        }
+                    }
+                    for (Usuario usuario : Sistema.usuarios) {
+                        if (reserva.getCodigoUnico().equals(usuario.getCodigoUnico())) {
+                            System.out.println(
+                                    "Nombre: " + usuario.getNombre() + " - Apellido: " + usuario.getApellido());
                         }
                     }
                 }
-                if (!reservaBuscada) {
-                    System.out.println("\nNo se encontraron reservas para esta fecha.");
-                }
-            } else {
-                System.out.println("Usuario no encontrado en el sistema.");
+            }
+
+            if (!reservaBuscada) {
+                System.out.println("No se encontraron reservas para esta fecha");
             }
         } catch (ParseException e) {
             System.out.println("Error al procesar la fecha");
             e.printStackTrace();
         }
-        
+
     }
 
     @Override
     public void mostrarMenu() {
         System.out.println('\n' + "............ Cargando menú ...............");
         Scanner sc = new Scanner(System.in);
-        String opcion = "";
-        while (!(opcion.equals("3"))) {
-            System.out.println('\n' + "═══════════  Menú Profesor ═══════════ ");
+        int opcion = 0;
+        while (opcion != 3) {
+            System.out.println('\n' + "--------------  Menú Profesor -------------- ");
             System.out.println("1. Reservar");
             System.out.println("2. Consultar Reserva");
             System.out.println("3. Salir" + '\n');
             System.out.print("Seleccione una opción: ");
-            opcion =sc.nextLine();
+            opcion = sc.nextInt();
+            sc.nextLine();
+
             switch (opcion) {
-                case "1":
+                case 1:
                     reservar();
                     break;
-                case "2":
+                case 2:
                     ConsultarReserva();
                     break;
-                case "3":
+                case 3:
                     System.out.println("-------------- Salida Exitosa --------------");
                     break;
                 default:
@@ -566,14 +589,14 @@ public class Profesor extends Usuario {
             String destinatario = "jcuencasaez3@gmail.com";
             // se crea el mensaje
             Message mes = new MimeMessage(session);
-            mes.setFrom(new InternetAddress(correoRemitente,nombre+" "+apellido));
+            mes.setFrom(new InternetAddress(correoRemitente));
             mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
             mes.setSubject("Reserva realizada");
             mes.setText("Se le notifica que el profesor "+nombre+" "+apellido+" ha realizado una reserva con código "+codigo+
             " para la fecha "+fecha+" en el "+espacio+" para la materia "+materia);
             // se envia el mensaje
             Transport.send(mes);
-            System.out.println("Correo enviado con éxito al administrador.");
+            System.out.println('\n'+"Correo enviado con éxito al administrador.");
 
         } catch (Exception e) {
             e.printStackTrace();

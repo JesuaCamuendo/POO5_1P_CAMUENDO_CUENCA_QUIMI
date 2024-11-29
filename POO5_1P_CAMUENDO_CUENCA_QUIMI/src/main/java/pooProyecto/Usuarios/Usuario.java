@@ -1,6 +1,13 @@
 package pooProyecto.Usuarios;
 
+import java.nio.charset.StandardCharsets;
+import java.text.Normalizer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
 import javax.mail.*;
+import javax.mail.internet.MimeMessage;
 import io.github.cdimascio.dotenv.*;
 
 import java.text.ParseException;
@@ -75,7 +82,7 @@ public abstract class Usuario {
         return anio.matches("\\d{4}") && mes.matches("\\d{2}") && dia.matches("\\d{2}");
     }
 
-    // metodo para convertir la fecha ingresa en tipo Date
+    // metodo para convertir la fecha ingresada en tipo Date
     protected Date convertirFecha(String fechaReserva) {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         try {
