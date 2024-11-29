@@ -60,7 +60,7 @@ public class Profesor extends Usuario {
     @Override
     public void reservar() {
         Scanner s = new Scanner(System.in);
-        // El estudiante debe ingresar la fecha de la reserva
+        // 1. El profesor debe ingresar la fecha de la reserva
         System.out.println('\n' + "-------- RESERVAR --------");
         String fechaReserva;
         do {
@@ -73,7 +73,7 @@ public class Profesor extends Usuario {
 
         Date fecha = convertirFecha(fechaReserva);
 
-        //Sellecionar el espacio
+        //2. El profesor selecciona el espacio
         boolean veracidad = false;
         System.out.print('\n' + "Elija el tipo de espacio que desea reservar [LABORATORIO/AULA/AUDITORIO]: ");
         String espacio = s.nextLine().toUpperCase();
