@@ -377,25 +377,23 @@ public class Estudiante extends Usuario {
     @Override
     public void mostrarMenu() {
         Scanner sc = new Scanner(System.in);
-        int opcion = 0;
-        while (opcion != 3) {
-            System.out.println('\n' + "................Cargando menú.................");
-            System.out.println('\n' + "-------------- Menú Estudiante -------------- ");
+        String opcion="" ;
+        while (!(opcion.equals("3"))) {
+            System.out.println('\n' + "....................Cargando menú.....................");
+            System.out.println('\n' + "══════════════════ Menú Estudiante ══════════════════ ");
             System.out.println("1. Reservar");
             System.out.println("2. Consultar Reserva");
             System.out.println("3. Salir" + '\n');
             System.out.print("Seleccione una opción: ");
-            opcion = sc.nextInt();
-
-            
+            opcion = sc.nextLine();
             switch (opcion) {
-                case 1:
+                case "1":
                     reservar();
                     break;
-                case 2:
+                case "2":
                     ConsultarReserva();
                     break;
-                case 3:
+                case "3":
                     System.out.println("-------------- Salida Exitosa --------------");
                     break;
                 default:
