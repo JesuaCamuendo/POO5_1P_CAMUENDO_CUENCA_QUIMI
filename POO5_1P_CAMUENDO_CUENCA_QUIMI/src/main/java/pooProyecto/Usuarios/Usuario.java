@@ -37,7 +37,7 @@ public abstract class Usuario {
 
     }
 
-    /*
+    /**
      * Este metodo es abstracto para que las clases hijas puedan sobreescribirlo
      * @param No recibe nada
      * @return No devuelve nada
@@ -102,7 +102,7 @@ public abstract class Usuario {
 
     }
 
-    /*
+    /**
      * Este metodo sirve para mostrar menú
      * @param No recibe nada
      * @return void No devuelve nada
