@@ -494,6 +494,7 @@ public class Profesor extends Usuario {
             SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date fechaReservada = inputDateFormat.parse(fechaReserva);
+//hasta aqui
 
             boolean reservaBuscada = false;
             for (Reserva reserva : Sistema.reservas) {
