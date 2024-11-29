@@ -9,9 +9,12 @@ import java.util.Scanner;
 import javax.mail.*;
 import javax.mail.internet.MimeMessage;
 import io.github.cdimascio.dotenv.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 import pooProyecto.Tipos.*;
-
 
 public abstract class Usuario {
     private String codigoUnico;
@@ -42,13 +45,13 @@ public abstract class Usuario {
 
     public abstract void mostrarMenu();
 
+    // metodo para enviar correo
     protected Session enviarCorreo() {
         Dotenv dot = Dotenv.load();
         String host = dot.get("MAIL_HOST");
         String port = dot.get("MAIL_PORT");
         String user = dot.get("MAIL_USER");
         String pass = dot.get("MAIL_PASS");
-
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", host);
@@ -61,6 +64,33 @@ public abstract class Usuario {
                 return new PasswordAuthentication(user, pass);
             }
         });
+    }
+
+    //metodo para validar la fecha
+    protected boolean validarFormatoFecha(String fecha) {
+        if (fecha.length() != 10) {
+            return false;
+        }
+        if (fecha.charAt(4) != '-' || fecha.charAt(7) != '-') {
+            return false;
+        }
+
+        String anio = fecha.substring(0, 4);
+        String mes = fecha.substring(5, 7);
+        String dia = fecha.substring(8);
+
+        return anio.matches("\\d{4}") && mes.matches("\\d{2}") && dia.matches("\\d{2}");
+    }
+
+    // metodo para convertir la fecha ingresada en tipo Date
+    protected Date convertirFecha(String fechaReserva) {
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return formato.parse(fechaReserva);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public String toString() {
