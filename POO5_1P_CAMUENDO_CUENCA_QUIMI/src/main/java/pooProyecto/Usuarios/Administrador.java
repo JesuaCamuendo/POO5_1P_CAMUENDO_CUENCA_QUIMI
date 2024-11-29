@@ -41,25 +41,25 @@ public class Administrador extends Usuario {
         System.out.println("\nNúmero de reservas creadas: " + Reserva.ReservasCreadas);
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         for (Reserva reserva : Sistema.reservas) {
-            Usuario usu = null;
+            Usuario usu= null;
             String fecha = formatoFecha.format(reserva.getFecha());
             for (Usuario usuario : Sistema.usuarios) {
                 if (usuario.getCedula().equals(reserva.getCedula())) {
-                    usu = usuario;
+                   usu= usuario;
                 }
             }
-            if (usu instanceof Estudiante) {
+            if (usu instanceof Estudiante ) {
                 Estudiante e = (Estudiante) usu;
                 System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
-                        + fecha + " - " + usu.getNombre() + " " + usu.getApellido()
+                        + fecha + " - " +usu.getNombre() + " " + usu.getApellido()
                         + " - " + e.getMatricula() + " - " + usu.getRol());
-            } else if (usu instanceof Profesor) {
+            } else if (usu instanceof Profesor){
                 Profesor p = (Profesor) usu;
                 System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
                         + fecha + " - " + usu.getNombre() + " " + usu.getApellido()
                         + " - " + p.getMateria() + " - " + usu.getRol());
-            } else {
-                Administrador a = (Administrador) usu;
+            }else{
+                Administrador a= (Administrador) usu;
                 System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
                         + fecha + " - " + usu.getNombre() + " " + usu.getApellido()
                         + " - " + a.getCargo() + " - " + usu.getRol());
@@ -67,14 +67,13 @@ public class Administrador extends Usuario {
         }
 
     }
-
     @Override
     public void mostrarMenu() {
         System.out.println('\n' + "............ Cargando menú ...............");
         Scanner sc = new Scanner(System.in);
         String opcion = "";
         while (!(opcion.equals("3"))) {
-            System.out.println('\n' + "═══════════ Menú Administrador ═══════════");
+            System.out.println('\n' + "═══════════ Menú Administrador ═══════════ ");
             System.out.println("1. Gestionar Reserva");
             System.out.println("2. Consultar Reserva");
             System.out.println("3. Salir" + '\n');
@@ -99,3 +98,6 @@ public class Administrador extends Usuario {
         // sc.close();
     }
 }
+
+
+
