@@ -102,18 +102,18 @@ public class Administrador extends Usuario {
         }
         System.out.println('\n' +codigo+" - "+fecha+" - "+tipoespacio+" - "+nombrespacio+" - "+capacidad+" - "+
         nombre+" "+apellido);
-        System.out.print('\n' +"Desea aprobar o rechazar esta reserva [APROBAR/RECHAZAR]: ");
+        System.out.print('\n' +"Desea aprobar o rechazar esta reserva [APROBADO/RECHAZADO]: ");
         String decision = sc.nextLine().toUpperCase();
-        int c1 = decision.compareTo("APROBAR");
-        int c2 = decision.compareTo("RECHAZAR");
+        int c1 = decision.compareTo("APROBADO");
+        int c2 = decision.compareTo("RECHAZADO");
         if(c1 == 0 || c2 ==0){
             veracidad = true;
         }
         while (veracidad==false) {
-            System.out.print('\n' +"Opción inválida. Ingrese APROBAR o RECHAZAR: ");
+            System.out.print('\n' +"Opción inválida. Ingrese APROBADO o RECHAZADO: ");
             decision = sc.nextLine().toUpperCase();
-            c1 = decision.compareTo("APROBAR");
-            c2 = decision.compareTo("RECHAZAR");
+            c1 = decision.compareTo("APROBADO");
+            c2 = decision.compareTo("RECHAZADO");
             if(c1 == 0 || c2 ==0){
                 veracidad = true;
             }

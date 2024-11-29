@@ -57,7 +57,7 @@ public class ManejoArchivos {
                     estado = decision;
                 }
                 String linea = r.getCodigoReserva() + " | " + r.getCodigoUnico() + " | " + r.getCedula() + " | " + String.valueOf(r.getFecha()) + " | "
-                            + r.getCodigoEspacio() + " | " + String.valueOf(r.getTipoEspacio()) + " | " + estado + " | " + r.getMotivo();
+                            + r.getCodigoEspacio() + " | " + String.valueOf(r.getTipoEspacio()) + " | " + estado + " | " + r.getMotivo()+'\n';
                 escritura.write(linea);
             }
             escritura.close();
