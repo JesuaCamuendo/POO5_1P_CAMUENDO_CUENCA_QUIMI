@@ -532,24 +532,22 @@ public class Profesor extends Usuario {
     public void mostrarMenu() {
         System.out.println('\n' + "............ Cargando menú ...............");
         Scanner sc = new Scanner(System.in);
-        int opcion = 0;
-        while (opcion != 3) {
-            System.out.println('\n' + "--------------  Menú Profesor -------------- ");
+        String opcion = "";
+        while (!(opcion.equals("3"))) {
+            System.out.println('\n' + "═══════════  Menú Profesor ═══════════ ");
             System.out.println("1. Reservar");
             System.out.println("2. Consultar Reserva");
             System.out.println("3. Salir" + '\n');
             System.out.print("Seleccione una opción: ");
-            opcion = sc.nextInt();
-            sc.nextLine();
-
+            opcion =sc.nextLine();
             switch (opcion) {
-                case 1:
+                case "1":
                     reservar();
                     break;
-                case 2:
+                case "2":
                     ConsultarReserva();
                     break;
-                case 3:
+                case "3":
                     System.out.println("-------------- Salida Exitosa --------------");
                     break;
                 default:
