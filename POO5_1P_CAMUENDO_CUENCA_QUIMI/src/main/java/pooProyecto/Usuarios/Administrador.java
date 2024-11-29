@@ -2,14 +2,13 @@ package pooProyecto.Usuarios;
 
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
-
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
 import pooProyecto.Sistema.*;
+import pooProyecto.Tipos.TipoEstado;
 import pooProyecto.Tipos.TipoRol;
 import pooProyecto.Recursos.*;
 
@@ -41,10 +40,10 @@ public class Administrador extends Usuario {
         System.out.print('\n' +"Ingrese el código de la reserva a gestionar: ");
         Scanner sc = new Scanner(System.in);
         String codigo = sc.nextLine();
-        ManejoArchivos m = new ManejoArchivos();
         boolean veracidad = false;
         String remitente = "null";
         String cedula = "null";
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         String fecha = "null";
         String tipoespacio = "null";
         String nombrespacio = "null";
@@ -59,7 +58,7 @@ public class Administrador extends Usuario {
                     String codigoReserva = String.valueOf(reser.getCodigoReserva());
                     if (codigoReserva.equals(codigo)) {
                         cedula = reser.getCedula();
-                        fecha = String.valueOf(reser.getFecha());
+                        fecha = formatoFecha.format(reser.getFecha());
                         tipoespacio = String.valueOf(reser.getTipoEspacio());
                         codigoespacio = reser.getCodigoEspacio();
                         veracidad = true;
@@ -75,7 +74,7 @@ public class Administrador extends Usuario {
                     String codigoReserva = String.valueOf(reser.getCodigoReserva());
                     if (codigoReserva.equals(codigo)) {
                         cedula = reser.getCedula();
-                        fecha = String.valueOf(reser.getFecha());
+                        fecha = formatoFecha.format(reser.getFecha());
                         tipoespacio = String.valueOf(reser.getTipoEspacio());
                         codigoespacio = reser.getCodigoEspacio();
                         veracidad = true;
@@ -104,31 +103,31 @@ public class Administrador extends Usuario {
         nombre+" "+apellido);
         System.out.print('\n' +"Desea aprobar o rechazar esta reserva [APROBADO/RECHAZADO]: ");
         String decision = sc.nextLine().toUpperCase();
-        int c1 = decision.compareTo("APROBADO");
-        int c2 = decision.compareTo("RECHAZADO");
-        if(c1 == 0 || c2 ==0){
-            veracidad = true;
-        }
-        while (veracidad==false) {
-            System.out.print('\n' +"Opción inválida. Ingrese APROBADO o RECHAZADO: ");
-            decision = sc.nextLine().toUpperCase();
-            c1 = decision.compareTo("APROBADO");
-            c2 = decision.compareTo("RECHAZADO");
-            if(c1 == 0 || c2 ==0){
-                veracidad = true;
-            }
-        }
+        decision = Elegiropciones(decision, "APROBADO", "RECHAZADO");
         String motivo = "null";
-        if (c1 == 0) {
+        String asunto = "null";
+        if (decision.compareTo("APROBADO") == 0) {
             motivo = "Sin motivo";
-            m.SobreescribirDesicion("reservas", decision, codigo);
-            enviarCorreo(remitente,destinatario,decision,codigo,motivo);
+            asunto = "aprobada";
+            for (Reserva r: Sistema.reservas){
+                String codigoReserva = String.valueOf(r.getCodigoReserva());
+                if(codigoReserva.equals(codigo)){
+                    r.setTipoEstado(TipoEstado.valueOf(decision));
+                }
+            }
+            enviarCorreo(remitente,destinatario,decision,codigo,motivo,asunto);
         }
-        else if(c2 == 0){
+        else if(decision.compareTo("RECHAZADO") == 0){
             System.out.print('\n' +"Ingrese el motivo del rechazo: ");
             motivo = sc.nextLine();
-            m.SobreescribirDesicion("reservas", decision, codigo);
-            enviarCorreo(remitente,destinatario,decision,codigo,motivo);
+            asunto = "rechazada";
+            for (Reserva r: Sistema.reservas){
+                String codigoReserva = String.valueOf(r.getCodigoReserva());
+                if(codigoReserva.equals(codigo)){
+                    r.setTipoEstado(TipoEstado.valueOf(decision));
+                }
+            }
+            enviarCorreo(remitente,destinatario,decision,codigo,motivo,asunto);
         }
     }
 
@@ -191,11 +190,9 @@ public class Administrador extends Usuario {
                     System.out.println("-------------- Opción no valida --------------");
             }
         }
-        System.out.println("Salida Exitosa");
-        // sc.close();
     }
 
-    public void enviarCorreo(String correoRemitente,String destinatario,String decision,String codigo,String motivo){
+    public void enviarCorreo(String correoRemitente,String destinatario,String decision,String codigo,String motivo,String asunto){
         try {
             Session session = enviarCorreo();
             destinatario = "jcuencasaez3@gmail.com";
@@ -203,8 +200,8 @@ public class Administrador extends Usuario {
             Message mes = new MimeMessage(session);
             mes.setFrom(new InternetAddress(correoRemitente));
             mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
-            mes.setSubject("Reserva "+decision);
-            mes.setText("Se ha "+decision+" con código "+codigo+" por el siguiente motivo: "+motivo+'.'+'\n'+'\n'
+            mes.setSubject("Reserva "+asunto);
+            mes.setText("Se ha "+decision+" su reserva con código "+codigo+" por el siguiente motivo: "+motivo+'.'+'\n'+'\n'
             +"Atentamente,"+'\n'+"Departamento Administrativo");
             // se envia el mensaje
             Transport.send(mes);

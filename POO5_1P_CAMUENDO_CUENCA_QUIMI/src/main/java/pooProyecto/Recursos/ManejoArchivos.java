@@ -45,25 +45,4 @@ public class ManejoArchivos {
             exception.printStackTrace(System.out);
         }
     }
-
-    public void SobreescribirDesicion(String nombreArchivo, String decision, String codigo) {
-        nombreArchivo = "POO5_1P_CAMUENDO_CUENCA_QUIMI\\src\\main\\java\\pooProyecto\\Archivos\\"+nombreArchivo+".txt";
-        try {
-            FileWriter escritura = new FileWriter(nombreArchivo);
-            for (Reserva r: Sistema.reservas){
-                String estado = String.valueOf(r.getTipoEstado());
-                String codigoReserva = String.valueOf(r.getCodigoReserva());
-                if(codigoReserva.equals(codigo)){
-                    estado = decision;
-                }
-                String linea = r.getCodigoReserva() + " | " + r.getCodigoUnico() + " | " + r.getCedula() + " | " + String.valueOf(r.getFecha()) + " | "
-                            + r.getCodigoEspacio() + " | " + String.valueOf(r.getTipoEspacio()) + " | " + estado + " | " + r.getMotivo()+'\n';
-                escritura.write(linea);
-            }
-            escritura.close();
-            System.out.println("Escritura exitosa c:"+'\n');
-        } catch (IOException exception) {
-            exception.printStackTrace(System.out);
-        }
-    }
 }
