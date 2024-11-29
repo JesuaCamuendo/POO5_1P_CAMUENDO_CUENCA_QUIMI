@@ -17,14 +17,14 @@ import java.util.Properties;
 import pooProyecto.Tipos.*;
 
 public abstract class Usuario {
-    private String codigoUnico;
-    private String cedula;
-    private String nombre;
-    private String apellido;
-    private String usuario;
-    private String contrasenia;
-    private String correo;
-    private TipoRol rol;
+    protected String codigoUnico;
+    protected String cedula;
+    protected String nombre;
+    protected String apellido;
+    protected String usuario;
+    protected String contrasenia;
+    protected String correo;
+    protected TipoRol rol;
 
     Usuario(String codigoUnico, String cedula, String nombre, String apellido, String usuario, String contrasenia,
             String correo, TipoRol rol) {
