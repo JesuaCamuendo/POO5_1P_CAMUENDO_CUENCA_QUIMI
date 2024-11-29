@@ -1,7 +1,6 @@
 package pooProyecto.Recursos;
 
 import java.util.Date;
-
 import pooProyecto.Tipos.*;
 
 public class Reserva {
@@ -95,16 +94,6 @@ public class Reserva {
         this.tipoEstado = tipoEstado;
     }
 
-    
-
-    // metodo toString
-    @Override
-    public String toString() {
-        return "Reserva [codigoUnico=" + codigoReserva + ", fecha=" + fecha + ", usuario=" + codigoUnico
-                + ", tipoEspacio="
-                + tipoEspacio + ", motivo=" + motivo + ", tipoEstado=" + tipoEstado + "]";
-    }
-
     public static int getReservasCreadas() {
         return ReservasCreadas;
     }
@@ -112,5 +101,12 @@ public class Reserva {
     public static void setReservasCreadas(int reservasCreadas) {
         ReservasCreadas = reservasCreadas;
     }
-
+    
+    // metodo toString
+    @Override
+    public String toString() {
+        return "Reserva [codigoUnico=" + codigoReserva + ", fecha=" + fecha + ", usuario=" + codigoUnico
+                + ", tipoEspacio="
+                + tipoEspacio + ", motivo=" + motivo + ", tipoEstado=" + tipoEstado + "]";
+    }
 }
