@@ -55,57 +55,29 @@ public class Profesor extends Usuario {
                 + ", hashCode()=" + hashCode() + "]";
     }
 
-    // Sobreescritura de metodos abstractos
 
+    // Sobreescritura de metodos abstractos
     @Override
     public void reservar() {
         Scanner s = new Scanner(System.in);
-        boolean veracidad = false;
         // El estudiante debe ingresar la fecha de la reserva
         System.out.println('\n' + "-------- RESERVAR --------");
-        System.out.print("Ingrese la fecha de la reserva [YYYY-MM-DD]: ");
-        String fechaReserva = s.nextLine();
-        if (fechaReserva.length() == 10) {
-            String numero = fechaReserva.substring(0, 4);
-            if (fechaReserva.charAt(4) == '-' && fechaReserva.charAt(7) == '-') {
-                if (numero.matches("[0-9]*")) {
-                    numero = fechaReserva.substring(5, 7);
-                    if (numero.matches("[0-9]*")) {
-                        numero = fechaReserva.substring(8);
-                        if (numero.matches("[0-9]*")) {
-                            veracidad = true;
-                        }
-                    }
-                }
-            }
-        }
-        while (veracidad == false) {
-            System.out.print("Error al ingresar la fecha, por favor use el formato [YYYY-MM-DD]: ");
+        String fechaReserva;
+        do {
+            System.out.print("Ingrese la fecha de la reserva [YYYY-MM-DD]: ");
             fechaReserva = s.nextLine();
-            if (fechaReserva.length() == 10) {
-                String numero = fechaReserva.substring(0, 4);
-                if (fechaReserva.charAt(4) == '-' && fechaReserva.charAt(7) == '-') {
-                    if (numero.matches("[0-9]*")) {
-                        numero = fechaReserva.substring(5, 7);
-                        if (numero.matches("[0-9]*")) {
-                            numero = fechaReserva.substring(8);
-                            if (numero.matches("[0-9]*")) {
-                                veracidad = true;
-                            }
-                        }
-                    }
-                }
+            if (!validarFormatoFecha(fechaReserva)) {
+                System.out.println("Error al ingresar la fecha, por favor use el formato [YYYY-MM-DD]: ");
             }
-        }
-        veracidad = false;
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-mm-dd");
-        Date fecha = new Date();
-        try {
-            fecha = formato.parse(fechaReserva);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        ;
+        } while (!validarFormatoFecha(fechaReserva));
+
+        Date fecha = convertirFecha(fechaReserva);
+
+
+
+
+
+        boolean veracidad = false;
         System.out.print('\n' + "Elija el tipo de espacio que desea reservar [LABORATORIO/AULA/AUDITORIO]: ");
         String espacio = s.nextLine().toUpperCase();
         int c1 = espacio.compareTo("LABORATORIO");
@@ -358,7 +330,7 @@ public class Profesor extends Usuario {
                     Reserva reserva = new Reserva(cod, codigoUnico, cedula, fecha, codigoEspacio1, tipo, tipoEstado,
                             motivo1);
                     Sistema.reservas.add(reserva);
-                    enviarCorreo("jesua.camuendo@gmail.com",nombre,apellido,codigoReserva,fechaReserva,Nombreespacio,motivo1);
+                    enviarCorreo(correo,nombre,apellido,codigoReserva,fechaReserva,Nombreespacio,motivo1);
                 }
                 break;
             case AUDITORIO:
@@ -596,7 +568,7 @@ public class Profesor extends Usuario {
             String destinatario = "jcuencasaez3@gmail.com";
             // se crea el mensaje
             Message mes = new MimeMessage(session);
-            mes.setFrom(new InternetAddress(correoRemitente));
+            mes.setFrom(new InternetAddress(correoRemitente,nombre+" "+apellido));
             mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
             mes.setSubject("Reserva realizada");
             mes.setText("Se le notifica que el profesor "+nombre+" "+apellido+" ha realizado una reserva con código "+codigo+
