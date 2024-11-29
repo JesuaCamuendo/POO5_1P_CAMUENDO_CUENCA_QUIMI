@@ -38,6 +38,7 @@ public abstract class Usuario {
 
     public abstract void mostrarMenu();
 
+    // metodo para enviar correo
     protected Session enviarCorreo() {
         Dotenv dot = Dotenv.load();
         String host = dot.get("MAIL_HOST");
@@ -58,6 +59,23 @@ public abstract class Usuario {
         });
     }
 
+    //metodo para validar la fecha
+    protected boolean validarFormatoFecha(String fecha) {
+        if (fecha.length() != 10) {
+            return false;
+        }
+        if (fecha.charAt(4) != '-' || fecha.charAt(7) != '-') {
+            return false;
+        }
+
+        String anio = fecha.substring(0, 4);
+        String mes = fecha.substring(5, 7);
+        String dia = fecha.substring(8);
+
+        return anio.matches("\\d{4}") && mes.matches("\\d{2}") && dia.matches("\\d{2}");
+    }
+
+    // metodo para convertir la fecha ingresa en tipo Date
     protected Date convertirFecha(String fechaReserva) {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -66,21 +84,6 @@ public abstract class Usuario {
             e.printStackTrace();
             return null;
         }
-    }
-
-    protected boolean validarFormatoFecha(String fecha) {
-        if (fecha.length() != 10){
-            return false;
-        } 
-        if (fecha.charAt(4) != '-' || fecha.charAt(7) != '-'){
-            return false;
-        } 
-
-        String anio = fecha.substring(0, 4);
-        String mes = fecha.substring(5, 7);
-        String dia = fecha.substring(8);
-
-        return anio.matches("\\d{4}") && mes.matches("\\d{2}") && dia.matches("\\d{2}");
     }
 
     public String toString() {
