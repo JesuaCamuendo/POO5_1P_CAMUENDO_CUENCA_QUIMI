@@ -1,7 +1,9 @@
 package pooProyecto.Recursos;
 
 import java.util.Date;
-import pooProyecto.Tipos.*;
+
+import pooProyecto.Tipos.TipoEspacio;
+import pooProyecto.Tipos.TipoEstado;
 
 public class Reserva {
 
@@ -15,7 +17,22 @@ public class Reserva {
     private TipoEstado tipoEstado;
     public static int ReservasCreadas = 0;
 
-    // constructor de la clase Reserva
+    /**
+     * Constructor para crear una instancia de la clase Reserva. Inicializa los
+     * atributos de la reserva. Además, incrementa el contador de reservas
+     * creadas.
+     *
+     * @param codigoReserva El código único de la reserva.
+     * @param codigoUnico El código único del usuario que realiza la reserva.
+     * @param cedula La cédula del usuario que realiza la reserva.
+     * @param fecha La fecha de la reserva.
+     * @param codigoEspacio El código del espacio reservado.
+     * @param tipoEspacio El tipo de espacio reservado (laboratorio, aula,
+     * auditorio).
+     * @param tipoEstado El estado de la reserva (por ejemplo, aprobado,
+     * pendiente).
+     * @param motivo El motivo de la reserva.
+     */
     public Reserva(int codigoReserva, String codigoUnico, String cedula, Date fecha, String codigoEspacio,
             TipoEspacio tipoEspacio, TipoEstado tipoEstado, String motivo) {
         ReservasCreadas++;
@@ -102,11 +119,4 @@ public class Reserva {
         ReservasCreadas = reservasCreadas;
     }
 
-    // metodo toString
-    @Override
-    public String toString() {
-        return "Reserva [codigoUnico=" + codigoReserva + ", fecha=" + fecha + ", usuario=" + codigoUnico
-                + ", tipoEspacio="
-                + tipoEspacio + ", motivo=" + motivo + ", tipoEstado=" + tipoEstado + "]";
-    }
 }

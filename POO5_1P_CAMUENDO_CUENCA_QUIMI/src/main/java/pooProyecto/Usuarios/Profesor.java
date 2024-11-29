@@ -1,18 +1,40 @@
 package pooProyecto.Usuarios;
+
 import java.util.Date;
 import java.util.Scanner;
-import javax.mail.*;
+
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import pooProyecto.Sistema.*;
-import pooProyecto.Recursos.*;
-import pooProyecto.Tipos.*;
+
+import pooProyecto.Recursos.Reserva;
+import pooProyecto.Sistema.Sistema;
+import pooProyecto.Tipos.TipoEspacio;
+import pooProyecto.Tipos.TipoRol;
 
 public class Profesor extends Usuario {
+
     private String facultad;
     private String materia;
 
-    // contructor de la clase Profesor
+    /**
+     * Constructor para crear un objeto Profesor. Inicializa los atributos del
+     * Profesor, incluyendo la facultad y la materia, además de los atributos
+     * heredados de la clase base (Usuario).
+     *
+     * @param codigoUnico El código único del profesor.
+     * @param cedula La cédula de identidad del profesor.
+     * @param nombre El nombre del profesor.
+     * @param apellido El apellido del profesor.
+     * @param usuario El nombre de usuario del profesor.
+     * @param contrasenia La contraseña del profesor.
+     * @param correo El correo electrónico del profesor.
+     * @param rol El rol del usuario (TipoRol) del profesor.
+     * @param facultad La facultad a la que pertenece el profesor.
+     * @param materia La materia que imparte el profesor.
+     */
     public Profesor(String codigoUnico, String cedula, String nombre, String apellido, String usuario,
             String contrasenia, String correo, TipoRol rol, String facultad, String materia) {
         super(codigoUnico, cedula, nombre, apellido, usuario, contrasenia, correo, rol);
@@ -37,19 +59,14 @@ public class Profesor extends Usuario {
         this.materia = materia;
     }
 
-    // metodo toString
-    @Override
-    public String toString() {
-        return "Profesor [facultad=" + facultad + ", materia=" + materia + ", getFacultad()=" + getFacultad()
-                + ", getMateria()=" + getMateria() + ", toString()=" + super.toString() + ", getCodigoUnico()="
-                + getCodigoUnico() + ", getCedula()=" + getCedula() + ", getNombre()=" + getNombre()
-                + ", getApellido()=" + getApellido() + ", getUsuario()=" + getUsuario() + ", getCorreo()=" + getCorreo()
-                + ", getContrasenia()=" + getContrasenia() + ", getRol()=" + getRol() + ", getClass()=" + getClass()
-                + ", hashCode()=" + hashCode() + "]";
-    }
-
     // Sobreescritura de metodos abstractos
-
+    /**
+     * Permite a un profesor realizar una reserva de un espacio (laboratorio,
+     * aula o auditorio) para una fecha determinada.
+     *
+     * @param none No recibe nada
+     * @return void No retorna nada
+     */
     @Override
     public void reservar() {
         Scanner s = new Scanner(System.in);
@@ -60,7 +77,7 @@ public class Profesor extends Usuario {
             System.out.print("Ingrese la fecha de la reserva [YYYY-MM-DD]: ");
             fechaReserva = s.nextLine();
             if (!validarFormatoFecha(fechaReserva)) {
-                System.out.print('\n' +"Error al ingresar la fecha, por favor use el formato [YYYY-MM-DD]: ");
+                System.out.print('\n' + "Error al ingresar la fecha, por favor use el formato [YYYY-MM-DD]: ");
             }
         } while (!validarFormatoFecha(fechaReserva));
         Date fecha = convertirFecha(fechaReserva);
@@ -113,7 +130,7 @@ public class Profesor extends Usuario {
                 String motivo = ElegirMateria();
                 //Crear Reserva
                 System.out.print('\n' + "Desea crear su reserva en el " + Nombreespacio + " con código " + codigoEspacio
-                + " para la fecha " + fechaReserva + " [SI/NO]: ");
+                        + " para la fecha " + fechaReserva + " [SI/NO]: ");
                 String confirmacion = s.nextLine().toUpperCase();
                 confirmacion = Elegiropciones(confirmacion, "SI", "NO");
                 //confirmamos la reserva y enviamos correo
@@ -133,7 +150,7 @@ public class Profesor extends Usuario {
                 String motivo1 = ElegirMateria();
                 //Crear Reserva
                 System.out.print('\n' + "Desea crear su reserva en el " + Nombreespacio + " con código "
-                + codigoEspacio1 + " para la fecha " + fechaReserva + " [SI/NO]: ");
+                        + codigoEspacio1 + " para la fecha " + fechaReserva + " [SI/NO]: ");
                 String confirmacion1 = s.nextLine().toUpperCase();
                 confirmacion1 = Elegiropciones(confirmacion1, "SI", "NO");
                 //confirmamos la reserva y enviamos correo
@@ -153,7 +170,7 @@ public class Profesor extends Usuario {
                 String motivo2 = ElegirMateria();
                 //Crear Reserva
                 System.out.print('\n' + "Desea crear su reserva en el " + Nombreespacio + " con código "
-                + codigoEspacio2 + " para la fecha "+ fechaReserva + " [SI/NO]: ");
+                        + codigoEspacio2 + " para la fecha " + fechaReserva + " [SI/NO]: ");
                 String confirmacion2 = s.nextLine().toUpperCase();
                 confirmacion2 = Elegiropciones(confirmacion2, "SI", "NO");
                 //confirmamos la reserva y enviamos correo
@@ -167,6 +184,15 @@ public class Profesor extends Usuario {
 
     }
 
+    /**
+     * Muestra el menú interactivo para el profesor, permitiéndole elegir entre
+     * varias opciones: 1. Reservar un espacio. 2. Consultar una reserva
+     * existente. 3. Salir del menú. El menú se repite hasta que el profesor
+     * selecciona la opción de salir.
+     *
+     * @param none No recibe nada
+     * @return void No retorna nada
+     */
     @Override
     public void mostrarMenu() {
         System.out.println('\n' + "............ Cargando menú ...............");
@@ -197,7 +223,19 @@ public class Profesor extends Usuario {
         }
     }
 
-    // sobrecarga del metodo enviar correo
+    /**
+     * Envia un correo de notificación a un destinatario específico para
+     * informar sobre una reserva realizada por un profesor.
+     *
+     * @param correoRemitente Dirección de correo electrónico del remitente
+     * (profesor).
+     * @param nombre Nombre del profesor que realiza la reserva.
+     * @param apellido Apellido del profesor que realiza la reserva.
+     * @param codigo Código único asociado a la reserva.
+     * @param fecha Fecha de la reserva.
+     * @param espacio Espacio o lugar reservado.
+     * @param materia Materia para la cual se realiza la reserva.
+     */
     public void enviarCorreo(String correoRemitente, String nombre, String apellido, String codigo, String fecha,
             String espacio, String materia) {
         try {
@@ -205,12 +243,12 @@ public class Profesor extends Usuario {
             String destinatario = "jcuencasaez3@gmail.com";
             // se crea el mensaje
             Message mes = new MimeMessage(session);
-            mes.setFrom(new InternetAddress(correoRemitente, nombre+" "+apellido));
+            mes.setFrom(new InternetAddress(correoRemitente, nombre + " " + apellido));
             mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
             mes.setSubject("Reserva realizada");
             mes.setText("Se le notifica que el profesor " + nombre + " " + apellido
-                    + " ha realizado una reserva con código " + codigo +
-                    " para la fecha " + fecha + " en el " + espacio + " para la materia " + materia);
+                    + " ha realizado una reserva con código " + codigo
+                    + " para la fecha " + fecha + " en el " + espacio + " para la materia " + materia);
             // se envia el mensaje
             Transport.send(mes);
             System.out.println('\n' + "Correo enviado con éxito al administrador.");
@@ -221,7 +259,12 @@ public class Profesor extends Usuario {
         }
     }
 
-    public String ElegirMateria(){
+    /**
+     * Este metodo sirve para Elegir la materia de profesor
+     *
+     * @return String Devuelte la materia como motivo de reserva
+     */
+    public String ElegirMateria() {
         String[] materias = {};
         Scanner s = new Scanner(System.in);
         boolean veracidad = false;
@@ -263,9 +306,9 @@ public class Profesor extends Usuario {
                         motivo = materias[1];
                     }
                     veracidad = true;
-                    }
                 }
             }
+        }
         return motivo;
     }
 }
