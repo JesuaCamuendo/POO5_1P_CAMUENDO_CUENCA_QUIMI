@@ -12,6 +12,16 @@ public class Espacio {
     private TipoRolPermitido rolPermitido;
 
 
+    /**
+ * Constructor de la clase Espacio que inicializa un espacio con la información proporcionada.
+ *
+ * @param codigoEspacio El código único que identifica al espacio 
+ * @param tipo El tipo de espacio 
+ * @param nombre El nombre del espacio 
+ * @param capacidad La capacidad máxima del espacio 
+ * @param estado El estado actual del espacio 
+ * @param rolPermitido El rol permitido para acceder a este espacio
+ */
     public Espacio(String codigoEspacio, TipoEspacio tipo, String nombre, int capacidad, String estado, TipoRolPermitido rolPermitido) {
         this.codigoEspacio = codigoEspacio;
         this.tipo = tipo;

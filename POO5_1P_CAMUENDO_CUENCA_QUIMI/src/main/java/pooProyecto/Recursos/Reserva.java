@@ -17,6 +17,7 @@ public class Reserva {
     private TipoEstado tipoEstado;
     public static int ReservasCreadas = 0;
 
+<<<<<<< Updated upstream
     /**
      * Constructor para crear una instancia de la clase Reserva. Inicializa los
      * atributos de la reserva. Además, incrementa el contador de reservas
@@ -33,6 +34,8 @@ public class Reserva {
      * pendiente).
      * @param motivo El motivo de la reserva.
      */
+=======
+>>>>>>> Stashed changes
     public Reserva(int codigoReserva, String codigoUnico, String cedula, Date fecha, String codigoEspacio,
             TipoEspacio tipoEspacio, TipoEstado tipoEstado, String motivo) {
         ReservasCreadas++;

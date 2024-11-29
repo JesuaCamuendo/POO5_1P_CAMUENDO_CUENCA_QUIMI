@@ -15,6 +15,19 @@ import pooProyecto.Recursos.*;
 public class Administrador extends Usuario {
     private String cargo;
 
+    /**
+ * Constructor de la clase Administrador.
+ *
+ * @param codigoUnico El código único que identifica al administrador.
+ * @param cedula La cédula de identidad del administrador.
+ * @param nombre El nombre del administrador.
+ * @param apellido El apellido del administrador.
+ * @param usuario El nombre de usuario para el administrador.
+ * @param contrasenia La contraseña asociada al usuario del administrador.
+ * @param correo El correo electrónico del administrador.
+ * @param rol El rol del administrador, representado por un valor de tipo `TipoRol` (por ejemplo, "Administrador").
+ * @param cargo El cargo específico que ocupa el administrador dentro de la organización
+ */
     public Administrador(String codigoUnico, String cedula, String nombre, String apellido, String usuario,
             String contrasenia, String correo, TipoRol rol, String cargo) {
         super(codigoUnico, cedula, nombre, apellido, usuario, contrasenia, correo, rol);
@@ -33,6 +46,15 @@ public class Administrador extends Usuario {
     public String toString() {
         return super.toString() + ", cargo=" + cargo + "]";
     }
+
+    /**
+ *  Permite al usuario gestionar una reserva mediante su código, 
+ * revisar los detalles de la reserva, y luego aprobar o rechazarla. Si se aprueba o rechaza la reserva, 
+ * se envía un correo de notificación al administrador.
+ *
+ * @param none
+ * @return void
+ */
 
     // Para Administrador este método funciona como gestionador de reservas
     public void reservar() {
@@ -131,6 +153,14 @@ public class Administrador extends Usuario {
         }
     }
 
+    /**
+ * Muestra una lista de todas las reservas, incluyendo detalles como el código de la reserva, 
+ * el estado, la fecha y la información del usuario (estudiante, profesor o administrador).
+ *
+ * @param none
+ * @return void
+ */
+
     @Override
     public void ConsultarReserva() {
         System.out.println("\n-----------------Consulta de reserva----------------");
@@ -163,6 +193,16 @@ public class Administrador extends Usuario {
         }
 
     }
+
+    /**
+ * Muestra el menú de opciones para el Administrador, permitiéndole gestionar y consultar reservas.
+ * El menú permite al Administrador elegir entre gestionar una reserva, consultar reservas o salir.
+ * El ciclo se repite hasta que se elige la opción de salir (opción 3).
+ *
+ * @param none
+ * @return void
+ */
+
     @Override
     public void mostrarMenu() {
         System.out.println('\n' + "............ Cargando menú ...............");
@@ -192,6 +232,18 @@ public class Administrador extends Usuario {
         }
     }
 
+    /**
+ * Envia un correo electrónico notificando sobre el estado de una reserva (aprobada o rechazada), 
+ * con el código de la reserva, el motivo y el asunto correspondiente.
+ *
+ * @param correoRemitente El correo del remitente que está enviando el mensaje.
+ * @param destinatario El correo del destinatario que recibirá la notificación.
+ * @param decision La decisión tomada sobre la reserva (APROBADO o RECHAZADO).
+ * @param codigo El código único de la reserva.
+ * @param motivo El motivo de la decisión tomada (si es RECHAZADO, por ejemplo).
+ * @param asunto El asunto del correo, que será "aprobada" o "rechazada" según el caso.
+ * @return void
+ */
     public void enviarCorreo(String correoRemitente,String destinatario,String decision,String codigo,String motivo,String asunto){
         try {
             Session session = enviarCorreo();

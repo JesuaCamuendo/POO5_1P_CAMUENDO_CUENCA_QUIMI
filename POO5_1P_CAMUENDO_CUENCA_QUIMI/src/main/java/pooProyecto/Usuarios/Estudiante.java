@@ -17,6 +17,20 @@ public class Estudiante extends Usuario {
     private String matricula;
     private String carrera;
 
+    /**
+ * Constructor de la clase Estudiante.
+ *
+ * @param codigoUnico El código único que identifica al estudiante.
+ * @param cedula La cédula de identidad del estudiante.
+ * @param nombre El nombre del estudiante.
+ * @param apellido El apellido del estudiante.
+ * @param usuario El nombre de usuario del estudiante.
+ * @param contrasenia La contraseña asociada al usuario del estudiante.
+ * @param correo El correo electrónico del estudiante.
+ * @param rol El rol del estudiante, representado por un valor de tipo `TipoRol`.
+ * @param matricula El número de matrícula del estudiante.
+ * @param carrera La carrera que está cursando el estudiante.
+ */
     public Estudiante(String codigoUnico, String cedula, String nombre, String apellido, String usuario,
             String contrasenia, String correo, TipoRol rol, String matricula, String carrera) {
         super(codigoUnico, cedula, nombre, apellido, usuario, contrasenia, correo, rol);
@@ -46,6 +60,13 @@ public class Estudiante extends Usuario {
                 + ", getCarrera()=" + getCarrera() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
                 + ", toString()=" + super.toString() + "]";
     }
+
+    /**
+ * Permite al estudiante realizar una reserva de espacio.
+ * El estudiante debe ingresar la fecha de la reserva, elegir el tipo de espacio (cancha o aula),
+ * seleccionar un espacio disponible, proporcionar el motivo de la reserva y confirmar la reserva.
+ * Finalmente, se envía un correo de confirmación al estudiante con los detalles de la reserva.
+ */
 
     @Override
     public void reservar() {
@@ -138,6 +159,13 @@ public class Estudiante extends Usuario {
 
     }
 
+   /**
+ * Muestra el menú principal para que el estudiante seleccione opciones como reservar, 
+ * consultar reservas o salir.
+ *
+ * @param none
+ * @return none
+ */
 
     @Override
     public void mostrarMenu() {
@@ -168,7 +196,20 @@ public class Estudiante extends Usuario {
         // sc.close();
     }
 
-    // sobrecarga del metodo enviar correo
+ /**
+ * Sobrecarga del método para enviar un correo electrónico notificando sobre una reserva realizada.
+ * El correo es enviado al administrador con los detalles de la reserva, incluyendo el nombre del estudiante, 
+ * código de la reserva, fecha, espacio y motivo.
+ *
+ * @param correoRemitente El correo del remitente que está enviando el mensaje.
+ * @param nombre El nombre del estudiante que realiza la reserva.
+ * @param apellido El apellido del estudiante que realiza la reserva.
+ * @param codigo El código único de la reserva realizada.
+ * @param fecha La fecha en la que se realiza la reserva.
+ * @param espacio El espacio reservado por el estudiante.
+ * @param motivo El motivo de la reserva realizada.
+ * @return void
+ */
     public void enviarCorreo(String correoRemitente, String nombre, String apellido, String codigo, String fecha,
             String espacio, String motivo) {
         try {
