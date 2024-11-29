@@ -37,8 +37,18 @@ public abstract class Usuario {
 
     }
 
+    /*
+     * Este metodo es abstracto para que las clases hijas puedan sobreescribirlo
+     * @param No recibe nada
+     * @return No devuelve nada
+     */
     public abstract void reservar();
 
+    /*
+     * Este metodo sirve para consultar las rese
+     * @param No recibe nada
+     * @return void:No devuelve nada
+     */
     public void ConsultarReserva() {
         System.out.println("\n-------------- Consultar reserva --------------  ");
         System.out.print("Ingrese la fecha de reserva [YYYY-MM-DD]: ");
@@ -92,9 +102,18 @@ public abstract class Usuario {
 
     }
 
+    /*
+     * Este metodo sirve para mostrar menú
+     * @param No recibe nada
+     * @return void No devuelve nada
+     */
     public abstract void mostrarMenu();
 
-    // metodo para enviar correo
+    /*
+     * Este metodo sirve para enviar correo
+     * @param No recibe nada
+     * @return Session retorna una Session iniciada
+     */
     protected Session enviarCorreo() {
         Dotenv dot = Dotenv.load();
         String host = dot.get("MAIL_HOST");
@@ -115,7 +134,11 @@ public abstract class Usuario {
         });
     }
 
-    //metodo para validar la fecha
+    /**
+     * Este metodo sirve para validar la fecha
+     * @param String fecha
+     * @return void No devuelve nada
+     */
     protected boolean validarFormatoFecha(String fecha) {
         boolean veracidad = false;
         if (fecha.length() == 10) {

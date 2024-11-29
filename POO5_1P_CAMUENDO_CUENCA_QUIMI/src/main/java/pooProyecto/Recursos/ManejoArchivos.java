@@ -38,7 +38,7 @@ public class ManejoArchivos {
         nombreArchivo = "POO5_1P_CAMUENDO_CUENCA_QUIMI\\src\\main\\java\\pooProyecto\\Archivos\\"+nombreArchivo+".txt";
         try {
             FileWriter escritura = new FileWriter(nombreArchivo,true);
-            escritura.write(linea+'\n');
+            escritura.write('\n'+linea);
             escritura.close();
             System.out.println("Escritura exitosa c:"+'\n');
         } catch (IOException exception) {
