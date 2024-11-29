@@ -23,3 +23,7 @@
 5023 | 008 | 0946789123 | 2024-78-98 | 113 | AULA | APROBADO | Microeconom�a
 5024 | 001 | 0923456789 | 2024-12-15 | 101 | AULA | PENDIENTE | nada
 5025 | 005 | 0945678912 | 2024-11-28 | 101 | AULA | APROBADO | Termodinámica
+5026 | 005 | 0945678912 | 2024-11-28 | 101 | AULA | APROBADO | Termodinámica
+5027 | 004 | 0934567890 | 2024-11-27 | 113 | AULA | PENDIENTE | Grabar un video para un proyecto de Comunicacion.
+5028 | 005 | 0945678912 | 2024-11-28 | 101 | AULA | APROBADO | Termodinámica
+5029 | 013 | 0954321789 | 2024-11-26 | 105 | AULA | PENDIENTE | Realizar la grabacion de un video de la materia de Comunicacion.

@@ -105,12 +105,16 @@ public class Estudiante extends Usuario {
         String apellido = "null";
         String Nombreespacio = "null";
         TipoEstado tipoEstado = TipoEstado.valueOf("PENDIENTE");
-            for (Usuario user : Sistema.usuarios) {
-                if (user.getUsuario().compareTo(usuario) == 0) {
-                    cedula = user.getCedula();
-                    codigoUnico = user.getCodigoUnico();
-                }
+        for (Usuario user : Sistema.usuarios) {
+            if (user.getUsuario().compareTo(usuario) == 0) {
+                cedula = user.getCedula();
+                codigoUnico = user.getCodigoUnico();
+                correo = user.getCorreo();
+                nombre = user.getNombre();
+                apellido = user.getApellido();
+
             }
+        }
         String codigoReserva = String.valueOf(5001 + Reserva.ReservasCreadas);
         int cod = Integer.parseInt(codigoReserva);
         switch (tipo) {
@@ -154,14 +158,14 @@ public class Estudiante extends Usuario {
                 veracidad = false;
                 System.out.print('\n' + "Mencione el motivo de la reserva: ");
                 String motivo = s.nextLine();
-                //obtener nombre del espacio
-                for(Espacio esp : Sistema.espacios){
-                    if(codigoEspacio.equals(esp.getCodigoEspacio())){
+                // obtener nombre del espacio
+                for (Espacio esp : Sistema.espacios) {
+                    if (codigoEspacio.equals(esp.getCodigoEspacio())) {
                         nombre = esp.getNombre();
                     }
                 }
-                //Confirmar reserva
-                System.out.print('\n' + "Desea crear su reserva en la "+nombre+" con código: " + codigoEspacio
+                // Confirmar reserva
+                System.out.print('\n' + "Desea crear su reserva en la " + nombre + " con código: " + codigoEspacio
                         + " para el: " + fechaReserva + " [SI/NO]: ");
                 String confirmacion = s.nextLine().toUpperCase();
                 c1 = confirmacion.compareTo("SI");
@@ -187,7 +191,7 @@ public class Estudiante extends Usuario {
                     Reserva reserva = new Reserva(cod, codigoUnico, cedula, fecha, codigoEspacio, tipo, tipoEstado,
                             motivo);
                     Sistema.reservas.add(reserva);
-                    enviarCorreo(correo,nombre,apellido,codigoReserva,fechaReserva,Nombreespacio,motivo);
+                    enviarCorreo(correo, nombre, apellido, codigoReserva, fechaReserva, Nombreespacio, motivo);
                 }
                 break;
             case AULA:
@@ -229,9 +233,9 @@ public class Estudiante extends Usuario {
                     }
                 }
                 veracidad = false;
-                //obtener nombre del espacio
-                for(Espacio esp : Sistema.espacios){
-                    if(codigoEspacio1.equals(esp.getCodigoEspacio())){
+                // obtener nombre del espacio
+                for (Espacio esp : Sistema.espacios) {
+                    if (codigoEspacio1.equals(esp.getCodigoEspacio())) {
                         nombre = esp.getNombre();
                     }
                 }
@@ -265,7 +269,7 @@ public class Estudiante extends Usuario {
                     Reserva reserva = new Reserva(cod, codigoUnico, cedula, fecha, codigoEspacio1, tipo, tipoEstado,
                             motivo1);
                     Sistema.reservas.add(reserva);
-                    enviarCorreo(correo,nombre,apellido,codigoReserva,fechaReserva,Nombreespacio,motivo1);
+                    enviarCorreo(correo, nombre, apellido, codigoReserva, fechaReserva, Nombreespacio, motivo1);
                 }
                 break;
             default:
@@ -358,21 +362,24 @@ public class Estudiante extends Usuario {
         }
         // sc.close();
     }
-// sobrecarga del metodo enviar correo
-    public void enviarCorreo(String correoRemitente,String nombre,String apellido,String codigo,String fecha,String espacio,String motivo){
+
+    // sobrecarga del metodo enviar correo
+    public void enviarCorreo(String correoRemitente, String nombre, String apellido, String codigo, String fecha,
+            String espacio, String motivo) {
         try {
             Session session = enviarCorreo();
             String destinatario = "jcuencasaez3@gmail.com";
             // se crea el mensaje
             Message mes = new MimeMessage(session);
-            mes.setFrom(new InternetAddress(correoRemitente));
+            mes.setFrom(new InternetAddress(correoRemitente, nombre + " " + apellido));
             mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
             mes.setSubject("Reserva realizada");
-            mes.setText("El estudiante "+nombre+" "+apellido+" ha realizado una reserva con código "+codigo+
-            " para la fecha "+fecha+" en "+espacio+".\nIngrese al sistemapara aprobar o rechzar la reserva.");
+            mes.setText("El estudiante " + nombre + " " + apellido + " ha realizado una reserva con código " + codigo +
+                    " para la fecha " + fecha + " en " + espacio
+                    + ".\nIngrese al sistemapara aprobar o rechzar la reserva.");
             // se envia el mensaje
             Transport.send(mes);
-            System.out.println('\n'+"Correo enviado con éxito al administrador.");
+            System.out.println('\n' + "Correo enviado con éxito al administrador.");
 
         } catch (Exception e) {
             e.printStackTrace();
