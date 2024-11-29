@@ -73,10 +73,7 @@ public class Profesor extends Usuario {
 
         Date fecha = convertirFecha(fechaReserva);
 
-
-
-
-
+        //Sellecionar el espacio
         boolean veracidad = false;
         System.out.print('\n' + "Elija el tipo de espacio que desea reservar [LABORATORIO/AULA/AUDITORIO]: ");
         String espacio = s.nextLine().toUpperCase();
