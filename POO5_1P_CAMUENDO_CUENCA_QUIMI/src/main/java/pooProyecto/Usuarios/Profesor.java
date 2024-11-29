@@ -569,7 +569,7 @@ public class Profesor extends Usuario {
             String destinatario = "jcuencasaez3@gmail.com";
             // se crea el mensaje
             Message mes = new MimeMessage(session);
-            mes.setFrom(new InternetAddress(correoRemitente));
+            mes.setFrom(new InternetAddress(correoRemitente, nombre+" "+apellido));
             mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinatario));
             mes.setSubject("Reserva realizada");
             mes.setText("Se le notifica que el profesor " + nombre + " " + apellido
