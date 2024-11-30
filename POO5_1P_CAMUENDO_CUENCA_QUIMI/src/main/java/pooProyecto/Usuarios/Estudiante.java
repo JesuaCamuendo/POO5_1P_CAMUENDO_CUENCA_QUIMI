@@ -1,4 +1,5 @@
 package pooProyecto.Usuarios;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,19 +19,20 @@ public class Estudiante extends Usuario {
     private String carrera;
 
     /**
- * Constructor de la clase Estudiante.
- *
- * @param codigoUnico El código único que identifica al estudiante.
- * @param cedula La cédula de identidad del estudiante.
- * @param nombre El nombre del estudiante.
- * @param apellido El apellido del estudiante.
- * @param usuario El nombre de usuario del estudiante.
- * @param contrasenia La contraseña asociada al usuario del estudiante.
- * @param correo El correo electrónico del estudiante.
- * @param rol El rol del estudiante, representado por un valor de tipo `TipoRol`.
- * @param matricula El número de matrícula del estudiante.
- * @param carrera La carrera que está cursando el estudiante.
- */
+     * Constructor de la clase Estudiante.
+     *
+     * @param codigoUnico El código único que identifica al estudiante.
+     * @param cedula      La cédula de identidad del estudiante.
+     * @param nombre      El nombre del estudiante.
+     * @param apellido    El apellido del estudiante.
+     * @param usuario     El nombre de usuario del estudiante.
+     * @param contrasenia La contraseña asociada al usuario del estudiante.
+     * @param correo      El correo electrónico del estudiante.
+     * @param rol         El rol del estudiante, representado por un valor de tipo
+     *                    `TipoRol`.
+     * @param matricula   El número de matrícula del estudiante.
+     * @param carrera     La carrera que está cursando el estudiante.
+     */
     public Estudiante(String codigoUnico, String cedula, String nombre, String apellido, String usuario,
             String contrasenia, String correo, TipoRol rol, String matricula, String carrera) {
         super(codigoUnico, cedula, nombre, apellido, usuario, contrasenia, correo, rol);
@@ -62,11 +64,14 @@ public class Estudiante extends Usuario {
     }
 
     /**
- * Permite al estudiante realizar una reserva de espacio.
- * El estudiante debe ingresar la fecha de la reserva, elegir el tipo de espacio (cancha o aula),
- * seleccionar un espacio disponible, proporcionar el motivo de la reserva y confirmar la reserva.
- * Finalmente, se envía un correo de confirmación al estudiante con los detalles de la reserva.
- */
+     * Permite al estudiante realizar una reserva de espacio.
+     * El estudiante debe ingresar la fecha de la reserva, elegir el tipo de espacio
+     * (cancha o aula),
+     * seleccionar un espacio disponible, proporcionar el motivo de la reserva y
+     * confirmar la reserva.
+     * Finalmente, se envía un correo de confirmación al estudiante con los detalles
+     * de la reserva.
+     */
 
     @Override
     public void reservar() {
@@ -79,7 +84,7 @@ public class Estudiante extends Usuario {
         veracidad = validarFormatoFecha(fechaReserva);
         // Validar fecha
         while (veracidad == false) {
-            System.out.print('\n' +"Error al ingresar la fecha, por favor use el formato [YYYY-MM-DD]: ");
+            System.out.print('\n' + "Error al ingresar la fecha, por favor use el formato [YYYY-MM-DD]: ");
             fechaReserva = s.nextLine();
             veracidad = validarFormatoFecha(fechaReserva);
         }
@@ -116,7 +121,7 @@ public class Estudiante extends Usuario {
                 System.out.println('\n' + "--------- Espacios Disponibles ---------");
                 System.out.println("Código de Espacio  |     Nombre");
                 System.out.println("----------------------------------------------");
-                //Elije entre los espacios tipo Cancha
+                // Elije entre los espacios tipo Cancha
                 String codigoEspacio = ElegirEspacios(tipo, "la");
                 // motivo de reserva
                 System.out.print('\n' + "Mencione el motivo de la reserva: ");
@@ -128,7 +133,8 @@ public class Estudiante extends Usuario {
                         + " para la fecha " + fechaReserva + " [SI/NO]: ");
                 String confirmacion = s.nextLine().toUpperCase();
                 confirmacion = Elegiropciones(confirmacion, "SI", "NO");
-                if (Confirmar(confirmacion, "PENDIENTE", fecha, codigoEspacio, espacio, motivo, Nombreespacio, fechaReserva)) {
+                if (Confirmar(confirmacion, "PENDIENTE", fecha, codigoEspacio, espacio, motivo, Nombreespacio,
+                        fechaReserva)) {
                     enviarCorreo(correo, nombre, apellido, codigoReserva, fechaReserva, Nombreespacio, motivo);
                 }
                 break;
@@ -137,7 +143,7 @@ public class Estudiante extends Usuario {
                 System.out.println('\n' + "--------- Espacios Disponibles ---------");
                 System.out.println("Código de Espacio  |     Nombre");
                 System.out.println("----------------------------------------");
-                //Elije entre los espacios tipo Aula
+                // Elije entre los espacios tipo Aula
                 String codigoEspacio1 = ElegirEspacios(tipo, "el");
                 // obtener nombre del espacio
                 Nombreespacio = NombreEspacio(codigoEspacio1);
@@ -145,11 +151,13 @@ public class Estudiante extends Usuario {
                 System.out.print('\n' + "Mencione el motivo de la reserva: ");
                 String motivo1 = s.nextLine();
                 // Confirmar reserva
-                System.out.print('\n' + "Desea crear su reserva en el " + Nombreespacio + " con código " + codigoEspacio1
-                        + " para la fecha "+ fechaReserva + " [SI/NO]: ");
+                System.out
+                        .print('\n' + "Desea crear su reserva en el " + Nombreespacio + " con código " + codigoEspacio1
+                                + " para la fecha " + fechaReserva + " [SI/NO]: ");
                 String confirmacion1 = s.nextLine().toUpperCase();
                 confirmacion1 = Elegiropciones(confirmacion1, "SI", "NO");
-                if (Confirmar(confirmacion1, "PENDIENTE", fecha, codigoEspacio1, espacio, motivo1, Nombreespacio, fechaReserva)) {
+                if (Confirmar(confirmacion1, "PENDIENTE", fecha, codigoEspacio1, espacio, motivo1, Nombreespacio,
+                        fechaReserva)) {
                     enviarCorreo(correo, nombre, apellido, codigoReserva, fechaReserva, Nombreespacio, motivo1);
                 }
                 break;
@@ -159,13 +167,14 @@ public class Estudiante extends Usuario {
 
     }
 
-   /**
- * Muestra el menú principal para que el estudiante seleccione opciones como reservar, 
- * consultar reservas o salir.
- *
- * @param none
- * @return none
- */
+    /**
+     * Muestra el menú principal para que el estudiante seleccione opciones como
+     * reservar,
+     * consultar reservas o salir.
+     *
+     * @param none
+     * @return none
+     */
 
     @Override
     public void mostrarMenu() {
@@ -196,20 +205,22 @@ public class Estudiante extends Usuario {
         // sc.close();
     }
 
- /**
- * Sobrecarga del método para enviar un correo electrónico notificando sobre una reserva realizada.
- * El correo es enviado al administrador con los detalles de la reserva, incluyendo el nombre del estudiante, 
- * código de la reserva, fecha, espacio y motivo.
- *
- * @param correoRemitente El correo del remitente que está enviando el mensaje.
- * @param nombre El nombre del estudiante que realiza la reserva.
- * @param apellido El apellido del estudiante que realiza la reserva.
- * @param codigo El código único de la reserva realizada.
- * @param fecha La fecha en la que se realiza la reserva.
- * @param espacio El espacio reservado por el estudiante.
- * @param motivo El motivo de la reserva realizada.
- * @return void
- */
+    /**
+     * Sobrecarga del método para enviar un correo electrónico notificando sobre una
+     * reserva realizada.
+     * El correo es enviado al administrador con los detalles de la reserva,
+     * incluyendo el nombre del estudiante,
+     * código de la reserva, fecha, espacio y motivo.
+     *
+     * @param correoRemitente El correo del remitente que está enviando el mensaje.
+     * @param nombre          El nombre del estudiante que realiza la reserva.
+     * @param apellido        El apellido del estudiante que realiza la reserva.
+     * @param codigo          El código único de la reserva realizada.
+     * @param fecha           La fecha en la que se realiza la reserva.
+     * @param espacio         El espacio reservado por el estudiante.
+     * @param motivo          El motivo de la reserva realizada.
+     * @return void
+     */
     public void enviarCorreo(String correoRemitente, String nombre, String apellido, String codigo, String fecha,
             String espacio, String motivo) {
         try {

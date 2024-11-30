@@ -34,6 +34,7 @@ public class Administrador extends Usuario {
         this.cargo = cargo;
     }
 
+    //getters y setters
     public String getCargo() {
         return cargo;
     }
@@ -42,10 +43,7 @@ public class Administrador extends Usuario {
         this.cargo = cargo;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + ", cargo=" + cargo + "]";
-    }
+
 
     /**
  *  Permite al usuario gestionar una reserva mediante su código, 
@@ -175,7 +173,7 @@ public class Administrador extends Usuario {
                 }
             }
             if (usu instanceof Estudiante ) {
-                Estudiante e = (Estudiante) usu;
+                Estudiante e = (Estudiante) usu; //downcasting
                 System.out.println(reserva.getCodigoReserva() + " - " + reserva.getTipoEstado() + " - "
                         + fecha + " - " +usu.getNombre() + " " + usu.getApellido()
                         + " - " + e.getMatricula() + " - " + usu.getRol());

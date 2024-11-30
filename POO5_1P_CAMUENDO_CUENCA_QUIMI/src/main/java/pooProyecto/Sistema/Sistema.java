@@ -50,7 +50,7 @@ public class Sistema {
                         if (u[0].trim().equals(est[0].trim())) {
                             Usuario es = new Estudiante(u[0].trim(), u[1].trim(), u[2].trim(), u[3].trim(), u[4].trim(),
                                     u[5].trim(), u[6].trim(), tipo, est[4].trim(), est[5].trim());
-                            usuarios.add(es);
+                            usuarios.add(es); //polimorfismo, upcasting
                         }
                     }
                     break;
@@ -123,7 +123,7 @@ public class Sistema {
 
             // Si es instancia de Estudiante
             if (e instanceof Estudiante && e.getUsuario().equals(usuario) && e.getContrasenia().equals(contrasenia)) {
-                Estudiante estudiante = (Estudiante) e;
+                Estudiante estudiante = (Estudiante) e; //downcasting
                 estudiante.mostrarMenu();
                 veracidad = true;
 

@@ -25,15 +25,15 @@ public class Profesor extends Usuario {
      * heredados de la clase base (Usuario).
      *
      * @param codigoUnico El código único del profesor.
-     * @param cedula La cédula de identidad del profesor.
-     * @param nombre El nombre del profesor.
-     * @param apellido El apellido del profesor.
-     * @param usuario El nombre de usuario del profesor.
+     * @param cedula      La cédula de identidad del profesor.
+     * @param nombre      El nombre del profesor.
+     * @param apellido    El apellido del profesor.
+     * @param usuario     El nombre de usuario del profesor.
      * @param contrasenia La contraseña del profesor.
-     * @param correo El correo electrónico del profesor.
-     * @param rol El rol del usuario (TipoRol) del profesor.
-     * @param facultad La facultad a la que pertenece el profesor.
-     * @param materia La materia que imparte el profesor.
+     * @param correo      El correo electrónico del profesor.
+     * @param rol         El rol del usuario (TipoRol) del profesor.
+     * @param facultad    La facultad a la que pertenece el profesor.
+     * @param materia     La materia que imparte el profesor.
      */
     public Profesor(String codigoUnico, String cedula, String nombre, String apellido, String usuario,
             String contrasenia, String correo, TipoRol rol, String facultad, String materia) {
@@ -81,6 +81,7 @@ public class Profesor extends Usuario {
             }
         } while (!validarFormatoFecha(fechaReserva));
         Date fecha = convertirFecha(fechaReserva);
+
         // 2. El profesor selecciona el espacio
         boolean veracidad = false;
         System.out.print('\n' + "Elija el tipo de espacio que desea reservar [LABORATORIO/AULA/AUDITORIO]: ");
@@ -128,13 +129,14 @@ public class Profesor extends Usuario {
                 Nombreespacio = NombreEspacio(codigoEspacio);
                 // Mostrar materias disponibles
                 String motivo = ElegirMateria();
-                //Crear Reserva
+                // Crear Reserva
                 System.out.print('\n' + "Desea crear su reserva en el " + Nombreespacio + " con código " + codigoEspacio
                         + " para la fecha " + fechaReserva + " [SI/NO]: ");
                 String confirmacion = s.nextLine().toUpperCase();
                 confirmacion = Elegiropciones(confirmacion, "SI", "NO");
-                //confirmamos la reserva y enviamos correo
-                if (Confirmar(confirmacion, "APROBADO", fecha, codigoEspacio, espacio, motivo, Nombreespacio, fechaReserva)) {
+                // confirmamos la reserva y enviamos correo
+                if (Confirmar(confirmacion, "APROBADO", fecha, codigoEspacio, espacio, motivo, Nombreespacio,
+                        fechaReserva)) {
                     enviarCorreo(correo, nombre, apellido, codigoReserva, fechaReserva, Nombreespacio, motivo);
                 }
                 break;
@@ -148,13 +150,14 @@ public class Profesor extends Usuario {
                 Nombreespacio = NombreEspacio(codigoEspacio1);
                 // Mostrar materias disponibles
                 String motivo1 = ElegirMateria();
-                //Crear Reserva
+                // Crear Reserva
                 System.out.print('\n' + "Desea crear su reserva en el " + Nombreespacio + " con código "
                         + codigoEspacio1 + " para la fecha " + fechaReserva + " [SI/NO]: ");
                 String confirmacion1 = s.nextLine().toUpperCase();
                 confirmacion1 = Elegiropciones(confirmacion1, "SI", "NO");
-                //confirmamos la reserva y enviamos correo
-                if (Confirmar(confirmacion1, "APROBADO", fecha, codigoEspacio1, espacio, motivo1, Nombreespacio, fechaReserva)) {
+                // confirmamos la reserva y enviamos correo
+                if (Confirmar(confirmacion1, "APROBADO", fecha, codigoEspacio1, espacio, motivo1, Nombreespacio,
+                        fechaReserva)) {
                     enviarCorreo(correo, nombre, apellido, codigoReserva, fechaReserva, Nombreespacio, motivo1);
                 }
                 break;
@@ -168,13 +171,14 @@ public class Profesor extends Usuario {
                 Nombreespacio = NombreEspacio(codigoEspacio2);
                 // Mostrar materias disponibles
                 String motivo2 = ElegirMateria();
-                //Crear Reserva
+                // Crear Reserva
                 System.out.print('\n' + "Desea crear su reserva en el " + Nombreespacio + " con código "
                         + codigoEspacio2 + " para la fecha " + fechaReserva + " [SI/NO]: ");
                 String confirmacion2 = s.nextLine().toUpperCase();
                 confirmacion2 = Elegiropciones(confirmacion2, "SI", "NO");
-                //confirmamos la reserva y enviamos correo
-                if (Confirmar(confirmacion2, "APROBADO", fecha, codigoEspacio2, espacio, motivo2, Nombreespacio, fechaReserva)) {
+                // confirmamos la reserva y enviamos correo
+                if (Confirmar(confirmacion2, "APROBADO", fecha, codigoEspacio2, espacio, motivo2, Nombreespacio,
+                        fechaReserva)) {
                     enviarCorreo(correo, nombre, apellido, codigoReserva, fechaReserva, Nombreespacio, motivo2);
                 }
                 break;
@@ -228,13 +232,13 @@ public class Profesor extends Usuario {
      * informar sobre una reserva realizada por un profesor.
      *
      * @param correoRemitente Dirección de correo electrónico del remitente
-     * (profesor).
-     * @param nombre Nombre del profesor que realiza la reserva.
-     * @param apellido Apellido del profesor que realiza la reserva.
-     * @param codigo Código único asociado a la reserva.
-     * @param fecha Fecha de la reserva.
-     * @param espacio Espacio o lugar reservado.
-     * @param materia Materia para la cual se realiza la reserva.
+     *                        (profesor).
+     * @param nombre          Nombre del profesor que realiza la reserva.
+     * @param apellido        Apellido del profesor que realiza la reserva.
+     * @param codigo          Código único asociado a la reserva.
+     * @param fecha           Fecha de la reserva.
+     * @param espacio         Espacio o lugar reservado.
+     * @param materia         Materia para la cual se realiza la reserva.
      */
     public void enviarCorreo(String correoRemitente, String nombre, String apellido, String codigo, String fecha,
             String espacio, String materia) {

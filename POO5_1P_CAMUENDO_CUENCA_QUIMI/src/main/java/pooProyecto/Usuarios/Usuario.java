@@ -38,16 +38,18 @@ public abstract class Usuario {
     }
 
     /**
-     * Este metodo es abstracto para que las clases hijas puedan sobreescribirlo
-     * @param No recibe nada
-     * @return No devuelve nada
+     * Reserva un recurso para el usuario.
+     * 
+     * Este método debe ser implementado por las clases derivadas.
      */
     public abstract void reservar();
 
-    /*
-     * Este metodo sirve para consultar las rese
-     * @param No recibe nada
-     * @return void:No devuelve nada
+    /**
+     * Consulta una reserva del usuario en una fecha específica.
+     * 
+     * Solicita la fecha en formato [YYYY-MM-DD], valida la entrada
+     * y busca la reserva correspondiente en el sistema. Si se encuentra,
+     * muestra los detalles de la reserva; de lo contrario, notifica al usuario.
      */
     public void ConsultarReserva() {
         System.out.println("\n-------------- Consultar reserva --------------  ");
@@ -62,7 +64,7 @@ public abstract class Usuario {
             veracidad = validarFormatoFecha(fechaReserva);
         }
         SimpleDateFormat Format = new SimpleDateFormat("yyyy-MM-dd");
-        Date fechaReservada = convertirFecha(fechaReserva);
+        Date fechaReservada = convertirFecha(fechaReserva); //cambia de String a Date
 
         boolean reservaBuscada = false;
         Usuario usu = null;
@@ -79,15 +81,15 @@ public abstract class Usuario {
                 if (reserva.getFecha().equals(fechaReservada) &&
                         reserva.getCedula().equals(usu.getCedula())) { // Verifica la reserva del usuario
                     reservaBuscada = true;
-                    String fechaFormato = Format.format(reserva.getFecha());
+                    String fechaFormato = Format.format(reserva.getFecha()); //cambia de Date a String
                     System.out.println("\n------------------Datos de la reserva--------------------");
                     System.out.println("Código reserva: " + reserva.getCodigoReserva() + " - Fecha: " + fechaFormato
-                            + " - Tipo espacio: " + reserva.getTipoEspacio()+" - Estado: "+reserva.getTipoEstado());
+                            + " - Tipo espacio: " + reserva.getTipoEspacio() + " - Estado: " + reserva.getTipoEstado());
 
                     for (Espacio espacio : Sistema.espacios) {
                         if (reserva.getCodigoEspacio().equals(espacio.getCodigoEspacio())) {
                             System.out.println("Nombre espacio: " + espacio.getNombre() + " - Capacidad: "
-                                    + espacio.getCapacidad() + " - Estado: " + espacio.getEstado() + "\nUsuario: "
+                                    + espacio.getCapacidad() + "\nUsuario: "
                                     + usu.getNombre() + " " + usu.getApellido());
                         }
                     }
@@ -104,6 +106,7 @@ public abstract class Usuario {
 
     /**
      * Este metodo sirve para mostrar menú
+     * 
      * @param No recibe nada
      * @return void No devuelve nada
      */
@@ -111,7 +114,9 @@ public abstract class Usuario {
 
     /*
      * Este metodo sirve para enviar correo
+     * 
      * @param No recibe nada
+     * 
      * @return Session retorna una Session iniciada
      */
     protected Session enviarCorreo() {
@@ -135,37 +140,53 @@ public abstract class Usuario {
     }
 
     /**
-     * Este metodo sirve para validar la fecha
-     * @param String fecha
-     * @return void No devuelve nada
+     * Valida si una fecha ingresada cumple con el formato [YYYY-MM-DD] y ciertas
+     * restricciones.
+     * 
+     * Tambien verifica que la fecha tenga el formato correcto, que el año sea 2024,
+     * que el mes esté entre 1 y 12, y que el día esté entre 1 y 31.
+     * 
+     * @param fecha la fecha en formato [YYYY-MM-DD] que se desea validar.
+     * @return {@code true} si la fecha es válida; {@code false} en caso contrario.
      */
+
     protected boolean validarFormatoFecha(String fecha) {
         boolean veracidad = false;
         if (fecha.length() == 10) {
-            if (fecha.charAt(4) == '-' && fecha.charAt(7) == '-') {
+            if (fecha.charAt(4) == '-' && fecha.charAt(7) == '-') { //verfica que esten los giones en las posiciones correctas
                 String anio = fecha.substring(0, 4);
                 String mes = fecha.substring(5, 7);
                 String dia = fecha.substring(8);
-                if(anio.matches("\\d{4}") && mes.matches("\\d{2}") && dia.matches("\\d{2}")){
-                    if (anio.compareTo("2024")==0){
-                        if (Integer.parseInt(mes)<=12){
-                            if(Integer.parseInt(dia)<=31){
+                if (anio.matches("\\d{4}") && mes.matches("\\d{2}") && dia.matches("\\d{2}")) { //
+                    if (anio.compareTo("2024") == 0) {
+                        if (Integer.parseInt(mes) <= 12) {
+                            if (Integer.parseInt(dia) <= 31) {
                                 veracidad = true;
+                            } else {
+                                System.out.println("Solo hay hasta 31 días en un mes.");
                             }
-                            else{System.out.println("Solo hay hasta 31 días en un mes.");}
+                        } else {
+                            System.out.println("Solo existen 12 meses.");
                         }
-                        else{System.out.println("Solo existen 12 meses.");}
+                    } else {
+                        System.out.println("Año incorrecto.");
                     }
-                    else{System.out.println("Año incorrecto.");}
                 }
-            }   
+            }
         }
         return veracidad;
     }
 
-    // metodo para convertir la fecha ingresada en tipo Date
+    /**
+     * Convierte una cadena de texto en formato "yyyy-MM-dd" a un objeto Date.
+     * 
+     * Retorna null si ocurre un error de formato.
+     *
+     * @param fechaReserva la fecha en formato "yyyy-MM-dd".
+     * @return un objeto {@link Date} o {@code null} si ocurre un error.
+     */
     protected Date convertirFecha(String fechaReserva) {
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); //define como debe verse el String para luego se pueda convertir a tipo Date
         try {
             return formato.parse(fechaReserva);
         } catch (ParseException e) {
@@ -174,8 +195,8 @@ public abstract class Usuario {
         }
     }
 
-    //metodo para elegir entre dos opciones
-    protected String Elegiropciones(String eleccion,String opcion1, String opcion2){
+    // metodo para elegir entre dos opciones
+    protected String Elegiropciones(String eleccion, String opcion1, String opcion2) {
         int c1 = eleccion.compareTo(opcion1);
         int c2 = eleccion.compareTo(opcion2);
         boolean veracidad = false;
@@ -184,7 +205,7 @@ public abstract class Usuario {
             veracidad = true;
         }
         while (veracidad == false) {
-            System.out.print('\n' + "Opción no válida. Elija Entre "+opcion1+" o "+opcion2+": ");
+            System.out.print('\n' + "Opción no válida. Elija Entre " + opcion1 + " o " + opcion2 + ": ");
             eleccion = s.nextLine().toUpperCase();
             c1 = eleccion.compareTo(opcion1);
             c2 = eleccion.compareTo(opcion2);
@@ -195,8 +216,8 @@ public abstract class Usuario {
         return eleccion;
     }
 
-    //obtener nombre del espacio
-    protected String NombreEspacio(String codigoEspacio){
+    // obtener nombre del espacio
+    protected String NombreEspacio(String codigoEspacio) {
         String Nombreespacio = "null";
         for (Espacio esp : Sistema.espacios) {
             if (codigoEspacio.equals(esp.getCodigoEspacio())) {
@@ -206,48 +227,49 @@ public abstract class Usuario {
         return Nombreespacio;
     }
 
-    //metodo elegir espacios
-    protected String ElegirEspacios(TipoEspacio espacio,String articulo){
+    // metodo elegir espacios
+    protected String ElegirEspacios(TipoEspacio espacio, String articulo) {
         ArrayList<String> codigos = new ArrayList<>();
         boolean veracidad = false;
         Scanner s = new Scanner(System.in);
-                for (Espacio space : Sistema.espacios) {
-                    if (space.getTipo() == espacio && space.mostrarDisponibilidad()) {
-                        System.out.println("        " + space.getCodigoEspacio() + "        |      " + space.getNombre());
-                        codigos.add(space.getCodigoEspacio());
+        for (Espacio space : Sistema.espacios) {
+            if (space.getTipo() == espacio && space.mostrarDisponibilidad()) {
+                System.out.println("        " + space.getCodigoEspacio() + "        |      " + space.getNombre());
+                codigos.add(space.getCodigoEspacio());
+            }
+        }
+        // Elegir la Cancha
+        System.out.print('\n' + "Elija " + articulo + " " + espacio + " a reservar, colocando su Código (1XX): ");
+        String codigoEspacio = s.nextLine();
+        if (codigoEspacio.matches("[0-9]*")) {
+            if (codigoEspacio.length() == 3) {
+                for (String st : codigos) {
+                    if (st.compareTo(codigoEspacio) == 0) {
+                        veracidad = true;
                     }
                 }
-                // Elegir la Cancha
-                System.out.print('\n' + "Elija "+articulo+" "+espacio+" a reservar, colocando su Código (1XX): ");
-                String codigoEspacio = s.nextLine();
-                if (codigoEspacio.matches("[0-9]*")) {
-                    if (codigoEspacio.length() == 3) {
-                        for (String st : codigos) {
-                            if (st.compareTo(codigoEspacio) == 0) {
-                                veracidad = true;
-                            }
+            }
+        }
+        // Validar opción
+        while (veracidad == false) {
+            System.out.print('\n' + "OPCION NO EXISTE. ELEGIR ENTRE LOS CODIGOS MOSTRADOS (1XX):  ");
+            codigoEspacio = s.nextLine().toUpperCase();
+            if (codigoEspacio.matches("[0-9]*")) {
+                if (codigoEspacio.length() == 3) {
+                    for (String st : codigos) {
+                        if (st.compareTo(codigoEspacio) == 0) {
+                            veracidad = true;
                         }
                     }
                 }
-                // Validar opción
-                while (veracidad == false) {
-                    System.out.print('\n' + "OPCION NO EXISTE. ELEGIR ENTRE LOS CODIGOS MOSTRADOS (1XX):  ");
-                    codigoEspacio = s.nextLine().toUpperCase();
-                    if (codigoEspacio.matches("[0-9]*")) {
-                        if (codigoEspacio.length() == 3) {
-                            for (String st : codigos) {
-                                if (st.compareTo(codigoEspacio) == 0) {
-                                    veracidad = true;
-                                }
-                            }
-                        }
-                    }
-                }
+            }
+        }
         return codigoEspacio;
     }
 
-    //metodo confirmar Reserva
-    protected boolean Confirmar(String confirmacion,String Estado,Date fecha, String codigoEspacio, String espacio, String motivo,String Nombreespacio, String fechaReserva){
+    // metodo confirmar Reserva
+    protected boolean Confirmar(String confirmacion, String Estado, Date fecha, String codigoEspacio, String espacio,
+            String motivo, String Nombreespacio, String fechaReserva) {
         boolean veracidad = false;
         ManejoArchivos m = new ManejoArchivos();
         TipoEspacio tipo = TipoEspacio.valueOf(espacio);
@@ -277,12 +299,6 @@ public abstract class Usuario {
         return veracidad;
     }
 
-    public String toString() {
-        return "Usuario [codigoUnico=" + codigoUnico + ", cedula=" + cedula + ", nombre="
-                + nombre + ", apellido=" + apellido + ", usuario=" + usuario + ", contraseña=" + contrasenia
-                + ", correo=" + correo + ", rol=" + rol;
-
-    }
 
     public String getCodigoUnico() {
         return codigoUnico;

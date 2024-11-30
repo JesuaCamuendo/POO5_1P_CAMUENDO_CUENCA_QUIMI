@@ -9,9 +9,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import javax.naming.spi.ResolveResult;
-
-import pooProyecto.Sistema.Sistema;
 
 /**
  * Lee el contenido de un archivo de texto y lo devuelve como un ArrayList de arreglos de cadenas.
