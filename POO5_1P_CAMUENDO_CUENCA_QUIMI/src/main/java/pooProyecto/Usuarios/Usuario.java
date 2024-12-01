@@ -24,6 +24,19 @@ public abstract class Usuario {
     protected String correo;
     protected TipoRol rol;
 
+    /**
+     * Constructor de la clase Usuario.
+     * 
+     * @param codigoUnico el identificador único del usuario.
+     * @param cedula      la cédula del usuario.
+     * @param nombre      el nombre del usuario.
+     * @param apellido    el apellido del usuario.
+     * @param usuario     el nombre de usuario para iniciar sesión.
+     * @param contrasenia la contraseña del usuario.
+     * @param correo      el correo electrónico del usuario.
+     * @param rol         el rol del usuario, representado por un objeto
+     *                    {@link TipoRol}.
+     */
     Usuario(String codigoUnico, String cedula, String nombre, String apellido, String usuario, String contrasenia,
             String correo, TipoRol rol) {
         this.codigoUnico = codigoUnico;
@@ -34,7 +47,6 @@ public abstract class Usuario {
         this.contrasenia = contrasenia;
         this.correo = correo;
         this.rol = rol;
-
     }
 
     /**
@@ -64,7 +76,7 @@ public abstract class Usuario {
             veracidad = validarFormatoFecha(fechaReserva);
         }
         SimpleDateFormat Format = new SimpleDateFormat("yyyy-MM-dd");
-        Date fechaReservada = convertirFecha(fechaReserva); //cambia de String a Date
+        Date fechaReservada = convertirFecha(fechaReserva); // cambia de String a Date
 
         boolean reservaBuscada = false;
         Usuario usu = null;
@@ -81,7 +93,7 @@ public abstract class Usuario {
                 if (reserva.getFecha().equals(fechaReservada) &&
                         reserva.getCedula().equals(usu.getCedula())) { // Verifica la reserva del usuario
                     reservaBuscada = true;
-                    String fechaFormato = Format.format(reserva.getFecha()); //cambia de Date a String
+                    String fechaFormato = Format.format(reserva.getFecha()); // cambia de Date a String
                     System.out.println("\n------------------Datos de la reserva--------------------");
                     System.out.println("Código reserva: " + reserva.getCodigoReserva() + " - Fecha: " + fechaFormato
                             + " - Tipo espacio: " + reserva.getTipoEspacio() + " - Estado: " + reserva.getTipoEstado());
@@ -112,12 +124,22 @@ public abstract class Usuario {
      */
     public abstract void mostrarMenu();
 
-    /*
-     * Este metodo sirve para enviar correo
+    /**
+     * Configura y devuelve una sesión de correo electrónico para el envío de
+     * mensajes.
      * 
-     * @param No recibe nada
+     * <p>
+     * Este método utiliza las variables de entorno configuradas en un archivo
+     * `.env`
+     * para obtener los parámetros necesarios para la conexión al servidor SMTP,
+     * incluyendo
+     * el host, el puerto, el usuario y la contraseña. También establece las
+     * propiedades
+     * necesarias para la autenticación y la conexión segura.
+     * </p>
      * 
-     * @return Session retorna una Session iniciada
+     * @return una instancia de {@link Session} configurada con los parámetros del
+     *         servidor SMTP.
      */
     protected Session enviarCorreo() {
         Dotenv dot = Dotenv.load();
@@ -153,7 +175,8 @@ public abstract class Usuario {
     protected boolean validarFormatoFecha(String fecha) {
         boolean veracidad = false;
         if (fecha.length() == 10) {
-            if (fecha.charAt(4) == '-' && fecha.charAt(7) == '-') { //verfica que esten los giones en las posiciones correctas
+            if (fecha.charAt(4) == '-' && fecha.charAt(7) == '-') { // verfica que esten los giones en las posiciones
+                                                                    // correctas
                 String anio = fecha.substring(0, 4);
                 String mes = fecha.substring(5, 7);
                 String dia = fecha.substring(8);
@@ -186,7 +209,8 @@ public abstract class Usuario {
      * @return un objeto {@link Date} o {@code null} si ocurre un error.
      */
     protected Date convertirFecha(String fechaReserva) {
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); //define como debe verse el String para luego se pueda convertir a tipo Date
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); // define como debe verse el String para luego se
+                                                                       // pueda convertir a tipo Date
         try {
             return formato.parse(fechaReserva);
         } catch (ParseException e) {
@@ -195,7 +219,15 @@ public abstract class Usuario {
         }
     }
 
-    // metodo para elegir entre dos opciones
+    /**
+     * Valida y procesa la elección del usuario entre dos opciones predefinidas.
+     * 
+     * @param eleccion la elección inicial proporcionada por el usuario.
+     * @param opcion1  la primera opción válida.
+     * @param opcion2  la segunda opción válida.
+     * @return la elección validada del usuario, que será igual a {@code opcion1} o
+     *         {@code opcion2}.
+     */
     protected String Elegiropciones(String eleccion, String opcion1, String opcion2) {
         int c1 = eleccion.compareTo(opcion1);
         int c2 = eleccion.compareTo(opcion2);
@@ -216,7 +248,13 @@ public abstract class Usuario {
         return eleccion;
     }
 
-    // obtener nombre del espacio
+    /**
+     * Obtiene el nombre de un espacio a partir de su código.
+     * 
+     * @param codigoEspacio el código único del espacio a buscar.
+     * @return el nombre del espacio correspondiente al código proporcionado,
+     *         o "null" si no se encuentra un espacio con el código especificado.
+     */
     protected String NombreEspacio(String codigoEspacio) {
         String Nombreespacio = "null";
         for (Espacio esp : Sistema.espacios) {
@@ -227,7 +265,17 @@ public abstract class Usuario {
         return Nombreespacio;
     }
 
-    // metodo elegir espacios
+    /**
+     * Permite al usuario elegir un espacio disponible de un tipo específico para
+     * realizar una reserva.
+     * 
+     * @param espacio  el tipo de espacio a elegir, representado por un objeto
+     *                 {@link TipoEspacio}.
+     * @param articulo una cadena que indica el artículo asociado al espacio (por
+     *                 ejemplo, "el" o "la").
+     * @return el código del espacio seleccionado por el usuario, garantizando que
+     *         sea válido.
+     */
     protected String ElegirEspacios(TipoEspacio espacio, String articulo) {
         ArrayList<String> codigos = new ArrayList<>();
         boolean veracidad = false;
@@ -238,6 +286,7 @@ public abstract class Usuario {
                 codigos.add(space.getCodigoEspacio());
             }
         }
+
         // Elegir la Cancha
         System.out.print('\n' + "Elija " + articulo + " " + espacio + " a reservar, colocando su Código (1XX): ");
         String codigoEspacio = s.nextLine();
@@ -267,7 +316,23 @@ public abstract class Usuario {
         return codigoEspacio;
     }
 
-    // metodo confirmar Reserva
+    /**
+     * Confirma y registra una reserva en el sistema si la confirmación es positiva.
+     * 
+     * @param confirmacion  indica si el usuario desea confirmar la reserva ("SI"
+     *                      para confirmar).
+     * @param Estado        el estado de la reserva (por ejemplo, "APROBADO",
+     *                      "PENDIENTE").
+     * @param fecha         la fecha en que se realiza la reserva.
+     * @param codigoEspacio el código del espacio reservado.
+     * @param espacio       el tipo de espacio reservado, representado como una
+     *                      cadena.
+     * @param motivo        el motivo de la reserva.
+     * @param Nombreespacio el nombre del espacio reservado.
+     * @param fechaReserva  la fecha de la reserva como cadena.
+     * @return {@code true} si la reserva fue confirmada y registrada exitosamente,
+     *         {@code false} en caso contrario.
+     */
     protected boolean Confirmar(String confirmacion, String Estado, Date fecha, String codigoEspacio, String espacio,
             String motivo, String Nombreespacio, String fechaReserva) {
         boolean veracidad = false;
@@ -298,7 +363,6 @@ public abstract class Usuario {
         }
         return veracidad;
     }
-
 
     public String getCodigoUnico() {
         return codigoUnico;
